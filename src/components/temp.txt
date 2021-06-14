@@ -1,0 +1,46 @@
+{Dataset.filter(k => ((k.name === klinik) && (k.source === source))).map(komment => <div key={komment.index}>
+    <p>Rezension-{komment.index + 1} : {komment.komment}</p>
+    <p>Result: {komment.positive}</p>
+</div>
+)}
+
+
+            {Dataset.map(komment => {
+                if ((komment.klinik === klinik) && ((komment.source === source) )) {
+                    return (<div key={komment.index}>
+                        <p>Rezension-{komment.index + 1} : {komment.komment}</p>
+                        <p>Result: {komment.positive}</p>
+                    </div>
+                    )
+                }
+                else {
+                    return (null)
+                }
+
+<h3>{source === 'klinikDe' ? 'Klinikbewertungen.de ' : source === 'googleMaps' ? 'Google Maps ' : source === 'Alle' ? 'Alle' : ''} {klinik ? 'Rezensionen von' : ''} {klinik}</h3>
+
+
+            <h3>Klinik: {klinik}</h3>
+            <h3>Source: {source === 'Beide' ? 'Klinikbewertungen.de und Google Maps' : source}</h3>
+
+
+    if (source === 'googleMaps') {
+        Data = Dataset.filter(k => (k.source === 'googleMaps'))
+    } else if (source === 'klinikDe') {
+        Data = Dataset.filter(k => (k.source === 'klinikDe'))
+    }
+
+
+        if (klinik !== 'Alle') {
+        Data = Dataset.filter(k => (k.name === klinik))
+    }
+
+    if (source !== 'Alle') {
+        Data = Dataset.filter(k => (k.source === source))
+    }
+
+
+    const Data = ((klinik === 'Alle') & (klinik === 'Alle')) ? Dataset :
+        klinik !== 'Alle' ? Dataset.filter(k => (k.name === klinik)) :
+            source !== 'Alle' ? Dataset.filter(k => (k.source === source)) :
+                Dataset.filter(k => (k.source === source & k.name === klinik)

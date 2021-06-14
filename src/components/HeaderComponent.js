@@ -22,15 +22,15 @@ const HeaderComponent = (props) => {
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">HFH</NavbarBrand>
+                <NavbarBrand >HFH</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
-                            <NavLink href="/components/">Components</NavLink>
+                            <NavLink >Components</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#">GitHub</NavLink>
+                            <NavLink >GitHub</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
