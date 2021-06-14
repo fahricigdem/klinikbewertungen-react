@@ -44,3 +44,17 @@
         klinik !== 'Alle' ? Dataset.filter(k => (k.name === klinik)) :
             source !== 'Alle' ? Dataset.filter(k => (k.source === source)) :
                 Dataset.filter(k => (k.source === source & k.name === klinik)
+
+<<<<<<>>>>>>>pagination
+
+                    {[...Array(pagesCount)].map((page, i) =>
+                        <PaginationItem active={i === currentPage} key={i}>
+                            <PaginationLink onClick={e => handleClick(e, i)} href="#">
+                                {i + 1}
+                            </PaginationLink>
+                        </PaginationItem>
+                    )}
+
+
+
+<PaginationLink> - Total Pages : {pagesCount}  - </PaginationLink>

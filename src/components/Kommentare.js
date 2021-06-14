@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 import ShowKommentare from './ShowKommentare'
 
+
 const Kommentare = ({ Dataset, KlinikNames }) => {
 
     const [klinik, setKlinik] = useState("Alle")
@@ -15,34 +16,34 @@ const Kommentare = ({ Dataset, KlinikNames }) => {
             let Data = Dataset.filter(k => ((k.source === source) && (k.name === klinik)))
             //console.log('1 Data: ', Data)
             return (
-                <ShowKommentare Data={Data} sorce={source} klinik={klinik} />
+                <ShowKommentare Dataset={Data} sorce={source} klinik={klinik} />
             )
         } else if (source === "Alle" && klinik !== "Alle") {
 
             let Data = Dataset.filter(k => k.name === klinik)
             //console.log('2 Data: ', Data)
             return (
-                <ShowKommentare Data={Data} sorce={source} klinik={klinik} />
+                <ShowKommentare Dataset={Data} sorce={source} klinik={klinik} />
             )
         } else if (source !== "Alle" && klinik === "Alle") {
 
             let Data = Dataset.filter(k => k.source === source)
             //console.log('3 Data: ', Data)
             return (
-                <ShowKommentare Data={Data} sorce={source} klinik={klinik} />
+                <ShowKommentare Dataset={Data} sorce={source} klinik={klinik} />
             )
         } else {
 
             let Data = Dataset
             //console.log('4 Data: ', Data)
             return (
-                <ShowKommentare Data={Data} sorce={source} klinik={klinik} />
+                <ShowKommentare Dataset={Data} sorce={source} klinik={klinik} />
             )
         }
     }
 
     return (
-        <div className="container">
+        <div className=" flex-row justify-content-end">
 
             <FormGroup>
                 <Label for="exampleSelect">Select Klinik</Label>
