@@ -1,7 +1,28 @@
 import React, { useState } from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import Chart from './Chart'
+import PaginationComponent from './PaginationComponent'
 
 const ShowKommentare = ({ Dataset }) => {
+    ////////////  Diagram Data ////////////////////////////
+    let positive = 0
+    let negative = 0
+    let data01 = []
+
+    Dataset.map(c => {
+        if (c.positive) {
+            positive = positive + 1
+        }
+        return c
+    })
+
+    negative = Dataset.length - positive
+
+    data01 = [
+        { name: 'Positive', value: positive },
+        { name: 'Negative', value: negative }
+    ];
+
+    //////////////////////////////////////////////////////////
 
     const dataSet = Dataset.map(komment =>
 
@@ -12,71 +33,35 @@ const ShowKommentare = ({ Dataset }) => {
 
     )
 
-    const pageSize = 10
+    const pageSize = 5
     const pagesCount = Math.ceil(dataSet.length / pageSize);
 
     const [currentPage, setCurrentPage] = useState(0)
 
-    const handleClick = (e, index) => {
+    const handleClickTop = (e, index) => {
         e.preventDefault()
         setCurrentPage(index)
     }
 
+    const handleClickBottom = (e, index) => {
+        e.preventDefault()
+        setCurrentPage(index)
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }
+
     return (
-        <div >
-            <div>
+        <>
+            <center>
+                <Chart data={data01} />
+            </center>
 
-                <Pagination aria-label="Page navigation example">
+            <PaginationComponent handleClick={handleClickTop} currentPage={currentPage} pagesCount={pagesCount} />
 
-                    <PaginationItem >
-
-                        <PaginationLink
-                            onClick={e => handleClick(e, 0)}
-                            first
-                            href="#"
-                        />
-
-                    </PaginationItem>
-
-                    <PaginationItem disabled={currentPage <= 0}>
-
-                        <PaginationLink
-                            onClick={e => handleClick(e, currentPage - 1)}
-                            previous
-                            href="#"
-                        />
-
-                    </PaginationItem>
-
-
-
-                    <PaginationItem disabled={currentPage >= pagesCount - 1}>
-
-                        <PaginationLink
-                            onClick={e => handleClick(e, currentPage + 1)}
-                            next
-                            href="#"
-                        />
-
-                    </PaginationItem>
-
-                    <PaginationItem >
-
-                        <PaginationLink
-                            onClick={e => handleClick(e, pagesCount - 1)}
-                            last
-                            href="#"
-                        />
-
-                    </PaginationItem>
-
-                </Pagination>
-
-            </div>
 
             <div >
                 <p>{dataSet.length} Rezension gefunden</p>
                 <p>Total Pages : {pagesCount}</p>
+                <p>Current Page : {currentPage + 1}</p>
 
                 {
                     dataSet
@@ -92,7 +77,12 @@ const ShowKommentare = ({ Dataset }) => {
                 }
             </div>
 
-        </div>
+            <PaginationComponent handleClick={handleClickBottom} currentPage={currentPage} pagesCount={pagesCount} />
+
+
+
+
+        </>
     );
 }
 
