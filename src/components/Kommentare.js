@@ -91,25 +91,27 @@ const Kommentare = ({ Dataset, KlinikNames }) => {
 
     return (
         <div >
-            <Row >
-                <FormGroup>
-                    <Label for="exampleSelect">Select Klinik</Label>
-                    <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)}>
-                        <option>Alle</option>
-                        {KlinikNames.map((k, index) =>
-                            <option key={index}>{k}</option>
-                        )}
-                    </Input>
-                    <br />
-                    <Label for="exampleSelect">Data Source</Label>
-                    <br />
+            <Row className="mt-3">
+                <Col xs="12" sm={{ size: 8, offset: "2" }} md={{ size: 6, offset: 3 }}>
+                    <FormGroup>
+                        <Label for="exampleSelect">Select Klinik</Label>
+                        <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} style={{ height: "120px" }} multiple>
+                            <option>Alle</option>
+                            {KlinikNames.map((k, index) =>
+                                <option key={index}>{k}</option>
+                            )}
+                        </Input>
 
-                    <ButtonGroup size="lg">
-                        <Button color="danger" onClick={() => handleButtonSource('klinikDe')}>klinikDe</Button>
-                        <Button color="warning" onClick={() => handleButtonSource('Alle')}>Alle</Button>
-                        <Button color="success" onClick={() => handleButtonSource('googleMaps')}>googleMaps</Button>
-                    </ButtonGroup>
-                </FormGroup>
+                        <Label className="mt-3" for="exampleSelect">Data Source</Label>
+                        <br />
+
+                        <ButtonGroup size="lg">
+                            <Button color="danger" onClick={() => handleButtonSource('klinikDe')}>klinikDe</Button>
+                            <Button color="warning" onClick={() => handleButtonSource('Alle')}>Alle</Button>
+                            <Button color="success" onClick={() => handleButtonSource('googleMaps')}>googleMaps</Button>
+                        </ButtonGroup>
+                    </FormGroup>
+                </Col>
             </Row>
             <br />
             <Row>

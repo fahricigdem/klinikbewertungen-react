@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Chart from './Chart'
 import PaginationComponent from './PaginationComponent'
+import { Row, Col, ButtonGroup, Button } from 'reactstrap';
 
 const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClickTop, handleClickBottom, handleSelect, klinik, source }) => {
     ////////////  Diagram Data ////////////////////////////
@@ -39,49 +40,55 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClic
 
 
     return (
-        <div >
+        <>
+            <Row >
+                <Col >
 
-            <center>
-                <h4>{klinik} {klinik !== 'Alle' && `(Group ${group})`}  </h4>
+                    <center>
+                        <h4>{klinik} {klinik !== 'Alle' && `(Group ${group})`}  </h4>
 
-                <h4>von {source}</h4>
-                <h3>{dataSet.length} Rezension gefunden</h3>
-                <div className="pb-5">
-                    <Chart data={data01} />
-                </div>
-            </center>
+                        <h4>von {source}</h4>
+                        <h3>{dataSet.length} Rezension gefunden</h3>
+                        <div className="pb-5">
+                            <Chart data={data01} />
+                        </div>
+                    </center>
+                </Col>
+            </Row>
 
-
-
-
-            <PaginationComponent handleClick={handleClickTop} handleSelect={handleSelect} currentPage={currentPage} pagesCount={pagesCount} />
-
-
-            <div >
-
+            <Row>
+                <Col xs="12" sm={{ size: 10, offset: "1" }} md={{ size: 8, offset: 2 }}>
 
 
+                    <PaginationComponent handleClick={handleClickTop} handleSelect={handleSelect} currentPage={currentPage} pagesCount={pagesCount} />
 
-                {
-                    dataSet
-                        .slice(
-                            (currentPage - 1) * pageSize,
-                            (currentPage) * pageSize
-                        )
-                        .map((data) =>
-                            <div key={data.index}>
-                                {data}
-                            </div>
-                        )
-                }
-            </div>
 
-            <PaginationComponent handleClick={handleClickBottom} currentPage={currentPage} pagesCount={pagesCount} />
+                    <div >
 
 
 
 
-        </div>
+                        {
+                            dataSet
+                                .slice(
+                                    (currentPage - 1) * pageSize,
+                                    (currentPage) * pageSize
+                                )
+                                .map((data) =>
+                                    <div key={data.index}>
+                                        {data}
+                                    </div>
+                                )
+                        }
+                    </div>
+
+                    <PaginationComponent handleClick={handleClickBottom} currentPage={currentPage} pagesCount={pagesCount} />
+
+
+
+                </Col>
+            </Row>
+        </>
     );
 }
 
