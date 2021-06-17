@@ -42,7 +42,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClic
         <div >
 
             <center>
-                <h4>{klinik} (Group {group} )  </h4>
+                <h4>{klinik} {klinik !== 'Alle' && `(Group ${group})`}  </h4>
 
                 <h4>von {source}</h4>
                 <h3>{dataSet.length} Rezension gefunden</h3>

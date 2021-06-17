@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 import ShowKommentare from './ShowKommentare'
-import { Row, Col } from 'reactstrap';
+import { Row, Col, ButtonGroup, Button } from 'reactstrap';
 
 
 
@@ -84,6 +84,11 @@ const Kommentare = ({ Dataset, KlinikNames }) => {
         setCurrentPage(1)
     }
 
+    function handleButtonSource(source) {
+        setSource(source)
+        setCurrentPage(1)
+    }
+
     return (
         <div >
             <Row >
@@ -96,13 +101,14 @@ const Kommentare = ({ Dataset, KlinikNames }) => {
                         )}
                     </Input>
                     <br />
-                    <Label for="exampleSelect">Select Data Source</Label>
-                    <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)}>
-                        <option>Alle</option>
-                        <option value='klinikDe'>Klinikbewertungen.de</option>
-                        <option value='googleMaps'>Google Maps</option>
+                    <Label for="exampleSelect">Data Source</Label>
+                    <br />
 
-                    </Input>
+                    <ButtonGroup size="lg">
+                        <Button color="danger" onClick={() => handleButtonSource('klinikDe')}>klinikDe</Button>
+                        <Button color="warning" onClick={() => handleButtonSource('Alle')}>Alle</Button>
+                        <Button color="success" onClick={() => handleButtonSource('googleMaps')}>googleMaps</Button>
+                    </ButtonGroup>
                 </FormGroup>
             </Row>
             <br />
