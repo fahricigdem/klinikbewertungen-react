@@ -33,14 +33,16 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClic
 
     )
 
-    const group = (Dataset.filter(k => k.name == klinik)[0].group + 1)
+    const group = Dataset[0].group + 1
+
+    //    const group = groupdf[0].group
 
 
     return (
-        <div className="pl-5 pr-5">
+        <div >
 
             <center>
-                <h4>{klinik} (Group {group})  </h4>
+                <h4>{klinik} (Group {group} )  </h4>
 
                 <h4>von {source}</h4>
                 <h3>{dataSet.length} Rezension gefunden</h3>
@@ -55,7 +57,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClic
             <PaginationComponent handleClick={handleClickTop} handleSelect={handleSelect} currentPage={currentPage} pagesCount={pagesCount} />
 
 
-            <div className="pl-5 pr-5">
+            <div >
 
 
 

@@ -29,7 +29,7 @@ export default class Chart extends PureComponent {
 
         return (
 
-            <PieChart width={500} height={500}>
+            <PieChart width={200} height={200}>
                 <Pie
                     dataKey="value"
                     isAnimationActive={false}
@@ -38,7 +38,7 @@ export default class Chart extends PureComponent {
                     cy="50%"
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={200}
+                    outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"
 

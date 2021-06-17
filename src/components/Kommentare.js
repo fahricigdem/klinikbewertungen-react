@@ -85,8 +85,8 @@ const Kommentare = ({ Dataset, KlinikNames }) => {
     }
 
     return (
-        <div className="p-5">
-            <Row className="p-5">
+        <div >
+            <Row >
                 <FormGroup>
                     <Label for="exampleSelect">Select Klinik</Label>
                     <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)}>

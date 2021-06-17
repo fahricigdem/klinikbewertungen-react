@@ -21,7 +21,7 @@ const HeaderComponent = (props) => {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
+            <Navbar color="light" light >
                 <NavbarBrand >HFH</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
