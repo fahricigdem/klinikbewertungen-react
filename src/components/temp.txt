@@ -58,3 +58,17 @@
 
 
 <PaginationLink> - Total Pages : {pagesCount}  - </PaginationLink>
+
+
+                    <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handleSelect(e.target.value)} >
+                        <option>Alle</option>
+                        {pages.map((p, index) =>
+                            <option key={index}>{p}</option>
+                        )}
+                    </Input>
+
+                                        <select name="seite" id="seite" value={currentPage} onChange={(e) => handleSelect(e.target.value)} >
+                        {pages.map((p, index) =>
+                            <option key={index}>{p}</option>
+                        )}
+                    </select>

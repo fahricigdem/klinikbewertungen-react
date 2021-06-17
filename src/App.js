@@ -9,7 +9,7 @@ import { Container } from 'reactstrap';
 
 function App() {
   return (
-    <Container >
+    <Container>
       <HeaderComponent />
       <Kommentare
         Dataset={Dataset}

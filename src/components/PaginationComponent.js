@@ -1,66 +1,96 @@
 import React from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Input } from 'reactstrap';
 
-const PaginationComponent = ({ handleClick, currentPage, pagesCount }) => {
+const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCount }) => {
+    const pages = Array.from(new Array(pagesCount), (x, i) => i + 1)
+
     return (
-        <div>
+        <Row>
+            <Col >
 
 
-            <Pagination aria-label="Page navigation example">
+                <Pagination aria-label="Page navigation example" >
 
-                <PaginationItem >
+                    <PaginationItem >
 
-                    <PaginationLink
-                        onClick={e => handleClick(e, 0)}
+                        <PaginationLink
 
-                        href="#"
-                    >
-                        <span>&#8826;&#8826;</span>
-                    </PaginationLink>
 
-                </PaginationItem>
+                            onClick={e => handleClick(e, 1)}
+                            href="#"
+                        >
+                            <span>&#8826;&#8826;</span>
+                        </PaginationLink>
 
-                <PaginationItem disabled={currentPage <= 0}>
-
-                    <PaginationLink
-
-                        onClick={e => handleClick(e, currentPage - 1)}
-                        href="#"
-                    >
-                        <span>&#8826;</span>
-                    </PaginationLink>
-
-                </PaginationItem>
+                    </PaginationItem>
 
 
 
-                <PaginationItem disabled={currentPage >= pagesCount - 1}>
 
-                    <PaginationLink
-                        onClick={e => handleClick(e, currentPage + 1)}
+                    <PaginationItem disabled={currentPage <= 1}>
 
-                        href="#"
-                    >
-                        <span>&#8827;</span>
-                    </PaginationLink>
+                        <PaginationLink
 
-                </PaginationItem>
+                            onClick={e => handleClick(e, currentPage - 1)}
+                            href="#"
+                        >
 
-                <PaginationItem >
+                            <span> zurück</span>
+                        </PaginationLink>
 
-                    <PaginationLink
-                        onClick={e => handleClick(e, pagesCount - 1)}
+                    </PaginationItem>
 
-                        href="#"
-                    >
-                        <span>&#8827;&#8827;</span>
-                    </PaginationLink>
 
-                </PaginationItem>
+                    <PaginationItem >
 
-            </Pagination>
 
-        </div>
+
+
+
+                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handleSelect(e.target.value)} style={{ textAlignLast: "center" }}>
+
+                            {pages.map((p, index) =>
+                                <option key={index}>{p}</option>
+                            )}
+                        </Input>
+
+
+
+                    </PaginationItem>
+
+
+
+                    <PaginationItem disabled={currentPage >= pagesCount}>
+
+                        <PaginationLink
+
+                            onClick={e => handleClick(e, currentPage + 1)}
+                            href="#"
+                        >
+                            <span> weiter </span>
+                        </PaginationLink>
+
+                    </PaginationItem>
+
+                    <PaginationItem >
+
+                        <PaginationLink
+
+                            onClick={e => handleClick(e, pagesCount)}
+                            href="#"
+                        >
+                            <span>&#8827;&#8827;</span>
+
+                        </PaginationLink>
+
+                    </PaginationItem>
+
+
+
+                </Pagination>
+            </Col>
+        </Row>
     );
 }
 

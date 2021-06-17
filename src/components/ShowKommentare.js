@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Chart from './Chart'
 import PaginationComponent from './PaginationComponent'
 
-const ShowKommentare = ({ Dataset }) => {
+const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handleClickTop, handleClickBottom, handleSelect, klinik, source }) => {
     ////////////  Diagram Data ////////////////////////////
     let positive = 0
     let negative = 0
@@ -33,44 +33,41 @@ const ShowKommentare = ({ Dataset }) => {
 
     )
 
-    const pageSize = 5
-    const pagesCount = Math.ceil(dataSet.length / pageSize);
+    const group = (Dataset.filter(k => k.name == klinik)[0].group + 1)
 
-    const [currentPage, setCurrentPage] = useState(0)
-
-    const handleClickTop = (e, index) => {
-        e.preventDefault()
-        setCurrentPage(index)
-    }
-
-    const handleClickBottom = (e, index) => {
-        e.preventDefault()
-        setCurrentPage(index)
-        window.scrollTo({ top: 150, behavior: 'smooth' });
-    }
 
     return (
-        <>
+        <div className="pl-5 pr-5">
+
             <center>
-                <Chart data={data01} />
+                <h4>{klinik} (Group {group})  </h4>
+
+                <h4>von {source}</h4>
+                <h3>{dataSet.length} Rezension gefunden</h3>
+                <div className="pb-5">
+                    <Chart data={data01} />
+                </div>
             </center>
 
-            <PaginationComponent handleClick={handleClickTop} currentPage={currentPage} pagesCount={pagesCount} />
 
 
-            <div >
-                <p>{dataSet.length} Rezension gefunden</p>
-                <p>Total Pages : {pagesCount}</p>
-                <p>Current Page : {currentPage + 1}</p>
+
+            <PaginationComponent handleClick={handleClickTop} handleSelect={handleSelect} currentPage={currentPage} pagesCount={pagesCount} />
+
+
+            <div className="pl-5 pr-5">
+
+
+
 
                 {
                     dataSet
                         .slice(
-                            currentPage * pageSize,
-                            (currentPage + 1) * pageSize
+                            (currentPage - 1) * pageSize,
+                            (currentPage) * pageSize
                         )
-                        .map((data, i) =>
-                            <div key={i}>
+                        .map((data) =>
+                            <div key={data.index}>
                                 {data}
                             </div>
                         )
@@ -82,7 +79,7 @@ const ShowKommentare = ({ Dataset }) => {
 
 
 
-        </>
+        </div>
     );
 }
 
