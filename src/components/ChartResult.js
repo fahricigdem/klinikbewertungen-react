@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 
 
-export default class Chart extends PureComponent {
+export default class ChartResult extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/two-simple-pie-chart-otx9h';
 
 
@@ -32,7 +32,7 @@ export default class Chart extends PureComponent {
             <PieChart width={200} height={200}>
                 <Pie
                     dataKey="value"
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                     data={this.props.data}
                     cx="50%"
                     cy="50%"
@@ -40,8 +40,6 @@ export default class Chart extends PureComponent {
                     label={renderCustomizedLabel}
                     outerRadius={80}
                     fill="#8884d8"
-                    dataKey="value"
-
                 >
                     {this.props.data.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

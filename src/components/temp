@@ -84,3 +84,75 @@
                         <option value='klinikDe'>Klinikbewertungen.de</option>
                         <option value='googleMaps'>Google Maps</option>
                     </Input>
+
+
+
+
+
+                    if ((source !== "Alle" && klinik !== "Alle")) {
+
+            let Data = Dataset.filter(k => ((k.source === source) && (k.name === klinik)))
+            //console.log('1 Data: ', Data)
+
+            const pageSize = 5
+            const pagesCount = Math.ceil(Data.length / pageSize);
+
+            return (
+                <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage} handlePageTop={handlePageTop} handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect} klinik={klinik} source={source} />
+            )
+        } else if (source === "Alle" && klinik !== "Alle") {
+
+            let Data = Dataset.filter(k => k.name === klinik)
+            //console.log('2 Data: ', Data)
+
+            const pageSize = 5
+            const pagesCount = Math.ceil(Data.length / pageSize);
+
+            return (
+                <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage} handlePageTop={handlePageTop} handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect} klinik={klinik} source={source} />
+            )
+        } else if (source !== "Alle" && klinik === "Alle") {
+
+            let Data = Dataset.filter(k => k.source === source)
+            //console.log('3 Data: ', Data)
+            const pageSize = 5
+            const pagesCount = Math.ceil(Data.length / pageSize);
+            return (
+                <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage} handlePageTop={handlePageTop} handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect} klinik={klinik} source={source} />
+            )
+        } else {
+
+            let Data = Dataset
+            //console.log('4 Data: ', Data)
+            const pageSize = 5
+            const pagesCount = Math.ceil(Data.length / pageSize);
+            return (
+                <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage} handlePageTop={handlePageTop} handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect} klinik={klinik} source={source} />
+            )
+        }
+
+
+        -----
+
+
+
+                if (klinik !== 'Alle') {
+
+            Data = Data.filter(k => k.klinik === klinik)
+            console.log('Data:', Data)
+
+        }
+
+        if (source !== 'Alle') {
+            Data = Data.filter(k => k.source === source)
+        }
+
+
+
+        if (result !== 'Alle') {
+            Data = Data.filter(k => k.positive === result)
+        }
+
+
+
+        <PaginationComponent handleClick={handlePageTop} handleSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} />
