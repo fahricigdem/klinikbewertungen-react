@@ -4,8 +4,12 @@ import ChartGruppe from './ChartGruppe'
 import ChartSource from './ChartSource'
 import ChartSterne from './ChartSterne'
 import ChartGesamt from './ChartGesamt'
+import ChartYearlyComments from './ChartYearlyComments'
 import PaginationComponent from './PaginationComponent'
 import { Row, Col } from 'reactstrap';
+import { GoogleMapsYearlyPosNeg } from '../Data/Lists'
+import { KlinikDeYearlyPosNeg } from '../Data/Lists'
+import { Card, CardText, CardBody, CardLink, CardTitle, CardSubtitle, Progress } from 'reactstrap';
 
 const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePageTop, handlePageBottom, handlePageSelect, klinik, source, result, gruppe }) => {
 
@@ -95,6 +99,9 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         { name: 'Unzufrieden', value: unzufrieden }
     ];
 
+    let data06 = GoogleMapsYearlyPosNeg
+    let data07 = KlinikDeYearlyPosNeg
+
     //////////////////////////////////////////////////////////
 
     const rezensionen = Dataset.map(komment =>
@@ -160,6 +167,92 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                             <ChartGesamt data={data05} />
                         </center>
                     </Col>}
+            </Row>
+            <Row>
+                {source === "googleMaps" &&
+                    <Col>
+                        <center>
+                            <h4>Alle Jahren für Google Maps</h4>
+                            <ChartYearlyComments data={data06} />
+                        </center>
+                    </Col>}
+                {source === "klinikDe" &&
+                    <Col>
+                        <center>
+                            <h4>Alle Jahren für Klinikbewertungen.de</h4>
+                            <ChartYearlyComments data={data07} />
+                        </center>
+                    </Col>}
+            </Row>
+            <Row>
+                <Col sm="12" md={{ size: 8, offset: 2 }}>
+                    <Progress multi>
+                        <Progress bar value="15">Unzufrieden</Progress>
+                        <Progress bar animated color="success" value="40">Wow!</Progress>
+                        <Progress bar color="info" value="25">Cool</Progress>
+                        <Progress bar color="danger" value="20">Zufrieden</Progress>
+                    </Progress>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h5">KlinikDe</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+
+                        </CardBody>
+                        <center>
+                            <h4>Alle Jahren für Klinikbewertungen.de</h4>
+                            <ChartYearlyComments data={data07} />
+                        </center>
+                        <CardBody>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col>
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h5">KlinikDe</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+
+                        </CardBody>
+                        <center>
+                            <h4>Alle Jahren für Klinikbewertungen.de</h4>
+                            <ChartYearlyComments data={data07} />
+                        </center>
+                        <CardBody>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col xs="12" lg="6">
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h5">Google Maps</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                        </CardBody>
+                        <img width="100%" src="klinikbewertungen-react/images/Klinik_Polarity.png" alt="Card image cap" />
+                        <CardBody>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col xs="12" lg="6">
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h5">Google Maps</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                        </CardBody>
+                        <img width="100%" src="klinikbewertungen-react/images/Klinik_Sterne.png" alt="Card image cap" />
+                        <CardBody>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                        </CardBody>
+                    </Card>
+                </Col>
             </Row>
             <Row>
                 {

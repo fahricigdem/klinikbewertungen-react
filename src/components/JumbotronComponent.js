@@ -6,7 +6,7 @@ const JumbotronComponent = () => {
         <div>
             <Jumbotron fluid>
                 <Container >
-                    <h1 className="display-3">Daten sind Macht</h1>
+                    <h1 className="display-3">Data ist Macht</h1>
                     <p className="lead">Wir röntgen Ihre Daten...</p>
                     <hr className="my-2" />
                 </Container>

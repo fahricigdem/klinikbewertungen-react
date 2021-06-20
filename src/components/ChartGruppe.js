@@ -29,7 +29,7 @@ export default class ChartGruppe extends PureComponent {
 
         return (
 
-            <PieChart width={240} height={250}>
+            <PieChart width={350} height={250}>
                 <Pie
                     dataKey="value"
                     isAnimationActive={true}

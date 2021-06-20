@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 import ShowKommentare from './ShowKommentare'
 import { Row, Col, Button } from 'reactstrap';
+import Dataset from '../Data/Dataset'
+import { KlinikNames, FachbereichNames, KlinikDeYears, GoogleMapsYears } from '../Data/Lists'
 
-const Kommentare = ({ Dataset, KlinikNames, FachbereichNames, GoogleMapsYears, KlinikDeYears }) => {
+
+const Kommentare = () => {
 
     var Data = [...Dataset]
     const pageSize = 1
