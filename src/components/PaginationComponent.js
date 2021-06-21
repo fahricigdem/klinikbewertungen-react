@@ -47,9 +47,6 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem >
 
 
-
-
-
                         <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} style={{ textAlignLast: "center" }}>
 
                             {pages.map((p, index) =>
@@ -57,10 +54,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                             )}
                         </Input>
 
-
-
                     </PaginationItem>
-
 
 
                     <PaginationItem disabled={currentPage >= pagesCount}>

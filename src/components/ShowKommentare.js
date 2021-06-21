@@ -165,7 +165,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Col >
                         <Card>
                             <CardBody>
-                                <CardTitle tag="h5">Positive Polarity ({rezensionen.length} Rezensionen)</CardTitle>
+                                <CardTitle tag="h5">Positive Polarity</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
                                 <ChartResult data={data01} />
@@ -177,7 +178,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Col >
                         <Card>
                             <CardBody>
-                                <CardTitle tag="h5">Gruppen ({rezensionen.length} Rezensionen)</CardTitle>
+                                <CardTitle tag="h5">Gruppen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
                                 <ChartGruppe data={data02} />
@@ -189,7 +191,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Col >
                         <Card>
                             <CardBody>
-                                <CardTitle tag="h5">Sterne Bewertungen ({rezensionen.length} Rezensionen)</CardTitle>
+                                <CardTitle tag="h5">Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
                                 <ChartSterne data={data04} />
@@ -202,7 +205,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Col >
                         <Card>
                             <CardBody>
-                                <CardTitle tag="h5">Nutzer Bewertungen ({rezensionen.length} Rezensionen)</CardTitle>
+                                <CardTitle tag="h5">Nutzer Bewertungen </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
                                 <ChartGruppe data={data05} />
@@ -214,7 +218,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col >
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">Rezension Zahlen  pro Jahr ({rezensionen.length} Rezensionen)</CardTitle>
+                            <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <center>
                             <ChartYearly data={Dataset} />
@@ -226,7 +231,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col >
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">Durchschnittliche Polaritäten pro Jahr ({rezensionen.length} Rezensionen)</CardTitle>
+                            <CardTitle tag="h5">Durchschnittliche Polaritäten pro Jahr </CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <center>
                             <ChartYearlyPolarity data={Dataset} />
@@ -239,8 +245,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">KlinikbewertungenDe</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Polarity Werte</CardSubtitle>
+                            <CardTitle tag="h5">KlinikbewertungenDe - Polarity Werte</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <img width="100%" src={KlinikDe_Polarity} alt="KlinikDe_Polarity.png" />
                     </Card>
@@ -248,8 +254,9 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">KlinikbewertungenDe</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Nutzer Bewertungen</CardSubtitle>
+                            <CardTitle tag="h5">KlinikbewertungenDe - Nutzer Bewertungen</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+
                         </CardBody>
                         <img width="100%" src={KlinikDe_Gesamt} alt="KlinikDe_Gesamt.png" />
                     </Card>
@@ -261,8 +268,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">Google Maps</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Polarity Werte</CardSubtitle>
+                            <CardTitle tag="h5">Google Maps - Polarity Werte</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <img width="100%" src={Klinik_Polarity} alt="Klinik_Polarity.png" />
                         <CardBody>
@@ -273,8 +280,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h5">Google Maps</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Stern Bewertungen</CardSubtitle>
+                            <CardTitle tag="h5">Google Maps - Stern Bewertungen</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <img width="100%" src={Klinik_Sterne} alt="Klinik_Sterne.png" />
                         <CardBody id="AnfangderKommentare">
@@ -283,7 +290,9 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Card>
                 </Col>
             </Row>
-
+            <Row >
+                <center><h3>{rezensionen.length} Rezensionen von 3545  </h3></center>
+            </Row>
             <Row >
                 {
                     rezensionen

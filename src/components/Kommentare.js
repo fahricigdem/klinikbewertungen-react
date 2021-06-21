@@ -9,6 +9,7 @@ import { KlinikNames, FachbereichNames, KlinikDeYears, GoogleMapsYears } from '.
 const Kommentare = () => {
 
     var Data = [...Dataset]
+
     const pageSize = 2
 
     /////////// fachbereichNames Vorbereitungen
@@ -29,6 +30,7 @@ const Kommentare = () => {
     const [year, setYear] = useState("Alle")
     const [sterne, setSterne] = useState("Alle")
     const [currentPage, setCurrentPage] = useState(1)
+
 
     if (klinik !== "Alle") {
         uniqueFachbereichen = []
@@ -293,7 +295,7 @@ const Kommentare = () => {
                 <Col xs="6" lg="2">
                     <center>
                         <Label>Reset</Label><br />
-                        <Button color="secondary" onClick={resetFilter} block>Alle Rezensionen </Button>
+                        <Button color="secondary" onClick={resetFilter} block>All Rezensionen</Button>
                     </center>
                 </Col>
 
@@ -301,11 +303,7 @@ const Kommentare = () => {
             </Row>
 
 
-
-
             {renderContent()}
-
-
 
 
         </div>
