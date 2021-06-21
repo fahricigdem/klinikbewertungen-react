@@ -27,7 +27,7 @@ const HeaderComponent = (props) => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
-                            <NavLink >Components</NavLink>
+                            <NavLink href="#AnfangderKommentare">Components</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink >GitHub</NavLink>

@@ -10,17 +10,20 @@ const Kommentare = () => {
 
     var Data = [...Dataset]
 
-    const pageSize = 2
+    const pageSize = 2  // Für Pagination hat jede seite wie pageSize hoch Kommantare
 
-    /////////// fachbereichNames Vorbereitungen
+    /////////// fachbereichNames Vorbereitungen : das ändert sich nach der Klinik
     let uniqueFachbereichen = []
     FachbereichNames.map(f => {
         uniqueFachbereichen = [...uniqueFachbereichen, f.fachbereich]
         return null
     })
     uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
-    //////////////////////////////////
 
+
+
+
+    ////////////////////////////////// useState Objekte Für Filters
     const [klinik, setKlinik] = useState("Alle")
     const [source, setSource] = useState("Alle")
     const [result, setResult] = useState("Alle")
@@ -29,9 +32,9 @@ const Kommentare = () => {
     const [gesamt, setGesamt] = useState("Alle")
     const [year, setYear] = useState("Alle")
     const [sterne, setSterne] = useState("Alle")
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1) // Das ist für Pagination
 
-
+    //// fachbereichNames sind für klinik für klinik wieder festgestellt
     if (klinik !== "Alle") {
         uniqueFachbereichen = []
         FachbereichNames.map(f => {
@@ -43,6 +46,7 @@ const Kommentare = () => {
         uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
     }
 
+    //// fachbereichNames sind für group für group wieder festgestellt
     if (gruppe !== "Alle") {
         uniqueFachbereichen = []
         FachbereichNames.map(f => {
@@ -54,6 +58,7 @@ const Kommentare = () => {
         uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
     }
 
+    ////// Pagination, unter Kommentare deswegen als Bottom genannt
     const handlePageBottom = (e, index) => {
         //e.preventDefault()
         setCurrentPage(index)
@@ -62,13 +67,14 @@ const Kommentare = () => {
 
     }
 
+    //// In der Mitte von Pagination für Wahl der Seite von Kommentare
     const handlePageSelect = (pageInput) => {
         setCurrentPage(parseInt(pageInput))
         window.location = String(window.location).replace(/\#.*$/, "") + "#AnfangderKommentare";
     }
 
 
-
+    ///// Filters werden ausgeübt
     function renderContent() {
         Data = (klinik !== "Alle") ? Data.filter(k => k.name === klinik) : Data
 
@@ -96,7 +102,7 @@ const Kommentare = () => {
     }
 
 
-
+    ////////////////////////////////// Inputs werden ausgeübt
     function handleKlinik(klinik) {
         setKlinik(klinik)
         setFachbereich("Alle")
@@ -154,8 +160,6 @@ const Kommentare = () => {
         setCurrentPage(1)
 
     }
-
-
 
     const resetFilter = () => {
 

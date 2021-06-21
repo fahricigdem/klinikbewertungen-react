@@ -12,7 +12,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
             </Row>
 
             <Row>
-                <Pagination aria-label="Page navigation example" style={{ flexDirection: "row", justifyContent: "center" }} >
+                <Pagination aria-label="Page navigation example" style={{ flexDirection: "row", justifyContent: "center", textAlignLast: "center" }} >
 
                     <PaginationItem >
 
@@ -49,8 +49,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem >
 
 
-                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} style={{ textAlignLast: "center" }}>
-
+                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} >
+                            {console.log(currentPage)}
                             {pages.map((p, index) =>
                                 <option key={index}>{p}</option>
                             )}

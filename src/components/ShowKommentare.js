@@ -118,7 +118,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     const rezensionen = Dataset.map(komment =>
 
         <Col xs="12" key={komment.index} >
-            <Card >
+            <Card className="border-light">
                 <CardBody>
                     <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} </CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name}</CardSubtitle>
@@ -149,14 +149,14 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
     return (
         <>
-            <Row >
+            <Row style={{ backgroundColor: "#EEEEEE" }}>
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
                     <Alert color="warning" className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
             </Row>
-            <Row >
+            <Row style={{ backgroundColor: "#EEEEEE" }}>
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
                     <Progress multi >
                         <Progress bar animated={((source === "googleMaps")) && true} color="info" value={sourceGooglePercent}>Google Maps - {sourceGooglePercent}% </Progress>
@@ -164,10 +164,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Progress>
                 </Col>
             </Row>
-            <Row>
+            <Row >
                 {((result === "Alle") && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card>
+                        <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Positive Polarity</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -180,7 +180,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
                 {(gruppe === "Alle" && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card>
+                        <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Gruppen</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -193,7 +193,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
                 {source === "googleMaps" &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card>
+                        <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Sterne Bewertungen</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -207,7 +207,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
                 {(source === "klinikDe" && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card>
+                        <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Nutzer Bewertungen </CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -218,9 +218,9 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </Card>
                     </Col>}
             </Row>
-            <Row>
+            <Row >
                 <Col xs="12" sm="12" md="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -232,7 +232,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Col>
 
                 <Col xs="12" sm="12" md="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">Durchschnittliche Polaritäten pro Jahr </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -246,7 +246,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
             <Row>
                 <Col xs="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">KlinikbewertungenDe - Polarity Werte</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -255,7 +255,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Card>
                 </Col>
                 <Col xs="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">KlinikbewertungenDe - Nutzer Bewertungen</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -269,7 +269,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
             <Row>
                 <Col xs="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">Google Maps - Polarity Werte</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
@@ -281,26 +281,26 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Card>
                 </Col>
                 <Col xs="12" lg="6">
-                    <Card>
+                    <Card className="border-light">
                         <CardBody>
                             <CardTitle tag="h5">Google Maps - Stern Bewertungen</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <img width="100%" src={Klinik_Sterne} alt="Klinik_Sterne.png" />
-                        <CardBody id="AnfangderKommentare">
+                        <CardBody >
                             <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                         </CardBody>
                     </Card>
                 </Col>
             </Row>
-            <Row >
+            <Row id="AnfangderKommentare" style={{ backgroundColor: "#EEEEEE" }}>
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
                     <Alert color="danger" className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
             </Row>
-            <Row >
+            <Row style={{ backgroundColor: "#EEEEEE" }}>
                 {
                     rezensionen
                         .slice(
@@ -314,10 +314,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         )
                 }
             </Row>
-            <Row >
-
+            <Row style={{ backgroundColor: "#EEEEEE" }}>
                 <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} />
-
             </Row>
         </>
     );

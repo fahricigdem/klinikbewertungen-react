@@ -4,7 +4,7 @@ import HeaderComponent from './components/HeaderComponent'
 import Kommentare from './components/Kommentare'
 import { Container } from 'reactstrap';
 import JumbotronComponent from './components/JumbotronComponent'
-
+import FooterComponent from './components/FooterComponent'
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <HeaderComponent />
       <JumbotronComponent />
       <Kommentare />
+      <FooterComponent />
     </Container>
   );
 }
