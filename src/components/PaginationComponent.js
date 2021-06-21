@@ -2,15 +2,17 @@ import React from 'react';
 import { Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Input } from 'reactstrap';
 
-const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pagesCount }) => {
+const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pagesCount, pageSize, rezensionenZahl }) => {
     const pages = Array.from(new Array(pagesCount), (x, i) => i + 1)
 
     return (
-        <Row>
-            <Col >
+        <>
+            <Row style={{ textAlign: "center", marginTop: "10px" }}>
+                <p>{(rezensionenZahl >= (currentPage * pageSize)) ? "Rezensionen :" : "Rezension :"}  {(currentPage - 1) * pageSize + 1} {(rezensionenZahl >= (currentPage * pageSize)) && ("- " + (currentPage * pageSize))} </p>
+            </Row>
 
-
-                <Pagination aria-label="Page navigation example" >
+            <Row>
+                <Pagination aria-label="Page navigation example" style={{ flexDirection: "row", justifyContent: "center" }} >
 
                     <PaginationItem >
 
@@ -85,8 +87,9 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
 
 
                 </Pagination>
-            </Col>
-        </Row>
+            </Row>
+        </>
+
     );
 }
 

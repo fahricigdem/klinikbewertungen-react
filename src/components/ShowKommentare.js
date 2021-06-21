@@ -291,7 +291,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Col>
             </Row>
             <Row >
-                <center><h3>{rezensionen.length} Rezensionen von 3545  </h3></center>
+                <center><h3>{rezensionen.length} Rezensionen gefunden  </h3></center>
             </Row>
             <Row >
                 {
@@ -307,8 +307,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         )
                 }
             </Row>
-            <Row>
-                <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} />
+            <Row >
+
+                <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} />
+
             </Row>
         </>
     );
