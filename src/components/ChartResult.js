@@ -26,10 +26,14 @@ export default class ChartResult extends PureComponent {
             );
         };
 
+        let weit = window.screen.width - 200;
+        if (window.screen.width > 900) {
+            weit = 300;
+        }
 
         return (
 
-            <PieChart width={350} height={200}>
+            <PieChart width={weit} height={weit}>
                 <Pie
                     dataKey="value"
                     isAnimationActive={true}
@@ -38,7 +42,7 @@ export default class ChartResult extends PureComponent {
                     cy="50%"
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={80}
+                    outerRadius={weit / 2.8}
                     fill="#8884d8"
                 >
                     {this.props.data.map((entry, index) => (

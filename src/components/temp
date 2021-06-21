@@ -156,3 +156,21 @@
 
 
         <PaginationComponent handleClick={handlePageTop} handleSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} />
+
+
+                        {source === "Alle" &&
+                    <Col >
+                        <center>
+                            <ChartSource data={data03} />
+                        </center>
+                    </Col>}
+
+                        let sourceGoogle = 0
+    let sourceKlinikDe = 0
+    let data03 = []
+
+    sourceGoogle = c.source === "googleMaps" ? (sourceGoogle + 1) : sourceGoogle
+
+<em style={{ fontSize: 'small' }} className="mt-2">* Google Maps Data hat diese Atribute nicht!!</em>
+                <em style={{ fontSize: 'small' }} className="mt-2">** Entweder einzelne Klinik oder eine Gruppe kann selektiert werden!</em>
+                <em style={{ fontSize: 'small' }} className="mt-2">*** Klinikbewertungen.de Data hat diese Atribute nicht!!</em>

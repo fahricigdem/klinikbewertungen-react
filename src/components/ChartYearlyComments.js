@@ -6,17 +6,18 @@ export default class ChartYearlyComments extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/stacked-bar-chart-s47i2';
 
     render() {
+        const weit = window.screen.width - 25;
         return (
 
             <BarChart
-                width={370}
+                width={weit}
                 height={300}
                 isAnimationActive={true}
                 data={this.props.data}
                 margin={{
                     top: 20,
                     right: 30,
-                    left: 20,
+                    left: 5,
                     bottom: 5,
                 }}
             >

@@ -67,9 +67,14 @@ export default class ChartGruppe extends PureComponent {
 
         const COLORS = ['#00C49F', '#FF8042', '#FFBB28', '#0088FE'];
 
+        let weit = window.screen.width - 70;
+        if (window.screen.width > 900) {
+            weit = 300;
+        }
+
         return (
 
-            <PieChart width={370} height={300}>
+            <PieChart width={weit} height={weit}>
                 <Pie
                     activeIndex={this.state.activeIndex}
                     activeShape={renderActiveShape}
@@ -78,17 +83,15 @@ export default class ChartGruppe extends PureComponent {
                     isAnimationActive={true}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
+                    innerRadius={weit / 5}
                     fill="#8884d8"
-                    outerRadius={80}
+                    outerRadius={weit / 3}
                     onMouseEnter={this.onPieEnter}
                 >
                     {this.props.data.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
-                <Legend />
 
             </PieChart>
 

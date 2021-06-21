@@ -9,12 +9,13 @@ import { KlinikNames, FachbereichNames, KlinikDeYears, GoogleMapsYears } from '.
 const Kommentare = () => {
 
     var Data = [...Dataset]
-    const pageSize = 1
+    const pageSize = 2
 
     /////////// fachbereichNames Vorbereitungen
     let uniqueFachbereichen = []
     FachbereichNames.map(f => {
         uniqueFachbereichen = [...uniqueFachbereichen, f.fachbereich]
+        return null
     })
     uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
     //////////////////////////////////
@@ -35,6 +36,7 @@ const Kommentare = () => {
             if (f.name === klinik) {
                 uniqueFachbereichen = [...uniqueFachbereichen, f.fachbereich]
             }
+            return null
         })
         uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
     }
@@ -45,23 +47,22 @@ const Kommentare = () => {
             if (f.group === parseInt(gruppe)) {
                 uniqueFachbereichen = [...uniqueFachbereichen, f.fachbereich]
             }
+            return null
         })
         uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
     }
 
-    const handlePageTop = (e, index) => {
-        e.preventDefault()
-        setCurrentPage(index)
-    }
-
     const handlePageBottom = (e, index) => {
-        e.preventDefault()
+        //e.preventDefault()
         setCurrentPage(index)
-        //window.scrollTo({ top: 150, behavior: 'smooth' });
+        //window.scrollTo({ top: 1300, behavior: 'smooth' });
+        //document.location = document.location.toString().split('#')[0] + '#AnfangderKommentare'; return false;
+
     }
 
     const handlePageSelect = (pageInput) => {
         setCurrentPage(parseInt(pageInput))
+        window.location = String(window.location).replace(/\#.*$/, "") + "#AnfangderKommentare";
     }
 
 
@@ -85,12 +86,11 @@ const Kommentare = () => {
 
 
 
-
-
-
         const pagesCount = Math.ceil(Data.length / pageSize);
 
-        return <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage} handlePageTop={handlePageTop} handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect} klinik={klinik} source={source} result={result} gruppe={gruppe} />
+        return <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage}
+            handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect}
+            klinik={klinik} source={source} result={result} gruppe={gruppe} />
     }
 
 
@@ -100,35 +100,38 @@ const Kommentare = () => {
         setFachbereich("Alle")
         gruppe !== "Alle" && setKlinik("Alle")
         setCurrentPage(1)
+
     }
 
     function handleSource(source) {
         setSource(source)
-        if (source === "Alle") {
-            setFachbereich("Alle")
-            setGesamt("Alle")
-            setSterne("Alle")
-        }
+        setSterne("Alle")
+        setGesamt("Alle")
+        setFachbereich("Alle")
+        setYear("Alle")
         setCurrentPage(1)
+        //
     }
 
     function handleResult(result) {
         setResult(result)
         setCurrentPage(1)
+
     }
 
     function handleFachbereich(fachbereich) {
         setFachbereich(fachbereich)
         source !== "klinikDe" && setFachbereich("Alle")
         setCurrentPage(1)
+
     }
 
     function handleGruppe(gruppe) {
         setGruppe(gruppe)
         setFachbereich('Alle')
         klinik !== "Alle" && setGruppe("Alle")
-
         setCurrentPage(1)
+
     }
 
     function handleGesamt(gesamt) {
@@ -140,12 +143,14 @@ const Kommentare = () => {
     function handleYear(year) {
         setYear(year)
         setCurrentPage(1)
+
     }
 
     function handleSterne(sterne) {
         setSterne(sterne)
         source !== "googleMaps" && setSterne("Alle")
         setCurrentPage(1)
+
     }
 
 
@@ -160,12 +165,15 @@ const Kommentare = () => {
         setGesamt("Alle")
         setYear("Alle")
         setSterne("Alle")
+
     }
 
     return (
         <div >
-            <Row className="mt-3">
-                <Col xs="6" lg="3">
+
+            <Row className={`mt-1 ${window.screen.width > 900 ? "sticky-top" : ""} bg-light`} >
+
+                <Col xs="6" lg="2">
                     <FormGroup>
                         <Label className="" for="exampleSelect">Data Source</Label>
                         <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)}>
@@ -175,9 +183,9 @@ const Kommentare = () => {
                         </Input>
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="3">
+                <Col xs="6" lg="2">
                     <FormGroup >
-                        <Label for="exampleSelect">Select Klinik</Label>
+                        <Label for="exampleSelect">Klinik</Label>
                         {gruppe === 'Alle' ?
                             <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)}  >
                                 <option>Alle</option>
@@ -190,40 +198,44 @@ const Kommentare = () => {
                             </Input>}
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="3">
+                <Col xs="6" lg="1">
                     <FormGroup>
-                        <Label for="exampleSelect">Selekt Gruppe**</Label>
+                        <Label for="exampleSelect">Gruppe</Label>
                         {klinik === 'Alle' ?
                             <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)}  >
                                 <option>Alle</option>
-                                <option value="0">Gruppe-1</option>
-                                <option value='1'>Gruppe-2</option>
-                                <option value="2">Gruppe-3</option>
-                                <option value='3'>Gruppe-4</option>
+                                <option value="0"> 1</option>
+                                <option value='1'> 2 </option>
+                                <option value="2"> 3 </option>
+                                <option value='3'> 4 </option>
                             </Input> :
                             <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} disabled>
                                 <option>Alle</option>
                             </Input>}
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="3">
-                    <FormGroup>
-                        <Label className="" for="exampleSelect">Fachbereich*</Label>
-                        {source === 'klinikDe' ?
+
+
+                {source === 'klinikDe' &&
+                    <Col xs="6" lg="2">
+                        <FormGroup>
+                            <Label className="" for="exampleSelect">Fachbereich</Label>
+
                             <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)}>
                                 <option>Alle</option>
                                 {uniqueFachbereichen.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
                             </Input>
-                            : <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} disabled>
-                                <option>Alle</option>
-                            </Input>}
-                    </FormGroup>
-                </Col>
-                <Col xs="6" lg="3">
+                        </FormGroup>
+                    </Col>
+                }
+
+
+
+                <Col xs="6" lg="1">
                     <FormGroup>
-                        <Label for="exampleSelect">Selekt Year</Label>
+                        <Label for="exampleSelect"> Year</Label>
                         {((source === 'klinikDe' || source === 'Alle')) ?
                             <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)}>
                                 <option>Alle</option>
@@ -239,9 +251,9 @@ const Kommentare = () => {
                             </Input>}
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="3">
+                <Col xs="6" lg="1">
                     <FormGroup>
-                        <Label className="" for="exampleSelect">Polarity Result</Label>
+                        <Label className="" for="exampleSelect">Polarity</Label>
                         <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)}>
                             <option>Alle</option>
                             <option value="1" >Positive</option>
@@ -249,28 +261,25 @@ const Kommentare = () => {
                         </Input>
                     </FormGroup>
                 </Col>
+                {source === 'klinikDe' &&
+                    <Col xs="6" lg="1">
+                        <FormGroup>
+                            <Label className="" for="exampleSelect">Gesamt</Label>
 
-                <Col xs="6" lg="3">
-                    <FormGroup>
-                        <Label className="" for="exampleSelect">Nutzer Bewertung - Gesamt*</Label>
-                        {source === 'klinikDe' ?
                             <Input type="select" name="gesamt" id="gesamt" value={gesamt} onChange={(e) => handleGesamt(e.target.value)}>
                                 <option>Alle</option>
                                 <option value="100" >Sehr Zufrieden</option>
                                 <option value='67'>Zufrieden</option>
                                 <option value='33'>Weniger Zufrieden</option>
                                 <option value='0'>Nicht Zufrieden</option>
-                            </Input> :
-                            <Input type="select" name="gesamt" id="gesamt" value={gesamt} onChange={(e) => handleGesamt(e.target.value)} disabled>
-                                <option>Alle</option>
-                            </Input>}
-                    </FormGroup>
-                </Col>
+                            </Input>
+                        </FormGroup>
+                    </Col>}
+                {source === 'googleMaps' &&
+                    <Col xs="6" lg="1">
+                        <FormGroup>
+                            <Label className="" for="exampleSelect"> Sterne</Label>
 
-                <Col xs="6" lg="3">
-                    <FormGroup>
-                        <Label className="" for="exampleSelect">Nutzer Bewertung - Sterne***</Label>
-                        {source === 'googleMaps' ?
                             <Input type="select" name="sterne" id="sterne" value={sterne} onChange={(e) => handleSterne(e.target.value)}>
                                 <option>Alle</option>
                                 <option value="1" >1 Stern</option>
@@ -278,22 +287,20 @@ const Kommentare = () => {
                                 <option value='3'>3 Stern</option>
                                 <option value='4'>4 Stern</option>
                                 <option value='5'>5 Stern</option>
-                            </Input> :
-                            <Input type="select" name="sterne" id="sterne" value={sterne} onChange={(e) => handleSterne(e.target.value)} disabled>
-                                <option>Alle</option>
-                            </Input>}
-                    </FormGroup>
+                            </Input>
+                        </FormGroup>
+                    </Col>}
+                <Col xs="6" lg="2">
+                    <center>
+                        <Label>Reset</Label><br />
+                        <Button color="secondary" onClick={resetFilter} block>Alle Rezensionen </Button>
+                    </center>
                 </Col>
 
-                <em style={{ fontSize: 'small' }} className="mt-2">* Google Maps Data hat diese Atribute nicht!!</em>
-                <em style={{ fontSize: 'small' }} className="mt-2">** Entweder einzelne Klinik oder eine Gruppe kann selektiert werden!</em>
-                <em style={{ fontSize: 'small' }} className="mt-2">*** Klinikbewertungen.de Data hat diese Atribute nicht!!</em>
 
             </Row>
-            <Row>
-                <Button color="danger" onClick={resetFilter}>Reset Filters</Button>
-            </Row>
-            <br />
+
+
 
 
             {renderContent()}

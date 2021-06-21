@@ -81,7 +81,6 @@ export default class ChartGruppe extends PureComponent {
                     innerRadius={60}
                     outerRadius={80}
                     fill="#8884d8"
-                    outerRadius={80}
                     onMouseEnter={this.onPieEnter}
                 >
                     {this.props.data.map((entry, index) => (

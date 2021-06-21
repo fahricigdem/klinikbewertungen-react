@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Input } from 'reactstrap';
 
-const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCount }) => {
+const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pagesCount }) => {
     const pages = Array.from(new Array(pagesCount), (x, i) => i + 1)
 
     return (
@@ -18,8 +18,9 @@ const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCoun
 
 
                             onClick={e => handleClick(e, 1)}
-                            href="#"
+                            href="#AnfangderKommentare"
                         >
+
                             <span>&#8826;&#8826;</span>
                         </PaginationLink>
 
@@ -33,8 +34,9 @@ const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCoun
                         <PaginationLink
 
                             onClick={e => handleClick(e, currentPage - 1)}
-                            href="#"
+                            href="#AnfangderKommentare"
                         >
+
 
                             <span> zurück</span>
                         </PaginationLink>
@@ -48,7 +50,7 @@ const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCoun
 
 
 
-                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handleSelect(e.target.value)} style={{ textAlignLast: "center" }}>
+                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} style={{ textAlignLast: "center" }}>
 
                             {pages.map((p, index) =>
                                 <option key={index}>{p}</option>
@@ -66,7 +68,7 @@ const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCoun
                         <PaginationLink
 
                             onClick={e => handleClick(e, currentPage + 1)}
-                            href="#"
+                            href="#AnfangderKommentare"
                         >
                             <span> weiter </span>
                         </PaginationLink>
@@ -78,7 +80,7 @@ const PaginationComponent = ({ handleSelect, handleClick, currentPage, pagesCoun
                         <PaginationLink
 
                             onClick={e => handleClick(e, pagesCount)}
-                            href="#"
+                            href="#AnfangderKommentare"
                         >
                             <span>&#8827;&#8827;</span>
 
