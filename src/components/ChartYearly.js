@@ -44,11 +44,11 @@ export default class ChartYearly extends PureComponent {
             datafordiagram.push(year)
         }
 
-        let weit = window.screen.width - 25;
+        let weit = window.screen.width - 30;
         let hoch = 350
         if (window.screen.width > 900) {
             hoch = 600;
-            weit = weit - 100
+            weit = (weit - 30) / 2
         }
 
 
@@ -59,10 +59,10 @@ export default class ChartYearly extends PureComponent {
                 height={hoch}
                 data={datafordiagram}
                 margin={{
-                    top: 5,
-                    right: 25,
+                    top: 10,
+                    right: 10,
                     left: 1,
-                    bottom: 5,
+                    bottom: 10,
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />

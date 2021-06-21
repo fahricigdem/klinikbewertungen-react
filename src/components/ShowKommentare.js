@@ -11,7 +11,7 @@ import PaginationComponent from './PaginationComponent'
 import { Row, Col } from 'reactstrap';
 import { GoogleMapsYearlyPosNeg } from '../Data/Lists'
 import { KlinikDeYearlyPosNeg } from '../Data/Lists'
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert } from 'reactstrap';
 import Klinik_Polarity from '../images/Klinik_Polarity.png'
 import Klinik_Sterne from '../images/Klinik_Sterne.png'
 import KlinikDe_Polarity from '../images/KlinikDe_Polarity.png'
@@ -117,14 +117,14 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
     const rezensionen = Dataset.map(komment =>
 
-        <Col xs="12" key={komment.index}>
-            <Card>
+        <Col xs="12" key={komment.index} >
+            <Card >
                 <CardBody>
                     <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} </CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name}</CardSubtitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>{komment.komment}</CardText>
+                    <CardText style={{ height: "180px", overflowY: "scroll" }}>{komment.komment}</CardText>
                     <p>Result durch TextBlob: {komment.positive ? "Positive" : "Negative"}</p>
                     {komment.titel && <p>Titel: {komment.titel} </p>}
                     <p>Datum: {komment.datum ? komment.datum : komment.year}</p>
@@ -150,19 +150,23 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     return (
         <>
             <Row >
-                <center><h3>{rezensionen.length} Rezensionen gefunden</h3></center>
+                <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
+                    <Alert color="warning" className="pt-1 pb-0 m-1" >
+                        <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
+                    </Alert>
+                </Col>
             </Row>
             <Row >
-                <Col sm="12" md={{ size: 8, offset: 2 }}>
-                    <Progress multi>
-                        <Progress bar animated={((source === "googleMaps") || source === "Alle") && true} color="success" value={sourceGooglePercent}>Google Maps - {sourceGooglePercent}% </Progress>
-                        <Progress bar animated={((source === "klinikDe") || source === "Alle") && true} color="info" value={sourceKlinikDePercent}>KlinikbewertungenDe - {sourceKlinikDePercent}%</Progress>
+                <Col sm="12" md={{ size: 10, offset: 1 }}>
+                    <Progress multi >
+                        <Progress bar animated={((source === "googleMaps")) && true} color="info" value={sourceGooglePercent}>Google Maps - {sourceGooglePercent}% </Progress>
+                        <Progress bar animated={((source === "klinikDe")) && true} color="danger" value={sourceKlinikDePercent}>KlinikbewertungenDe - {sourceKlinikDePercent}%</Progress>
                     </Progress>
                 </Col>
             </Row>
             <Row>
                 {((result === "Alle") && rezensionen.length !== 0) &&
-                    <Col >
+                    <Col xs="12" sm="6" lg="4">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">Positive Polarity</CardTitle>
@@ -175,7 +179,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
 
                 {(gruppe === "Alle" && rezensionen.length !== 0) &&
-                    <Col >
+                    <Col xs="12" sm="6" lg="4">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">Gruppen</CardTitle>
@@ -188,7 +192,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
 
                 {source === "googleMaps" &&
-                    <Col >
+                    <Col xs="12" sm="6" lg="4">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">Sterne Bewertungen</CardTitle>
@@ -202,7 +206,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
 
                 {(source === "klinikDe" && rezensionen.length !== 0) &&
-                    <Col >
+                    <Col xs="12" sm="6" lg="4">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">Nutzer Bewertungen </CardTitle>
@@ -215,7 +219,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
             </Row>
             <Row>
-                <Col >
+                <Col xs="12" sm="12" md="12" lg="6">
                     <Card>
                         <CardBody>
                             <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
@@ -226,9 +230,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </center>
                     </Card>
                 </Col>
-            </Row>
-            <Row>
-                <Col >
+
+                <Col xs="12" sm="12" md="12" lg="6">
                     <Card>
                         <CardBody>
                             <CardTitle tag="h5">Durchschnittliche Polaritäten pro Jahr </CardTitle>
@@ -291,7 +294,11 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Col>
             </Row>
             <Row >
-                <center><h3>{rezensionen.length} Rezensionen gefunden  </h3></center>
+                <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
+                    <Alert color="danger" className="pt-1 pb-0 m-1" >
+                        <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
+                    </Alert>
+                </Col>
             </Row>
             <Row >
                 {

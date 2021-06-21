@@ -33,18 +33,27 @@ export default class Example extends PureComponent {
                 return r
             })
 
-            year.GoogleMaps = year.GoogleMaps / googleZahl
-            year.KlinikDe = year.KlinikDe / klinikZahl
+            if (googleZahl === 0) {
+                year.GoogleMaps = 0
+            } else {
+                year.GoogleMaps = Number.parseFloat(year.GoogleMaps / googleZahl).toPrecision(2)
+            }
+
+            if (klinikZahl === 0) {
+                year.KlinikDe = 0
+            } else {
+                year.KlinikDe = Number.parseFloat(year.KlinikDe / klinikZahl).toPrecision(2)
+            }
 
             datafordiagram.push(year)
         }
         console.log(datafordiagram)
 
-        let weit = window.screen.width - 25;
+        let weit = window.screen.width - 30;
         let hoch = 350
         if (window.screen.width > 900) {
             hoch = 600;
-            weit = weit - 100
+            weit = (weit - 30) / 2
         }
 
         return (
@@ -54,9 +63,9 @@ export default class Example extends PureComponent {
                 height={hoch}
                 data={datafordiagram}
                 margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
+                    top: 10,
+                    right: 10,
+                    left: 1,
                     bottom: 5,
                 }}
             >

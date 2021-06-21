@@ -173,9 +173,9 @@ const Kommentare = () => {
     return (
         <div >
 
-            <Row className={`mt-1 ${window.screen.width > 900 ? "sticky-top" : ""} bg-light`} >
+            <Row className={`mt-1 ${window.screen.width > 900 ? "sticky-top" : ""} bg-light justify-content-between`} >
 
-                <Col xs="6" lg="2">
+                <Col xs="6" lg="auto">
                     <FormGroup>
                         <Label className="" for="exampleSelect">Data Source</Label>
                         <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)}>
@@ -185,7 +185,7 @@ const Kommentare = () => {
                         </Input>
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="2">
+                <Col xs="6" lg={source === 'Alle' ? 3 : 2}>
                     <FormGroup >
                         <Label for="exampleSelect">Klinik</Label>
                         {gruppe === 'Alle' ?
@@ -200,7 +200,7 @@ const Kommentare = () => {
                             </Input>}
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="1">
+                <Col xs="6" lg="auto">
                     <FormGroup>
                         <Label for="exampleSelect">Gruppe</Label>
                         {klinik === 'Alle' ?
@@ -218,24 +218,30 @@ const Kommentare = () => {
                 </Col>
 
 
-                {source === 'klinikDe' &&
-                    <Col xs="6" lg="2">
-                        <FormGroup>
-                            <Label className="" for="exampleSelect">Fachbereich</Label>
 
+                <Col xs="6" lg="2">
+                    <FormGroup>
+                        <Label className="" for="exampleSelect">Fachbereich</Label>
+                        {source === 'klinikDe' ?
                             <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)}>
                                 <option>Alle</option>
                                 {uniqueFachbereichen.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
+                            </Input> : <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} disabled>
+                                <option>Alle</option>
+                                {uniqueFachbereichen.map((k, index) =>
+                                    <option key={index}>{k}</option>
+                                )}
                             </Input>
-                        </FormGroup>
-                    </Col>
-                }
+                        }
+                    </FormGroup>
+                </Col>
 
 
 
-                <Col xs="6" lg="1">
+
+                <Col xs="6" lg="auto">
                     <FormGroup>
                         <Label for="exampleSelect"> Year</Label>
                         {((source === 'klinikDe' || source === 'Alle')) ?
@@ -278,7 +284,7 @@ const Kommentare = () => {
                         </FormGroup>
                     </Col>}
                 {source === 'googleMaps' &&
-                    <Col xs="6" lg="1">
+                    <Col xs="6" lg="auto">
                         <FormGroup>
                             <Label className="" for="exampleSelect"> Sterne</Label>
 
@@ -292,10 +298,12 @@ const Kommentare = () => {
                             </Input>
                         </FormGroup>
                     </Col>}
-                <Col xs="6" lg="2">
-                    <center>
+                <Col xs={source === 'Alle' ? 12 : 6} lg="auto">
+                    <center >
                         <Label>Reset</Label><br />
-                        <Button color="secondary" onClick={resetFilter} block>All Rezensionen</Button>
+
+                        <Button color="secondary" onClick={resetFilter} >All Rezensionen</Button>
+
                     </center>
                 </Col>
 
