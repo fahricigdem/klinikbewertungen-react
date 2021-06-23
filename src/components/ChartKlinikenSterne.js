@@ -88,7 +88,7 @@ export default class Example extends PureComponent {
             let j = 0
             googleMapsData.map(r => {
                 if (r.name === i) {
-                    einKlinik.SterneMean = einKlinik.SterneMean + r.polarity
+                    einKlinik.SterneMean = einKlinik.SterneMean + r.sterne
                     j++
                 }
                 return r
