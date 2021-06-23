@@ -21,8 +21,6 @@ const Kommentare = () => {
     uniqueFachbereichen = [...new Set(uniqueFachbereichen)];
 
 
-
-
     ////////////////////////////////// useState Objekte Für Filters
     const [klinik, setKlinik] = useState("Alle")
     const [source, setSource] = useState("Alle")
@@ -62,9 +60,6 @@ const Kommentare = () => {
     const handlePageBottom = (e, index) => {
         //e.preventDefault()
         setCurrentPage(index)
-        //window.scrollTo({ top: 1300, behavior: 'smooth' });
-        //document.location = document.location.toString().split('#')[0] + '#AnfangderKommentare'; return false;
-
     }
 
     //// In der Mitte von Pagination für Wahl der Seite von Kommentare
@@ -91,8 +86,6 @@ const Kommentare = () => {
         Data = (year !== "Alle") ? Data.filter(k => k.year === parseInt(year)) : Data
 
         Data = (sterne !== "Alle") ? Data.filter(k => k.sterne === parseInt(sterne)) : Data
-
-
 
         const pagesCount = Math.ceil(Data.length / pageSize);
 
@@ -306,7 +299,7 @@ const Kommentare = () => {
                     <center >
                         <Label>Reset</Label><br />
 
-                        <Button color="secondary" onClick={resetFilter} >All Rezensionen</Button>
+                        <Button color="secondary" onClick={resetFilter} >Alle Rezensionen</Button>
 
                     </center>
                 </Col>

@@ -50,7 +50,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
 
 
                         <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} >
-                            {console.log(currentPage)}
+
                             {pages.map((p, index) =>
                                 <option key={index}>{p}</option>
                             )}

@@ -16,6 +16,16 @@ import Klinik_Polarity from '../images/Klinik_Polarity.png'
 import Klinik_Sterne from '../images/Klinik_Sterne.png'
 import KlinikDe_Polarity from '../images/KlinikDe_Polarity.png'
 import KlinikDe_Gesamt from '../images/KlinikDe_Gesamt.png'
+import ChartYearly_Google from './ChartYearly_Google'
+import ChartYearly_KlinikDe from './ChartYearly_KlinikDe'
+import ChartKlinikenDePolarity from './ChartKlinikenDePolarity'
+import ChartKlinikenGesamt from './ChartKlinikenGesamt'
+import ChartKlinikenSterne from './ChartKlinikenSterne'
+import ChartKlinikenMapsPolarity from './ChartKlinikenMapsPolarity'
+import ChartFachbereichenPolarity from './ChartFachbereichenPolarity'
+import ChartFachbereichenGesamt from './ChartFachbereichenGesamt'
+import ChartKlinikenZahlen from './ChartKlinikenZahlen'
+import ChartFachbereichenZahlen from './ChartFachbereichenZahlen'
 
 
 
@@ -23,20 +33,25 @@ import KlinikDe_Gesamt from '../images/KlinikDe_Gesamt.png'
 const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePageBottom, handlePageSelect, klinik, source, result, gruppe }) => {
 
     ////////////  Diagram Data ////////////////////////////
+
+    ////Piechart-Result
     let positive = 0
     let negative = 0
     let data01 = []
 
+    ////Piechart-Gruppe
     let one = 0
     let two = 0
     let three = 0
     let four = 0
     let data02 = []
 
+    ////Progressbar-source
     let sourceGoogle = 0
     let sourceKlinikDe = 0
     let data03 = []
 
+    ////Piechart-Sterne
     let oneStern = 0
     let twoStern = 0
     let threeStern = 0
@@ -44,12 +59,14 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     let fiveStern = 0
     let data04 = []
 
+    ////Piechart-Nutzerbewertung von klinikDe
     let sehrZufrieden = 0
     let zufrieden = 0
     let wenigerZufrieden = 0
     let unzufrieden = 0
     let data05 = []
 
+    ///Diagram variables werden gerechnet im map function
     Dataset.map(c => {
 
         positive = c.positive ? (positive + 1) : positive
@@ -72,16 +89,19 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     }
     )
 
+    /// Für Progressbar Data (source data)
     negative = Dataset.length - positive
     sourceKlinikDe = Dataset.length - sourceGoogle
-    let sourceGooglePercent = Math.round(sourceGoogle / (sourceKlinikDe + sourceGoogle) * 100)
-    let sourceKlinikDePercent = Math.round(sourceKlinikDe / (sourceKlinikDe + sourceGoogle) * 100)
+    let sourceGooglePercent = Dataset.length !== 0 ? Math.round(sourceGoogle / (sourceKlinikDe + sourceGoogle) * 100) : 0
+    let sourceKlinikDePercent = Dataset.length !== 0 ? Math.round(sourceKlinikDe / (sourceKlinikDe + sourceGoogle) * 100) : 0
 
+    ////Piechart-Result
     data01 = [
         { name: 'Positive', value: positive },
         { name: 'Negative', value: negative }
     ];
 
+    ////Piechart-gruppe
     data02 = [
         { name: 'Gruppe-1', value: one },
         { name: 'Gruppe-2', value: two },
@@ -89,12 +109,13 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         { name: 'Gruppe-4', value: four }
     ];
 
-
+    ////Piechart-Source
     data03 = [
         { name: 'Google', value: sourceGoogle },
         { name: 'KlinikDe', value: sourceKlinikDe }
     ];
 
+    ////Piechart-Sterne
     data04 = [
         { name: '1 Stern', value: oneStern },
         { name: '2 Stern', value: twoStern },
@@ -103,6 +124,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         { name: '5 Stern', value: fiveStern }
     ];
 
+    ////Piechart-Nutzerbewertung von klinikDe
     data05 = [
         { name: 'Sehr Zufrieden', value: sehrZufrieden },
         { name: 'Zufrieden', value: zufrieden },
@@ -110,13 +132,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         { name: 'Unzufrieden', value: unzufrieden }
     ];
 
-    let data06 = GoogleMapsYearlyPosNeg
-    let data07 = KlinikDeYearlyPosNeg
-
-    //////////////////////////////////////////////////////////
-
+    ////// Kommentare Cards
     const rezensionen = Dataset.map(komment =>
-
         <Col xs="12" key={komment.index} >
             <Card className="border-light">
                 <CardBody>
@@ -143,30 +160,28 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             </Card>
         </Col>
     )
-    //console.log('In ShowKommentare', Dataset)
 
-    //const group = Dataset.length ? (Dataset[0].group + 1) : ''
 
     return (
-        <>
-            <Row style={{ backgroundColor: "#EEEEEE" }}>
+        <> {/* Diagräme und Kommentare */}
+            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
                     <Alert color="warning" className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}>
+            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Progressbar für  source */}
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
                     <Progress multi >
-                        <Progress bar animated={((source === "googleMaps")) && true} color="info" value={sourceGooglePercent}>Google Maps - {sourceGooglePercent}% </Progress>
-                        <Progress bar animated={((source === "klinikDe")) && true} color="danger" value={sourceKlinikDePercent}>KlinikbewertungenDe - {sourceKlinikDePercent}%</Progress>
+                        <Progress bar animated={((source === "googleMaps")) && true} color="info" value={sourceGooglePercent}>GoogleMaps - {sourceGooglePercent}% </Progress>
+                        <Progress bar animated={((source === "klinikDe")) && true} color="danger" value={sourceKlinikDePercent}>KlinikDe - {sourceKlinikDePercent}%</Progress>
                     </Progress>
                 </Col>
             </Row>
-            <Row >
+            <Row >  {/* Piecharts */}
                 {((result === "Alle") && rezensionen.length !== 0) &&
-                    <Col xs="12" sm="6" lg="4">
+                    <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
                         <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Positive Polarity</CardTitle>
@@ -177,9 +192,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                             </center>
                         </Card>
                     </Col>}
-
                 {(gruppe === "Alle" && rezensionen.length !== 0) &&
-                    <Col xs="12" sm="6" lg="4">
+                    <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
                         <Card className="border-light">
                             <CardBody>
                                 <CardTitle tag="h5">Gruppen</CardTitle>
@@ -213,23 +227,54 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartGruppe data={data05} />
+                                <ChartGesamt data={data05} />
                             </center>
                         </Card>
                     </Col>}
             </Row>
-            <Row >
-                <Col xs="12" sm="12" md="12" lg="6">
-                    <Card className="border-light">
-                        <CardBody>
-                            <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
-                        </CardBody>
-                        <center>
-                            <ChartYearly data={Dataset} />
-                        </center>
-                    </Card>
-                </Col>
+
+
+
+
+            <Row className="bg-light "> {/* Yearly - commentareZahl und polarity */}
+
+
+                {(source === "Alle") ?
+                    <Col xs="12" sm="12" md="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <center>
+                                <ChartYearly data={Dataset} />
+                            </center>
+                        </Card>
+                    </Col> : (source === "googleMaps") ?
+                        <Col xs="12" sm="12" md="12" lg="6">
+                            <Card className="border-light">
+                                <CardBody>
+                                    <CardTitle tag="h5">GoogleMaps Rezension Zahlen  pro Jahr </CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                </CardBody>
+                                <center>
+                                    <ChartYearly_Google data={Dataset} />
+                                </center>
+                            </Card>
+                        </Col> :
+
+                        <Col xs="12" sm="12" md="12" lg="6">
+                            <Card className="border-light">
+                                <CardBody>
+                                    <CardTitle tag="h5">KLinikDe Rezension Zahlen  pro Jahr </CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                </CardBody>
+                                <center>
+                                    <ChartYearly_KlinikDe data={Dataset} />
+                                </center>
+                            </Card>
+                        </Col>}
+
 
                 <Col xs="12" sm="12" md="12" lg="6">
                     <Card className="border-light">
@@ -244,63 +289,105 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Col>
             </Row>
 
-            <Row>
+            {(source !== "googleMaps") &&
+                <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">KlinikbewertungenDe - Polarity Werte</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartKlinikenDePolarity data={Dataset} />
+                        </Card>
+                    </Col>
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">KlinikbewertungenDe - Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartKlinikenGesamt data={Dataset} />
+                        </Card>
+                    </Col>
+                </Row>}
+
+            {(source !== "klinikDe") &&
+                <Row className="pt-2 pb-2 bg-light">  {/* GoogleMaos:  Klinik by Klinik images- polarity versus nutzer bewertung */}
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">Google Maps - Polarity Werte</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceGoogle} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartKlinikenMapsPolarity data={Dataset} />
+                        </Card>
+                    </Col>
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">Google Maps - Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceGoogle} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartKlinikenSterne data={Dataset} />
+                        </Card>
+                    </Col>
+                </Row>}
+
+            {(source !== "googleMaps") &&
+                <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">Fachbereichen - Polarity Werte </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartFachbereichenPolarity data={Dataset} />
+                        </Card>
+                    </Col>
+                    <Col xs="12" lg="6">
+                        <Card className="border-light">
+                            <CardBody>
+                                <CardTitle tag="h5">Fachbereichen - Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            </CardBody>
+                            <ChartFachbereichenGesamt data={Dataset} />
+                        </Card>
+                    </Col>
+                </Row>}
+
+            <Row className="pt-2 pb-2 bg-light"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
                 <Col xs="12" lg="6">
                     <Card className="border-light">
                         <CardBody>
-                            <CardTitle tag="h5">KlinikbewertungenDe - Polarity Werte</CardTitle>
+                            <CardTitle tag="h5">Klinik Zahlen </CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">(GoogleMaps und KlinikDe Data)</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
-                        <img width="100%" src={KlinikDe_Polarity} alt="KlinikDe_Polarity.png" />
+                        <ChartKlinikenZahlen data={Dataset} />
                     </Card>
                 </Col>
                 <Col xs="12" lg="6">
                     <Card className="border-light">
                         <CardBody>
-                            <CardTitle tag="h5">KlinikbewertungenDe - Nutzer Bewertungen</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
-
+                            <CardTitle tag="h5">Fachbereich Zahlen</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                         </CardBody>
-                        <img width="100%" src={KlinikDe_Gesamt} alt="KlinikDe_Gesamt.png" />
+                        <ChartFachbereichenZahlen data={Dataset} />
                     </Card>
                 </Col>
             </Row>
 
-
-            <Row>
-                <Col xs="12" lg="6">
-                    <Card className="border-light">
-                        <CardBody>
-                            <CardTitle tag="h5">Google Maps - Polarity Werte</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
-                        </CardBody>
-                        <img width="100%" src={Klinik_Polarity} alt="Klinik_Polarity.png" />
-                        <CardBody>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                        </CardBody>
-                    </Card>
-                </Col>
-                <Col xs="12" lg="6">
-                    <Card className="border-light">
-                        <CardBody>
-                            <CardTitle tag="h5">Google Maps - Stern Bewertungen</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
-                        </CardBody>
-                        <img width="100%" src={Klinik_Sterne} alt="Klinik_Sterne.png" />
-                        <CardBody >
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
-            <Row id="AnfangderKommentare" style={{ backgroundColor: "#EEEEEE" }}>
+            <Row id="AnfangderKommentare" style={{ backgroundColor: "#EEEEEE" }}>{/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
                     <Alert color="danger" className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}>
+            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Kommentare */}
                 {
                     rezensionen
                         .slice(
@@ -314,9 +401,11 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         )
                 }
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}>
+            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Pagination */}
                 <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} />
             </Row>
+
+
         </>
     );
 }

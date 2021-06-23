@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { KlinikNames } from '../Data/Lists'
+
 
 
 
@@ -23,35 +23,34 @@ export default class Example extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
     render() {
-
-        const klinikDeData = [...this.props.data].filter(e => e.source === "klinikDe")
-
+        const dataYearlyRaw = [...this.props.data]
         let datafordiagram = []
+        for (let i = 2006; i < 2022; i++) {
 
-        for (let i of KlinikNames) {
+            let year = {
+                name: i.toString(),
+                GooglePositive: 0,
+                GoogleNegative: 0,
 
-            let einKlinik = {
-                name: i,
-                PolarityMean: 0,
             }
 
+            dataYearlyRaw.map(r => {
+                if (r.year === i) {
+                    if (r.source === "googleMaps") {
+                        if (r.positive) {
+                            year.GooglePositive++
+                        } else {
+                            year.GoogleNegative++
+                        }
 
-            let j = 0
-            klinikDeData.map(r => {
-                if (r.name === i) {
-                    einKlinik.PolarityMean = einKlinik.PolarityMean + r.polarity
-                    j++
+                    }
                 }
+
                 return r
             })
 
-            einKlinik.PolarityMean = einKlinik.PolarityMean / j
-            datafordiagram.push(einKlinik)
+            datafordiagram.push(year)
         }
-
-
-        datafordiagram.sort((a, b) => (a.PolarityMean > b.PolarityMean) ? 1 : -1)
-
 
         let weit = window.screen.width - 30;
         let hoch = 350
@@ -77,13 +76,11 @@ export default class Example extends PureComponent {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="KlinikDePositive" stackId="a" stroke="#8884d8" fill="#189AB4" />
-                <Area type="monotone" dataKey="KlinikDeNegative" stackId="a" stroke="#8884d8" fill="#75E6DA" />
+                <Area type="monotone" dataKey="GooglePositive" stackId="a" stroke="#8884d8" fill="#B32D2E" />
+                <Area type="monotone" dataKey="GoogleNegative" stackId="a" stroke="#8884d8" fill="#F86368" />
 
             </AreaChart>
 
         );
     }
 }
-
-

@@ -47,7 +47,7 @@ export default class Example extends PureComponent {
 
             datafordiagram.push(year)
         }
-        console.log(datafordiagram)
+
 
         let weit = window.screen.width - 30;
         let hoch = 350
