@@ -12,10 +12,6 @@ import { Row, Col } from 'reactstrap';
 import { GoogleMapsYearlyPosNeg } from '../Data/Lists'
 import { KlinikDeYearlyPosNeg } from '../Data/Lists'
 import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert } from 'reactstrap';
-import Klinik_Polarity from '../images/Klinik_Polarity.png'
-import Klinik_Sterne from '../images/Klinik_Sterne.png'
-import KlinikDe_Polarity from '../images/KlinikDe_Polarity.png'
-import KlinikDe_Gesamt from '../images/KlinikDe_Gesamt.png'
 import ChartYearly_Google from './ChartYearly_Google'
 import ChartYearly_KlinikDe from './ChartYearly_KlinikDe'
 import ChartKlinikenDePolarity from './ChartKlinikenDePolarity'
@@ -289,7 +285,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Col>
             </Row>
 
-            {(source !== "googleMaps") &&
+            {(source === "klinikDe") &&
                 <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
                         <Card className="border-light">
@@ -311,7 +307,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>
                 </Row>}
 
-            {(source !== "klinikDe") &&
+            {(source === "googleMaps") &&
                 <Row className="pt-2 pb-2 bg-light">  {/* GoogleMaos:  Klinik by Klinik images- polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
                         <Card className="border-light">
@@ -333,7 +329,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>
                 </Row>}
 
-            {(source !== "googleMaps") &&
+            {(source === "klinikDe") &&
                 <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
                         <Card className="border-light">
