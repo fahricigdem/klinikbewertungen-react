@@ -196,7 +196,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
                         <Card className="border-light">
                             <CardBody>
-                                <CardTitle tag="h5">Gruppen</CardTitle>
+                                <CardTitle tag="h5">Klinik Gruppe</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
@@ -361,9 +361,15 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card className="border-light">
                         <CardBody>
-                            <CardTitle tag="h5">Klinik Zahlen </CardTitle>
+                            <CardTitle tag="h5">Kommentare Zahlen pro Klinik </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">(GoogleMaps und KlinikDe Data)</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                            <CardSubtitle>
+                                <Progress multi >
+                                    <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} Rezensionen</Progress>
+                                    <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
+                                </Progress>
+                            </CardSubtitle>
                         </CardBody>
                         <ChartKlinikenZahlen data={Dataset} />
                     </Card>
@@ -371,9 +377,12 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" lg="6">
                     <Card className="border-light">
                         <CardBody>
-                            <CardTitle tag="h5">Fachbereich Zahlen</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                            <CardTitle tag="h5">Kommentare Zahlen pro Fachbereich</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">(nur KlinikDe Data, googleMaps hat keine Fachbereich Data)</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            <CardSubtitle>
+                                <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
+                            </CardSubtitle>
                         </CardBody>
                         <ChartFachbereichenZahlen data={Dataset} />
                     </Card>
@@ -385,6 +394,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     <Alert color="danger" className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
+                    <Progress multi >
+                        <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} Rezensionen</Progress>
+                        <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
+                    </Progress>
                 </Col>
             </Row>
             <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Kommentare */}

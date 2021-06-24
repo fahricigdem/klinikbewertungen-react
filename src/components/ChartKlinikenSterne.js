@@ -123,7 +123,7 @@ export default class Example extends PureComponent {
                 }}
             >
                 <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" />
+                <XAxis ticks={[0, 1, 2, 3, 4, 5]} type="number" domain={[0, 5]} />
                 <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
                 <Tooltip />

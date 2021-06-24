@@ -94,7 +94,7 @@ export default class Example extends PureComponent {
                 return r
             })
 
-            einKlinik.PolarityMean = einKlinik.PolarityMean / j
+            einKlinik.PolarityMean = (einKlinik.PolarityMean / j).toFixed(3)
             datafordiagram.push(einKlinik)
         }
 
@@ -123,7 +123,7 @@ export default class Example extends PureComponent {
                 }}
             >
                 <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" />
+                <XAxis type="number" domain={[-1, +1]} />
                 <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
                 <Tooltip />
