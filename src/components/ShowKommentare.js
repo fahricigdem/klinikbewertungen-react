@@ -133,12 +133,12 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         <Col xs="12" key={komment.index} >
             <Card className="border-light" >
                 <CardBody>
-                    <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} </CardTitle>
+                    <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} {komment.positive ? " ✅  " : " ❌  "} </CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name},  {komment.datum ? komment.datum : komment.year}, {komment.fachbereich && komment.fachbereich}</CardSubtitle>
                 </CardBody>
                 <CardBody>
                     <CardText style={{ height: "180px", overflowY: "scroll" }}> {komment.titel && <p>{komment.titel} </p>}{komment.komment}</CardText>
-                    <p className={komment.positive ? "text-success" : "text-danger"}>TextBlob: {komment.positive ? "Positive ✅  " : "Negative ❌  "} ({komment.polarity.toFixed(2)})</p>
+                    <p >TextBlob: {komment.polarity.toFixed(2)}</p>
                     {komment.source === "googleMaps" &&
                         <>
                             <p>Nutzer Bewertung: {komment.sterne == 1 ? " ⭐ " : komment.sterne == 2 ? "⭐⭐" : komment.sterne == 3 ? "⭐⭐⭐" : komment.sterne == 4 ? "⭐⭐⭐⭐" : "⭐⭐⭐⭐⭐"} </p>
@@ -147,7 +147,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     }
                     {komment.source === "klinikDe" &&
                         <>
-                            <p>Nutzer Bewertung: {komment.gesamt === 100 ? "sehr zufrieden 😃 " : komment.gesamt === 67 ? "zufrieden 🙂" : komment.gesamt === 33 ? "weniger zufriden 😏" : "unzufrieden 😡"}</p>
+                            <p>Nutzer : {komment.gesamt === 100 ? "😃 " : komment.gesamt === 67 ? " 🙂" : komment.gesamt === 33 ? " 😏" : " 😡"}</p>
                         </>
                     }
                     <p>Data Source: {komment.source}</p>
