@@ -8,12 +8,12 @@ import FooterComponent from './components/FooterComponent'
 
 function App() {
   return (
-    <Container fluid={true}>
-      <HeaderComponent />
+    <>
+
       <JumbotronComponent />
       <Kommentare />
       <FooterComponent />
-    </Container>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Container,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -20,40 +21,35 @@ const HeaderComponent = (props) => {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div>
+        <Container fluid id="header">
             <Navbar color="light" light >
+
                 <NavbarBrand >HFH</NavbarBrand>
+
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
+
                         <NavItem>
-                            <NavLink href="#AnfangderKommentare">Components</NavLink>
+                            <NavLink href="#werteProJahr">Werte Pro Jahr</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink >GitHub</NavLink>
+                            <NavLink href="#anzahlderKommentare">Anzahl der Kommentare pro Klinik</NavLink>
                         </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
+                        <NavItem>
+                            <NavLink href="#bewertungen">Bewertungen</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#fachbereichen">Fachbereichen</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#kommentare">Kommentare</NavLink>
+                        </NavItem>
+
                     </Nav>
-                    <NavbarText>Simple Text</NavbarText>
                 </Collapse>
             </Navbar>
-        </div>
+        </Container>
     );
 }
 

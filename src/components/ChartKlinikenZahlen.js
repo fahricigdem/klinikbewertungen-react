@@ -22,6 +22,15 @@ export default class Example extends PureComponent {
     render() {
 
         const klinikDeData = [...this.props.data]
+        const source = this.props.source
+
+        let barColor = "#07AF09"
+
+
+        source === "klinikDe" && (barColor = "#9E2631")
+
+        source === "googleMaps" && (barColor = "#0C8FA7")
+
 
         let datafordiagram = []
 
@@ -52,8 +61,12 @@ export default class Example extends PureComponent {
         let weit = window.screen.width - 30;
         let hoch = 550
         if (window.screen.width > 900) {
-            hoch = 600;
-            weit = (weit - 30) / 2
+            hoch = 400;
+            weit = (weit - 30)
+
+
+
+
         }
         return (
 
@@ -76,7 +89,7 @@ export default class Example extends PureComponent {
                 <Tooltip />
 
 
-                <Bar dataKey="Zahl" fill="#112eff" />
+                <Bar dataKey="Zahl" fill={barColor} />
 
             </BarChart>
 

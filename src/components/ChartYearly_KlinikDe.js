@@ -76,8 +76,8 @@ export default class Example extends PureComponent {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="KlinikDePositive" stackId="a" stroke="#8884d8" fill="#189AB4" />
-                <Area type="monotone" dataKey="KlinikDeNegative" stackId="a" stroke="#8884d8" fill="#75E6DA" />
+                <Area type="monotone" dataKey="KlinikDePositive" stackId="a" stroke="#8884d8" fill="#9E2631" />
+                <Area type="monotone" dataKey="KlinikDeNegative" stackId="a" stroke="#8884d8" fill="#DC3545" />
 
             </AreaChart>
 

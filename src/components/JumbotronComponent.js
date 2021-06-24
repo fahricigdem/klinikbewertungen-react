@@ -7,10 +7,14 @@ const JumbotronComponent = () => {
         <div>
 
             <Jumbotron fluid style={{ backgroundImage: `url(${jumbotron_image})`, backgroundSize: 'cover' }}>
-                <Container >
-                    <h1 className="display-3">Data ist Macht!</h1>
-                    <p className="lead">Nur beleuchten wir gerne Ihren Weg zum Ziel</p>
-                    <hr className="my-2" />
+                <Container fluid >
+                    <br className="my-2" />
+                    <br className="my-2" />
+                    <br className="my-2" />
+                    <p className="lead">Wir beleuchten gerne Ihren Weg zum Ziel</p>
+                    <br className="my-2" />
+                    <br className="my-2" />
+
                 </Container>
             </Jumbotron>
         </div>

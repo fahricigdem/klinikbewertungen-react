@@ -8,7 +8,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
     return (
         <>
             <Row style={{ textAlign: "center", marginTop: "10px" }}>
-                <p>{(rezensionenZahl >= (currentPage * pageSize)) ? "Rezensionen :" : "Rezension :"}  {(currentPage - 1) * pageSize + 1} {(rezensionenZahl >= (currentPage * pageSize)) && ("- " + (currentPage * pageSize))} </p>
+                <p>{(currentPage - 1) * pageSize + 1} {(rezensionenZahl >= (currentPage * pageSize)) && ("- " + (currentPage * pageSize))}  von {rezensionenZahl}</p>
             </Row>
 
             <Row>

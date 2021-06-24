@@ -10,8 +10,13 @@ export default class ChartResult extends PureComponent {
 
     render() {
 
-        const COLORS = ['#00C49F', '#FF8042'];
-        //        COLORS = ['#0088FE', '#00C49F', , '#FF8042'];
+        let COLORS = ['#07AF09', '#00F400'];
+        const source = this.props.source
+
+        source === "klinikDe" && (COLORS = ['#9E2631', '#DC3545'])
+
+        source === "googleMaps" && (COLORS = ['#0C8FA7', '#0DCAF0'])
+
 
         const RADIAN = Math.PI / 180;
         const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {

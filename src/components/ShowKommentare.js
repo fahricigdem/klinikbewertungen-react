@@ -11,7 +11,7 @@ import PaginationComponent from './PaginationComponent'
 import { Row, Col } from 'reactstrap';
 import { GoogleMapsYearlyPosNeg } from '../Data/Lists'
 import { KlinikDeYearlyPosNeg } from '../Data/Lists'
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert } from 'reactstrap';
+import { Container, Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert } from 'reactstrap';
 import ChartYearly_Google from './ChartYearly_Google'
 import ChartYearly_KlinikDe from './ChartYearly_KlinikDe'
 import ChartKlinikenDePolarity from './ChartKlinikenDePolarity'
@@ -134,35 +134,46 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             <Card className="border-light">
                 <CardBody>
                     <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} </CardTitle>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name}</CardSubtitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name},  {komment.datum ? komment.datum : komment.year}, {komment.fachbereich && komment.fachbereich}</CardSubtitle>
                 </CardBody>
                 <CardBody>
-                    <CardText style={{ height: "180px", overflowY: "scroll" }}>{komment.komment}</CardText>
-                    <p>Result durch TextBlob: {komment.positive ? "Positive" : "Negative"}</p>
-                    {komment.titel && <p>Titel: {komment.titel} </p>}
-                    <p>Datum: {komment.datum ? komment.datum : komment.year}</p>
-                    {komment.fachbereich && <p>Fachbereich: {komment.fachbereich} </p>}
-                    <p>polarity: {komment.polarity}</p>
-                    <p>gesamt: {komment.gesamt}</p>
-                    <p>qualität: {komment.qualität}</p>
-                    <p>behandlung: {komment.behandlung}</p>
-                    <p>verwaltung: {komment.verwaltung}</p>
-                    <p>ausstattung: {komment.ausstattung}</p>
-                    <p>Group: {komment.group + 1}</p>
-                    <p>sterne: {komment.sterne}</p>
-                    <p>likes: {komment.likes}</p>
-                    <p>source: {komment.source}</p>
+                    <CardText style={{ height: "180px", overflowY: "scroll" }}> {komment.titel && <p>{komment.titel} </p>}{komment.komment}</CardText>
+                    <Row>
+                        <Col>
+                            <p>TextBlob: {komment.positive ? "Positive" : "Negative"}</p>
+                            <p>polarity: {komment.polarity}</p>
+                            <p>Group: {komment.group + 1}</p>
+                            <p>sterne: {komment.sterne}</p>
+                            <p>likes: {komment.likes}</p>
+                            <p>source: {komment.source}</p>
+                        </Col>
+                        <Col>
+                            <p>gesamt: {komment.gesamt}</p>
+                            <p>qualität: {komment.qualität}</p>
+                            <p>behandlung: {komment.behandlung}</p>
+                            <p>verwaltung: {komment.verwaltung}</p>
+                            <p>ausstattung: {komment.ausstattung}</p>
+
+
+                        </Col>
+                    </Row>
+
+
                 </CardBody>
             </Card>
         </Col>
     )
 
+    ////AlertColor
+    let AlertColor = "success"
+    source === "klinikDe" && (AlertColor = "danger")
+    source === "googleMaps" && (AlertColor = "info")
 
     return (
-        <> {/* Diagräme und Kommentare */}
+        <Container fluid> {/* Diagräme und Kommentare */}
             <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
-                    <Alert color="warning" className="pt-1 pb-0 m-1" >
+                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
@@ -175,6 +186,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Progress>
                 </Col>
             </Row>
+
+            <br />
             <Row >  {/* Piecharts */}
                 {((result === "Alle") && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
@@ -184,7 +197,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartResult data={data01} />
+                                <ChartResult data={data01} source={source} />
                             </center>
                         </Card>
                     </Col>}
@@ -229,12 +242,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
             </Row>
 
+            <br />
+            <h1 id="werteProJahr">Werte pro Jahr</h1>
 
-
-
-            <Row className="bg-light "> {/* Yearly - commentareZahl und polarity */}
-
-
+            <Row > {/* Yearly - commentareZahl und polarity */}
                 {(source === "Alle") ?
                     <Col xs="12" sm="12" md="12" lg="6">
                         <Card className="border-light">
@@ -275,7 +286,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 <Col xs="12" sm="12" md="12" lg="6">
                     <Card className="border-light">
                         <CardBody>
-                            <CardTitle tag="h5">Durchschnittliche Polaritäten pro Jahr </CardTitle>
+                            <CardTitle tag="h5">Polarität pro Jahr </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <center>
@@ -284,6 +295,28 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Card>
                 </Col>
             </Row>
+            <br />
+            <h1 id="anzahlderKommentare">Anzahl der Kommentare pro Klinik</h1>
+            <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
+
+                <Card className="border-light">
+                    <CardBody>
+                        <CardTitle tag="h5">{source === "googleMaps" ? "Google Maps Data" : (source === "klinikDe") ? "Klinikbewertungen.de Data" : "Alle Data"}</CardTitle>
+                        <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                        <CardSubtitle>
+                            <Progress multi >
+                                <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} Rezensionen</Progress>
+                                <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
+                            </Progress>
+                        </CardSubtitle>
+                    </CardBody>
+                    <ChartKlinikenZahlen data={Dataset} source={source} />
+                </Card>
+            </Row>
+
+            {source !== "Alle" &&
+                <h1 id="bewertungen">Bewertungen</h1>
+            }
 
             {(source === "klinikDe") &&
                 <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
@@ -306,9 +339,25 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </Card>
                     </Col>
                 </Row>}
+            <br />
+            {source === "klinikDe" &&
+                <Row>
 
+                    <h1 id="fachbereichen">Fachbereichen</h1>
+                    <Card className="border-light">
+                        <CardBody>
+                            <CardTitle tag="h5">Kommentare Zahlen pro Fachbereich</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">(nur KlinikDe Data, googleMaps hat keine Fachbereich Data)</CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
+                            <CardSubtitle>
+                                <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
+                            </CardSubtitle>
+                        </CardBody>
+                        <ChartFachbereichenZahlen data={Dataset} />
+                    </Card>
+                </Row>}
             {(source === "googleMaps") &&
-                <Row className="pt-2 pb-2 bg-light">  {/* GoogleMaos:  Klinik by Klinik images- polarity versus nutzer bewertung */}
+                <Row className="pt-2 pb-2">  {/* GoogleMaos:  Klinik by Klinik images- polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
                         <Card className="border-light">
                             <CardBody>
@@ -341,8 +390,9 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                             <ChartFachbereichenPolarity data={Dataset} />
                         </Card>
                     </Col>
-                    <Col xs="12" lg="6">
-                        <Card className="border-light">
+
+                    <Col xs="12" lg="6" >
+                        <Card className="border-light" >
                             <CardBody>
                                 <CardTitle tag="h5">Fachbereichen - Sterne Bewertungen</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
@@ -352,42 +402,12 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </Card>
                     </Col>
                 </Row>}
+            <br />
+            <h1 id="kommentare" >Kommentare</h1>
 
-            <Row className="pt-2 pb-2 bg-light"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
-                <Col xs="12" lg="6">
-                    <Card className="border-light">
-                        <CardBody>
-                            <CardTitle tag="h5">Kommentare Zahlen pro Klinik </CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">(GoogleMaps und KlinikDe Data)</CardSubtitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
-                            <CardSubtitle>
-                                <Progress multi >
-                                    <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} Rezensionen</Progress>
-                                    <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
-                                </Progress>
-                            </CardSubtitle>
-                        </CardBody>
-                        <ChartKlinikenZahlen data={Dataset} />
-                    </Card>
-                </Col>
-                <Col xs="12" lg="6">
-                    <Card className="border-light">
-                        <CardBody>
-                            <CardTitle tag="h5">Kommentare Zahlen pro Fachbereich</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">(nur KlinikDe Data, googleMaps hat keine Fachbereich Data)</CardSubtitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
-                            <CardSubtitle>
-                                <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
-                            </CardSubtitle>
-                        </CardBody>
-                        <ChartFachbereichenZahlen data={Dataset} />
-                    </Card>
-                </Col>
-            </Row>
-
-            <Row id="AnfangderKommentare" style={{ backgroundColor: "#EEEEEE" }}>{/* Zahl der rezension */}
+            <Row >{/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
-                    <Alert color="danger" className="pt-1 pb-0 m-1" >
+                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                     <Progress multi >
@@ -396,7 +416,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Progress>
                 </Col>
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Kommentare */}
+
+            <Row> {/* Kommentare */}
                 {
                     rezensionen
                         .slice(
@@ -410,12 +431,12 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         )
                 }
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Pagination */}
+            <Row > {/* Pagination */}
                 <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} />
             </Row>
 
 
-        </>
+        </Container>
     );
 }
 

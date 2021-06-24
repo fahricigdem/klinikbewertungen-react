@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 import ShowKommentare from './ShowKommentare'
-import { Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import Dataset from '../Data/Dataset'
 import { KlinikNames, FachbereichNames, KlinikDeYears, GoogleMapsYears } from '../Data/Lists'
 
@@ -168,7 +168,7 @@ const Kommentare = () => {
     }
 
     return (
-        <div >
+        <Container fluid >
 
             <Row className={`mt-1 ${window.screen.width > 900 ? "sticky-top" : ""} bg-light justify-content-between`} >
 
@@ -299,7 +299,7 @@ const Kommentare = () => {
                     <center >
                         <Label>Reset</Label><br />
 
-                        <Button color="secondary" onClick={resetFilter} >Alle Rezensionen</Button>
+                        <Button color={source === 'Alle' ? 'secondary' : 'success'} onClick={resetFilter} >Alle Rezensionen</Button>
 
                     </center>
                 </Col>
@@ -311,7 +311,7 @@ const Kommentare = () => {
             {renderContent()}
 
 
-        </div>
+        </Container>
     );
 }
 

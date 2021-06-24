@@ -74,8 +74,8 @@ export default class Example extends PureComponent {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="KlinikDe" fill="#8884d8" />
-                <Bar dataKey="GoogleMaps" fill="#82ca9d" />
+                <Bar dataKey="KlinikDe" fill="#9E2631" />
+                <Bar dataKey="GoogleMaps" fill="#0C8FA7" />
             </BarChart>
 
         );

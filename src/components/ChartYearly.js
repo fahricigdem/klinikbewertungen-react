@@ -70,10 +70,10 @@ export default class ChartYearly extends PureComponent {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="GooglePositive" stackId="a" fill="#B32D2E" />
-                <Bar dataKey="GoogleNegative" stackId="a" fill="#F86368" />
-                <Bar dataKey="KlinikDePositive" stackId="b" fill="#189AB4" />
-                <Bar dataKey="KlinikDeNegative" stackId="b" fill="#75E6DA" />
+                <Bar dataKey="GooglePositive" stackId="a" fill="#0C8FA7" />
+                <Bar dataKey="GoogleNegative" stackId="a" fill="#0DCAF0" />
+                <Bar dataKey="KlinikDePositive" stackId="b" fill="#9E2631" />
+                <Bar dataKey="KlinikDeNegative" stackId="b" fill="#DC3545" />
             </BarChart>
 
         );

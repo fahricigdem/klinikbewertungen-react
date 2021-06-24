@@ -129,7 +129,7 @@ export default class Example extends PureComponent {
                 <Tooltip />
                 <Legend />
 
-                <Bar dataKey="GesamtMean" fill="#413ea0" />
+                <Bar dataKey="GesamtMean" fill="#9E2631" />
 
             </BarChart>
 

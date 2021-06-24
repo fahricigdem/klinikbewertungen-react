@@ -52,7 +52,7 @@ export default class Example extends PureComponent {
         let hoch = 550
         if (window.screen.width > 900) {
             hoch = 600;
-            weit = (weit - 30) / 2
+            weit = (weit - 30)
         }
         return (
 
@@ -75,7 +75,7 @@ export default class Example extends PureComponent {
                 <Tooltip />
 
 
-                <Bar dataKey="zahl" fill="#413ea0" />
+                <Bar dataKey="zahl" fill="#DC3545" />
 
             </BarChart>
 
