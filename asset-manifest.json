@@ -1,26 +1,27 @@
 {
   "files": {
     "main.css": "/klinikbewertungen-react/static/css/main.bab0b925.chunk.css",
-    "main.js": "/klinikbewertungen-react/static/js/main.1e010e3b.chunk.js",
-    "main.js.map": "/klinikbewertungen-react/static/js/main.1e010e3b.chunk.js.map",
-    "runtime-main.js": "/klinikbewertungen-react/static/js/runtime-main.2739764e.js",
-    "runtime-main.js.map": "/klinikbewertungen-react/static/js/runtime-main.2739764e.js.map",
+    "main.js": "/klinikbewertungen-react/static/js/main.dc20969f.chunk.js",
+    "main.js.map": "/klinikbewertungen-react/static/js/main.dc20969f.chunk.js.map",
+    "runtime-main.js": "/klinikbewertungen-react/static/js/runtime-main.c18c6974.js",
+    "runtime-main.js.map": "/klinikbewertungen-react/static/js/runtime-main.c18c6974.js.map",
     "static/css/2.61b4cb56.chunk.css": "/klinikbewertungen-react/static/css/2.61b4cb56.chunk.css",
-    "static/js/2.baf238ba.chunk.js": "/klinikbewertungen-react/static/js/2.baf238ba.chunk.js",
-    "static/js/2.baf238ba.chunk.js.map": "/klinikbewertungen-react/static/js/2.baf238ba.chunk.js.map",
-    "static/js/3.edc224c9.chunk.js": "/klinikbewertungen-react/static/js/3.edc224c9.chunk.js",
-    "static/js/3.edc224c9.chunk.js.map": "/klinikbewertungen-react/static/js/3.edc224c9.chunk.js.map",
+    "static/js/2.c2cda547.chunk.js": "/klinikbewertungen-react/static/js/2.c2cda547.chunk.js",
+    "static/js/2.c2cda547.chunk.js.map": "/klinikbewertungen-react/static/js/2.c2cda547.chunk.js.map",
+    "static/js/3.b515a443.chunk.js": "/klinikbewertungen-react/static/js/3.b515a443.chunk.js",
+    "static/js/3.b515a443.chunk.js.map": "/klinikbewertungen-react/static/js/3.b515a443.chunk.js.map",
     "index.html": "/klinikbewertungen-react/index.html",
     "static/css/2.61b4cb56.chunk.css.map": "/klinikbewertungen-react/static/css/2.61b4cb56.chunk.css.map",
     "static/css/main.bab0b925.chunk.css.map": "/klinikbewertungen-react/static/css/main.bab0b925.chunk.css.map",
-    "static/js/2.baf238ba.chunk.js.LICENSE.txt": "/klinikbewertungen-react/static/js/2.baf238ba.chunk.js.LICENSE.txt",
-    "static/media/jumbotron_image.f63da880.png": "/klinikbewertungen-react/static/media/jumbotron_image.f63da880.png"
+    "static/js/2.c2cda547.chunk.js.LICENSE.txt": "/klinikbewertungen-react/static/js/2.c2cda547.chunk.js.LICENSE.txt",
+    "static/media/jumbotron_image.f63da880.png": "/klinikbewertungen-react/static/media/jumbotron_image.f63da880.png",
+    "static/media/refugeeks.116ea051.png": "/klinikbewertungen-react/static/media/refugeeks.116ea051.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.2739764e.js",
+    "static/js/runtime-main.c18c6974.js",
     "static/css/2.61b4cb56.chunk.css",
-    "static/js/2.baf238ba.chunk.js",
+    "static/js/2.c2cda547.chunk.js",
     "static/css/main.bab0b925.chunk.css",
-    "static/js/main.1e010e3b.chunk.js"
+    "static/js/main.dc20969f.chunk.js"
   ]
 }
