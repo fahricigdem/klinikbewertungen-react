@@ -15,58 +15,17 @@ import {
 
 import { KlinikNames } from '../Data/Lists'
 
-const data = [
-    {
-        name: 'Herzogin Elisabeth Hospital',
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: "white" }}>
 
-        pv: 800,
-
-    },
-    {
-        name: 'Psychiatrische Klinik Lüneburg',
-
-        pv: 967,
-
-    },
-    {
-        name: 'Page rewrwe',
-
-        pv: 1098,
-
-    },
-    {
-        name: 'Page sdfsfsdfsdfd fsdfdsfds fs ',
-
-        pv: 1200,
-
-    },
-    {
-        name: 'Page E',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page 2',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page 3',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page ew',
-
-        pv: 1108,
-
-    },
-
-
-];
+                <p className="label " style={{ color: "#9E2631", padding: "5px 10px" }}>{`${label} : ${payload[0].value}`} </p>
+            </div>
+        );
+    }
+    return null;
+};
 
 export default class Example extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/vertical-composed-chart-w6fni';
@@ -122,12 +81,12 @@ export default class Example extends PureComponent {
                     left: 0,
                 }}
             >
-                <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" domain={[-1, +1]} />
-                <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
+                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} domain={[-1, +1]} />
+                <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-                <Tooltip />
-                <Legend />
+                <Tooltip content={<CustomTooltip />} />
+
 
                 <Bar dataKey="PolarityMean" fill="#9E2631" />
 

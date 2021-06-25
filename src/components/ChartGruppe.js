@@ -20,7 +20,7 @@ export default class ChartGruppe extends PureComponent {
             const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
             return (
-                <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                <text x={x} y={y} fill={this.props.dark ? "#dddddd" : "#555555"} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
                     {`${(percent * 100).toFixed(0)}%`}
                 </text>
             );

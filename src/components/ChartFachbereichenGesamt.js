@@ -15,58 +15,17 @@ import {
 
 import { FachbereichNamesKurz } from '../Data/Lists'
 
-const data = [
-    {
-        name: 'Herzogin Elisabeth Hospital',
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div className="custom-tooltip " style={{ backgroundColor: "white" }}>
 
-        pv: 800,
-
-    },
-    {
-        name: 'Psychiatrische Klinik Lüneburg',
-
-        pv: 967,
-
-    },
-    {
-        name: 'Page rewrwe',
-
-        pv: 1098,
-
-    },
-    {
-        name: 'Page sdfsfsdfsdfd fsdfdsfds fs ',
-
-        pv: 1200,
-
-    },
-    {
-        name: 'Page E',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page 2',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page 3',
-
-        pv: 1108,
-
-    },
-    {
-        name: 'Page ew',
-
-        pv: 1108,
-
-    },
-
-
-];
+                <p className="label " style={{ color: "#9E2631", padding: "10px 10px" }}>{`${label} : ${payload[0].value.toPrecision(3)}`} </p>
+            </div>
+        );
+    }
+    return null;
+};
 
 export default class Example extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/vertical-composed-chart-w6fni';
@@ -94,7 +53,7 @@ export default class Example extends PureComponent {
                 return r
             })
 
-            einKlinik.GesamtMean = einKlinik.GesamtMean / j
+            einKlinik.GesamtMean = (einKlinik.GesamtMean / j)
             datafordiagram.push(einKlinik)
         }
 
@@ -106,7 +65,7 @@ export default class Example extends PureComponent {
         let hoch = 550
         if (window.screen.width > 900) {
             hoch = 600;
-            weit = (weit - 30) / 2
+            weit = (weit - 40) / 2
         }
         return (
 
@@ -122,12 +81,12 @@ export default class Example extends PureComponent {
                     left: 0,
                 }}
             >
-                <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" domain={[0, 100]} />
-                <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
+                <CartesianGrid stroke="#f5f5f5" stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                <XAxis type="number" domain={[0, 100]} tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={160} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-                <Tooltip />
-                <Legend />
+                <Tooltip content={<CustomTooltip />} />
+
 
                 <Bar dataKey="GesamtMean" fill="#9E2631" />
 

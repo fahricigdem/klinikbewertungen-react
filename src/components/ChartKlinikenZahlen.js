@@ -14,6 +14,19 @@ import {
 } from 'recharts';
 
 import { KlinikNames } from '../Data/Lists'
+import refugeeks from '../images/refugeeks.png'
+
+
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div className="custom-tooltip flex-row" >
+                <p className="label clearfix" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>{`${label} : ${payload[0].value}`}  <img src={refugeeks} style={{ height: "20px", verticalAlign: "top" }} /></p>
+            </div>
+        );
+    }
+    return null;
+};
 
 
 export default class Example extends PureComponent {
@@ -81,12 +94,13 @@ export default class Example extends PureComponent {
                     bottom: 0,
                     left: 0,
                 }}
-            >
-                <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-                <Tooltip />
+            >
+                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
+
+                <Tooltip content={<CustomTooltip />} />
 
 
                 <Bar dataKey="Zahl" fill={barColor} />

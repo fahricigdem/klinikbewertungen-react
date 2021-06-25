@@ -30,6 +30,8 @@ const Kommentare = () => {
     const [gesamt, setGesamt] = useState("Alle")
     const [year, setYear] = useState("Alle")
     const [sterne, setSterne] = useState("Alle")
+    const [dark, setDark] = useState(false)
+
     const [currentPage, setCurrentPage] = useState(1) // Das ist für Pagination
 
     //// fachbereichNames sind für klinik für klinik wieder festgestellt
@@ -91,7 +93,7 @@ const Kommentare = () => {
 
         return <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage}
             handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect}
-            klinik={klinik} source={source} result={result} gruppe={gruppe} />
+            klinik={klinik} source={source} result={result} gruppe={gruppe} dark={dark} />
     }
 
 
@@ -154,6 +156,10 @@ const Kommentare = () => {
 
     }
 
+    function handleDark() {
+        setDark(!dark)
+    }
+
     const resetFilter = () => {
 
         setKlinik("Alle")
@@ -168,14 +174,14 @@ const Kommentare = () => {
     }
 
     return (
-        <Container fluid >
+        <Container fluid className={dark && "bg-dark text-light"}>
 
-            <Row className={`mt-1 ${window.screen.width > 900 ? "sticky-top" : ""} bg-light justify-content-between`} >
+            <Row className={`mt-1 pb-2 pt-1 ${window.screen.width > 900 ? "sticky-top" : ""} ${dark ? "bg-dark text-light" : "bg-light text-dark"} justify-content-between `} >
 
                 <Col xs="6" lg="auto">
-                    <FormGroup>
-                        <Label className="" for="exampleSelect">Data Source</Label>
-                        <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)}>
+                    <FormGroup >
+                        <Label className="" for="exampleSelect">Daten Quelle</Label>
+                        <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <option>Alle</option>
                             <option value='klinikDe'>Klinikbewertungen.de</option>
                             <option value='googleMaps'>Google Maps</option>
@@ -186,13 +192,13 @@ const Kommentare = () => {
                     <FormGroup >
                         <Label for="exampleSelect">Klinik</Label>
                         {gruppe === 'Alle' ?
-                            <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)}  >
+                            <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 {KlinikNames.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
                             </Input> :
-                            <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} disabled>
+                            <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                             </Input>}
                     </FormGroup>
@@ -201,14 +207,14 @@ const Kommentare = () => {
                     <FormGroup>
                         <Label for="exampleSelect">Gruppe</Label>
                         {klinik === 'Alle' ?
-                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)}  >
+                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 <option value="0"> 1</option>
                                 <option value='1'> 2 </option>
                                 <option value="2"> 3 </option>
                                 <option value='3'> 4 </option>
                             </Input> :
-                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} disabled>
+                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                             </Input>}
                     </FormGroup>
@@ -220,12 +226,12 @@ const Kommentare = () => {
                     <FormGroup>
                         <Label className="" for="exampleSelect">Fachbereich</Label>
                         {source === 'klinikDe' ?
-                            <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)}>
+                            <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 {uniqueFachbereichen.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
-                            </Input> : <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} disabled>
+                            </Input> : <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 {uniqueFachbereichen.map((k, index) =>
                                     <option key={index}>{k}</option>
@@ -240,15 +246,15 @@ const Kommentare = () => {
 
                 <Col xs="6" lg="auto">
                     <FormGroup>
-                        <Label for="exampleSelect"> Year</Label>
+                        <Label for="exampleSelect"> Jahr</Label>
                         {((source === 'klinikDe' || source === 'Alle')) ?
-                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)}>
+                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 {KlinikDeYears.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
                             </Input> :
-                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)}>
+                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 {GoogleMapsYears.map((k, index) =>
                                     <option key={index}>{k}</option>
@@ -259,7 +265,7 @@ const Kommentare = () => {
                 <Col xs="6" lg="1">
                     <FormGroup>
                         <Label className="" for="exampleSelect">Polarity</Label>
-                        <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)}>
+                        <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <option>Alle</option>
                             <option value="1" >Positive</option>
                             <option value='0'>Negative</option>
@@ -269,9 +275,9 @@ const Kommentare = () => {
                 {source === 'klinikDe' &&
                     <Col xs="6" lg="1">
                         <FormGroup>
-                            <Label className="" for="exampleSelect">Gesamt</Label>
+                            <Label className="" for="exampleSelect">Sterne</Label>
 
-                            <Input type="select" name="gesamt" id="gesamt" value={gesamt} onChange={(e) => handleGesamt(e.target.value)}>
+                            <Input type="select" name="gesamt" id="gesamt" value={gesamt} onChange={(e) => handleGesamt(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 <option value="100" >Sehr Zufrieden</option>
                                 <option value='67'>Zufrieden</option>
@@ -285,7 +291,7 @@ const Kommentare = () => {
                         <FormGroup>
                             <Label className="" for="exampleSelect"> Sterne</Label>
 
-                            <Input type="select" name="sterne" id="sterne" value={sterne} onChange={(e) => handleSterne(e.target.value)}>
+                            <Input type="select" name="sterne" id="sterne" value={sterne} onChange={(e) => handleSterne(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>Alle</option>
                                 <option value="1" >1 Stern</option>
                                 <option value='2'>2 Stern</option>
@@ -299,7 +305,28 @@ const Kommentare = () => {
                     <center >
                         <Label>Reset</Label><br />
 
-                        <Button color={source === 'Alle' ? 'secondary' : 'success'} onClick={resetFilter} >Alle Rezensionen</Button>
+                        <Button color={
+                            (source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle')
+                                ? 'success' : 'secondary'}
+                            onClick={resetFilter} >
+                            Alle
+                        </Button>
+
+                    </center>
+                </Col>
+
+                <Col xs={source === 'Alle' ? 12 : 6} lg="auto">
+                    <center >
+                        <Label>Thema</Label><br />
+
+                        <Button className={`     ${dark ? "bg-light" : "bg-dark"} `}
+                            color={dark ? 'light' : 'dark'}
+
+
+
+                            onClick={handleDark} >
+                            {dark ? "Hellen" : "Dunkel"}
+                        </Button>
 
                     </center>
                 </Col>

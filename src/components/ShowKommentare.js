@@ -26,7 +26,7 @@ import ChartFachbereichenZahlen from './ChartFachbereichenZahlen'
 
 
 
-const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePageBottom, handlePageSelect, klinik, source, result, gruppe }) => {
+const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePageBottom, handlePageSelect, klinik, source, result, gruppe, dark }) => {
 
     ////////////  Diagram Data ////////////////////////////
 
@@ -131,7 +131,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     ////// Kommentare Cards
     const rezensionen = Dataset.map(komment =>
         <Col xs="12" key={komment.index} >
-            <Card className="border-light" >
+            <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"} >
                 <CardBody>
                     <CardTitle tag="h5">Rezension Nr.: {komment.index + 1} {komment.positive ? " ✅  " : " ❌  "} </CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name},  {komment.datum ? komment.datum : komment.year}, {komment.fachbereich && komment.fachbereich}</CardSubtitle>
@@ -150,7 +150,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                             <p>Nutzer : {komment.gesamt === 100 ? "😃 " : komment.gesamt === 67 ? " 🙂" : komment.gesamt === 33 ? " 😏" : " 😡"}</p>
                         </>
                     }
-                    <p>Data Source: {komment.source}</p>
+                    <p>Daten Quelle: {komment.source}</p>
                 </CardBody>
             </Card>
         </Col>
@@ -162,15 +162,15 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     source === "googleMaps" && (AlertColor = "info")
 
     return (
-        <Container fluid> {/* Diagräme und Kommentare */}
-            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Zahl der rezension */}
+        <Container fluid className=""> {/* Diagräme und Kommentare */}
+            <Row > {/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
                     <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
                         <center><h4>{rezensionen.length} Rezensionen gefunden!</h4></center>
                     </Alert>
                 </Col>
             </Row>
-            <Row style={{ backgroundColor: "#EEEEEE" }}> {/* Progressbar für  source */}
+            <Row > {/* Progressbar für  source */}
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
                     <Progress multi >
                         <Progress bar animated={((source === "googleMaps")) && true} color="info" value={sourceGooglePercent}>GoogleMaps - {sourceGooglePercent}% </Progress>
@@ -183,10 +183,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             <Row >  {/* Piecharts */}
                 {((result === "Alle") && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
-                                <CardTitle tag="h5">Positive Polarity</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                <CardTitle tag="h5" className="text-center">Positive Polarity</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted text-center">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
                                 <ChartResult data={data01} source={source} />
@@ -195,26 +195,26 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
                 {(gruppe === "Alle" && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}  >
                             <CardBody>
-                                <CardTitle tag="h5">Klinik Gruppe</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                <CardTitle tag="h5" className="text-red text-center">Klinik Gruppe</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted text-center">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartGruppe data={data02} />
+                                <ChartGruppe data={data02} dark={dark} />
                             </center>
                         </Card>
                     </Col>}
 
                 {source === "googleMaps" &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
-                                <CardTitle tag="h5">Sterne Bewertungen</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                <CardTitle tag="h5" className="text-center">Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted text-center">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartSterne data={data04} />
+                                <ChartSterne data={data04} dark={dark} />
                             </center>
                         </Card>
                     </Col>}
@@ -222,13 +222,13 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
                 {(source === "klinikDe" && rezensionen.length !== 0) &&
                     <Col xs="12" sm="6" lg="4">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
-                                <CardTitle tag="h5">Nutzer Bewertungen </CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                <CardTitle tag="h5" className="text-center">Nutzer Bewertungen </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted text-center">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartGesamt data={data05} />
+                                <ChartGesamt data={data05} dark={dark} />
                             </center>
                         </Card>
                     </Col>}
@@ -240,49 +240,49 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             <Row > {/* Yearly - commentareZahl und polarity */}
                 {(source === "Alle") ?
                     <Col xs="12" sm="12" md="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
-                                <CardTitle tag="h5">Rezension Zahlen  pro Jahr </CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                <CardTitle tag="h5" className="">Anzahl der Rezensionen pro Jahr </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted ">{rezensionen.length} Rezensionen</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartYearly data={Dataset} />
+                                <ChartYearly data={Dataset} dark={dark} />
                             </center>
                         </Card>
                     </Col> : (source === "googleMaps") ?
                         <Col xs="12" sm="12" md="12" lg="6">
-                            <Card className="border-light">
+                            <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <CardBody>
-                                    <CardTitle tag="h5">GoogleMaps Rezension Zahlen  pro Jahr </CardTitle>
-                                    <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                    <CardTitle tag="h5" className="">GoogleMaps, Anzahl der Rezensionen pro Jahr </CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted ">{rezensionen.length} Rezensionen</CardSubtitle>
                                 </CardBody>
                                 <center>
-                                    <ChartYearly_Google data={Dataset} />
+                                    <ChartYearly_Google data={Dataset} dark={dark} />
                                 </center>
                             </Card>
                         </Col> :
 
                         <Col xs="12" sm="12" md="12" lg="6">
-                            <Card className="border-light">
+                            <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <CardBody>
-                                    <CardTitle tag="h5">KLinikDe Rezension Zahlen  pro Jahr </CardTitle>
-                                    <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                                    <CardTitle tag="h5" >KLinikDe, Anzahl der Rezensionen pro Jahr </CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted ">{rezensionen.length} Rezensionen</CardSubtitle>
                                 </CardBody>
                                 <center>
-                                    <ChartYearly_KlinikDe data={Dataset} />
+                                    <ChartYearly_KlinikDe data={Dataset} dark={dark} />
                                 </center>
                             </Card>
                         </Col>}
 
 
                 <Col xs="12" sm="12" md="12" lg="6">
-                    <Card className="border-light">
+                    <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                         <CardBody>
                             <CardTitle tag="h5">Polarität pro Jahr </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
                         </CardBody>
                         <center>
-                            <ChartYearlyPolarity data={Dataset} />
+                            <ChartYearlyPolarity data={Dataset} dark={dark} />
                         </center>
                     </Card>
                 </Col>
@@ -291,10 +291,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             <h1 id="anzahlderKommentare">Anzahl der Kommentare pro Klinik</h1>
             <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
 
-                <Card className="border-light">
+                <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                     <CardBody>
-                        <CardTitle tag="h5">{source === "googleMaps" ? "Google Maps Data" : (source === "klinikDe") ? "Klinikbewertungen.de Data" : "Alle Data"}</CardTitle>
-                        <CardSubtitle tag="h6" className="mb-2 text-muted">{rezensionen.length} Rezensionen</CardSubtitle>
+                        <CardTitle tag="h5">{source === "googleMaps" ? "Google Maps Daten" : (source === "klinikDe") ? "Klinikbewertungen.de Daten" : "Alle Daten"}</CardTitle>
+                        <CardSubtitle tag="h6" className="mb-2 text-muted ">{rezensionen.length} Rezensionen</CardSubtitle>
                         <CardSubtitle>
                             <Progress multi >
                                 <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} Rezensionen</Progress>
@@ -302,7 +302,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                             </Progress>
                         </CardSubtitle>
                     </CardBody>
-                    <ChartKlinikenZahlen data={Dataset} source={source} />
+                    <ChartKlinikenZahlen data={Dataset} source={source} dark={dark} />
                 </Card>
             </Row>
 
@@ -313,21 +313,21 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             {(source === "klinikDe") &&
                 <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
                                 <CardTitle tag="h5">KlinikbewertungenDe - Polarity Werte</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartKlinikenDePolarity data={Dataset} />
+                            <ChartKlinikenDePolarity data={Dataset} dark={dark} />
                         </Card>
                     </Col>
                     <Col xs="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
                                 <CardTitle tag="h5">KlinikbewertungenDe - Sterne Bewertungen</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartKlinikenGesamt data={Dataset} />
+                            <ChartKlinikenGesamt data={Dataset} dark={dark} />
                         </Card>
                     </Col>
                 </Row>}
@@ -335,37 +335,37 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             {source === "klinikDe" &&
                 <Row>
 
-                    <h1 id="fachbereichen">Fachbereichen</h1>
-                    <Card className="border-light">
+                    <h1 id="fachbereichen">Fachbereiche</h1>
+                    <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                         <CardBody>
-                            <CardTitle tag="h5">Kommentare Zahlen pro Fachbereich</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">(nur KlinikDe Data, googleMaps hat keine Fachbereich Data)</CardSubtitle>
+                            <CardTitle tag="h5">Anzahl der Kommentare pro Fachbereich</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">(nur KlinikDe Daten, googleMaps hat keine Fachbereich Daten)</CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                             <CardSubtitle>
                                 <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} Rezensionen</Progress>
                             </CardSubtitle>
                         </CardBody>
-                        <ChartFachbereichenZahlen data={Dataset} />
+                        <ChartFachbereichenZahlen data={Dataset} dark={dark} />
                     </Card>
                 </Row>}
             {(source === "googleMaps") &&
                 <Row className="pt-2 pb-2">  {/* GoogleMaos:  Klinik by Klinik images- polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
                                 <CardTitle tag="h5">Google Maps - Polarity Werte</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceGoogle} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartKlinikenMapsPolarity data={Dataset} />
+                            <ChartKlinikenMapsPolarity data={Dataset} dark={dark} />
                         </Card>
                     </Col>
                     <Col xs="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
                                 <CardTitle tag="h5">Google Maps - Sterne Bewertungen</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceGoogle} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartKlinikenSterne data={Dataset} />
+                            <ChartKlinikenSterne data={Dataset} dark={dark} />
                         </Card>
                     </Col>
                 </Row>}
@@ -373,24 +373,24 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             {(source === "klinikDe") &&
                 <Row className="pt-2 pb-2"> {/* KlinikDe: Klinik by Klinik images : polarity versus nutzer bewertung */}
                     <Col xs="12" lg="6">
-                        <Card className="border-light">
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                             <CardBody>
-                                <CardTitle tag="h5">Fachbereichen - Polarity Werte </CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                                <CardTitle tag="h5">Fachbereiche - Polarity Werte </CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Daten)</CardSubtitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartFachbereichenPolarity data={Dataset} />
+                            <ChartFachbereichenPolarity data={Dataset} dark={dark} />
                         </Card>
                     </Col>
 
                     <Col xs="12" lg="6" >
-                        <Card className="border-light" >
+                        <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"} >
                             <CardBody>
-                                <CardTitle tag="h5">Fachbereichen - Sterne Bewertungen</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Data)</CardSubtitle>
+                                <CardTitle tag="h5">Fachbereiche - Sterne Bewertungen</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">(KlinikbewertungenDe Daten)</CardSubtitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{sourceKlinikDe} Rezensionen</CardSubtitle>
                             </CardBody>
-                            <ChartFachbereichenGesamt data={Dataset} />
+                            <ChartFachbereichenGesamt data={Dataset} dark={dark} />
                         </Card>
                     </Col>
                 </Row>}

@@ -2,6 +2,22 @@ import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
+const CustomTooltip = ({ active, payload, label }) => {
+
+    if (active) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: "white", padding: "5px 10px" }} >
+                <p className="label " style={{ color: "black" }}>{label} </p>
+                <p className="label " style={{ color: "#9E2631" }}>{`${payload[0].dataKey} : ${payload[0].value}`} </p>
+                <p className="label " style={{ color: "#0C8FA7" }}>{`${payload[1].dataKey} : ${payload[1].value}`} </p>
+
+            </div>
+        );
+    }
+    return null;
+};
+
+
 export default class Example extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
 
@@ -69,10 +85,10 @@ export default class Example extends PureComponent {
                     bottom: 5,
                 }}
             >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
+                <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Bar dataKey="KlinikDe" fill="#9E2631" />
                 <Bar dataKey="GoogleMaps" fill="#0C8FA7" />

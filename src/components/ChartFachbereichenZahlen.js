@@ -15,6 +15,17 @@ import {
 
 import { FachbereichNamesKurz } from '../Data/Lists'
 
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: "white" }}>
+
+                <p className="label " style={{ color: "#DC3545", padding: "5px 10px" }}>{`${label} : ${payload[0].value}`} </p>
+            </div>
+        );
+    }
+    return null;
+};
 
 export default class Example extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/vertical-composed-chart-w6fni';
@@ -68,11 +79,11 @@ export default class Example extends PureComponent {
                     left: 0,
                 }}
             >
-                <CartesianGrid stroke="#f5f5f5" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
+                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
 
 
                 <Bar dataKey="zahl" fill="#DC3545" />

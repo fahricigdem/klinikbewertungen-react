@@ -6,12 +6,13 @@ const JumbotronComponent = () => {
     return (
         <div>
 
-            <Jumbotron fluid style={{ backgroundImage: `url(${jumbotron_image})`, backgroundSize: 'cover' }}>
+            <Jumbotron fluid style={{ backgroundImage: `url(${jumbotron_image})`, backgroundSize: 'cover', textAlign: 'right' }}>
                 <Container fluid >
                     <br className="my-2" />
+
                     <br className="my-2" />
+                    <p className="lead align-self-end text-white">Wir beleuchten gerne Ihren Weg zum Ziel</p>
                     <br className="my-2" />
-                    <p className="lead">Wir beleuchten gerne Ihren Weg zum Ziel</p>
                     <br className="my-2" />
                     <br className="my-2" />
 

@@ -1,6 +1,29 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+
+const CustomTooltip = ({ active, payload, label }) => {
+    console.log("active", active)
+    console.log("payload", payload)
+    console.log("label", label)
+    if (active) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: "white", padding: "5px 10px" }} >
+                <p className="label" style={{ color: "black" }}>{label} </p>
+
+                <p className="label" style={{ color: "#0DCAF0" }}>{`${payload[1].dataKey} : ${payload[1].value}`} </p>
+                <p className="label" style={{ color: "#0C8FA7" }}>{`${payload[0].dataKey} : ${payload[0].value}`} </p>
+
+                <p className="label" style={{ color: "#DC3545" }}>{`${payload[3].dataKey} : ${payload[3].value}`} </p>
+                <p className="label" style={{ color: "#9E2631" }}>{`${payload[2].dataKey} : ${payload[2].value}`} </p>
+            </div>
+        );
+    }
+    return null;
+};
+
+
+
 export default class ChartYearly extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/mixed-bar-chart-q4hgc';
 
@@ -64,11 +87,12 @@ export default class ChartYearly extends PureComponent {
                     left: 1,
                     bottom: 10,
                 }}
+
             >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
+                <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Bar dataKey="GooglePositive" stackId="a" fill="#0C8FA7" />
                 <Bar dataKey="GoogleNegative" stackId="a" fill="#0DCAF0" />
