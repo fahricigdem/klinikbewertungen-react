@@ -3,12 +3,49 @@ import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 
 
+
 export default class ChartResult extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/two-simple-pie-chart-otx9h';
 
 
 
     render() {
+
+
+        const getIntroOfPage = (label) => {
+            if (label === 'Positive') {
+                return this.props.english ? "Positive" : "Positiv"
+            }
+            if (label === 'Negative') {
+                return this.props.english ? "Negative" : "Negativ"
+            }
+            return '';
+        };
+
+
+        const CustomTooltip = ({ active, payload, label }) => {
+            if (active) {
+
+                return (
+                    <div className="custom-tooltip flex-row" >
+                        <p className="label" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>
+
+
+
+                            {`${getIntroOfPage(payload[0].name)} : ${payload[0].value}`}
+
+
+                        </p>
+                    </div>
+                );
+            }
+            return null;
+        };
+
+
+
+
+
 
         let COLORS = ['#07AF09', '#00F400'];
         const source = this.props.source
@@ -55,7 +92,7 @@ export default class ChartResult extends PureComponent {
                     ))}
                 </Pie>
                 <Legend />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
             </PieChart>
 
         );

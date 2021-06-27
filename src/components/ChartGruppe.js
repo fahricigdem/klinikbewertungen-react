@@ -10,6 +10,77 @@ export default class ChartGruppe extends PureComponent {
 
     render() {
 
+        const getIntroOfPage = (label) => {
+            if (label === 'Gruppe-1') {
+                return "Gr-1"
+            }
+            if (label === 'Gruppe-2') {
+                return "Gr-2"
+            }
+            if (label === 'Gruppe-3') {
+                return "Gr-3"
+            }
+            if (label === 'Gruppe-4') {
+                return "Gr-4"
+            }
+            return '';
+        };
+
+
+        const CustomTooltip = ({ active, payload, label }) => {
+            if (active) {
+
+                return (
+                    <div className="custom-tooltip flex-row" >
+                        <p className="label" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>
+
+
+
+                            {`${getIntroOfPage(payload[0].name)} : ${payload[0].value}`}
+
+
+                        </p>
+                    </div>
+                );
+            }
+            return null;
+        };
+
+        const getIntroOfGroup = (label) => {
+            if (label === 'Gruppe-1') {
+                return "Gr-1"
+            }
+            if (label === 'Gruppe-2') {
+                return "Gr-2"
+            }
+            if (label === 'Gruppe-3') {
+                return "Gr-3"
+            }
+            if (label === 'Gruppe-4') {
+                return "Gr-4"
+            }
+            return '';
+        };
+
+        const renderLegend = (props) => {
+            const { payload } = props;
+
+            return (
+                <div style={{ display: 'flex', justifyContent: "center", gap: '1em' }}>
+                    {
+                        payload.map((entry, index) => (
+
+                            <div style={{ color: entry.color }}>
+                                {getIntroOfGroup(entry.value)}
+                            </div>
+                        ))
+                    }
+                </div>
+            );
+        }
+
+
+
         const COLORS = ['#00C49F', '#FF8042', '#FFBB28', '#0088FE'];
 
         const RADIAN = Math.PI / 180;
@@ -49,13 +120,14 @@ export default class ChartGruppe extends PureComponent {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
-                <Legend />
-                <Tooltip />
+                <Legend content={renderLegend} />
+                <Tooltip content={<CustomTooltip />} />
             </PieChart>
 
         );
     }
 }
+
 
 
 

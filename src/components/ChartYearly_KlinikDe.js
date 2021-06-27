@@ -51,7 +51,7 @@ export default class Example extends PureComponent {
             datafordiagram.push(year)
         }
 
-        let weit = window.screen.width - 30;
+        let weit = window.screen.width - 50;
         let hoch = 350
         if (window.screen.width > 900) {
             hoch = 600;

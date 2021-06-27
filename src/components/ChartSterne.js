@@ -25,6 +25,24 @@ export default class ChartGruppe extends PureComponent {
 
         const COLORS = ['#00C49F', '#FF8042', '#FFBB28', '#0088FE', '#FA3392'];
 
+        const renderLegend = (props) => {
+            const { payload } = props;
+            console.log(payload)
+            return (
+                <div style={{ display: 'flex', justifyContent: "center", gap: '1em' }}>
+                    {
+                        payload.map((entry, index) => (
+
+                            <div style={{ color: entry.color }}>
+                                {entry.value}
+                            </div>
+                        ))
+                    }
+                </div>
+            );
+        }
+
+
         const renderActiveShape = (props) => {
             const RADIAN = Math.PI / 180;
             const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
@@ -91,7 +109,7 @@ export default class ChartGruppe extends PureComponent {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
-                <Legend />
+                <Legend content={renderLegend} />
 
             </PieChart>
 

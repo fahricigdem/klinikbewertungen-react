@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 
 import { FachbereichNamesKurz } from '../Data/Lists'
+import { FachbereichNamesKurz_eng } from '../Data/Lists'
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
@@ -36,16 +37,26 @@ export default class Example extends PureComponent {
 
         let datafordiagram = []
 
-        for (let i of FachbereichNamesKurz) {
-
-            let einKlinik = {
-                name: i,
-                zahl: 0,
+        for (let i = 0; i < FachbereichNamesKurz.length; i++) {
+            let einKlinik
+            {
+                this.props.english ?
+                einKlinik = {
+                    name: FachbereichNamesKurz_eng[i],
+                    zahl: 0,
+                }
+                :
+                einKlinik = {
+                    name: FachbereichNamesKurz[i],
+                    zahl: 0,
+                }
             }
+
+
 
             let j = 0
             klinikDeData.map(r => {
-                if (r.fachbereich === i) {
+                if (r.fachbereich === FachbereichNamesKurz[i]) {
                     j++
                 }
                 return r
@@ -59,7 +70,7 @@ export default class Example extends PureComponent {
         datafordiagram.sort((a, b) => (a.zahl > b.zahl) ? 1 : -1)
 
 
-        let weit = window.screen.width - 30;
+        let weit = window.screen.width - 50;
         let hoch = 550
         if (window.screen.width > 900) {
             hoch = 600;

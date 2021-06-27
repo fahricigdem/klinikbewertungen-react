@@ -9,7 +9,7 @@ import FooterComponent from './components/FooterComponent'
 function App() {
   return (
     <>
-
+      <HeaderComponent />
       <JumbotronComponent />
       <Kommentare />
       <FooterComponent />

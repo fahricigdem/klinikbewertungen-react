@@ -21,7 +21,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
         return (
             <div className="custom-tooltip flex-row" >
-                <p className="label clearfix" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>{`${label} : ${payload[0].value}`}  <img src={refugeeks} style={{ height: "20px", verticalAlign: "top" }} /></p>
+                <p className="label clearfix" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>{`${label} : ${payload[0].value}`}  {window.screen.width > 900 && <img src={refugeeks} style={{ height: "20px", verticalAlign: "top" }} />}</p>
             </div>
         );
     }
@@ -71,7 +71,7 @@ export default class Example extends PureComponent {
         datafordiagram.sort((a, b) => (a.Zahl > b.Zahl) ? 1 : -1)
 
 
-        let weit = window.screen.width - 30;
+        let weit = window.screen.width - 50;
         let hoch = 550
         if (window.screen.width > 900) {
             hoch = 400;

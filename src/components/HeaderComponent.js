@@ -8,12 +8,12 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
+
+    Media
 } from 'reactstrap';
+
+import logo1 from '../images/logo1.jpeg'
+import logo from '../images/logo.png'
 
 const HeaderComponent = (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,30 +24,27 @@ const HeaderComponent = (props) => {
         <Container fluid id="header">
             <Navbar color="light" light >
 
-                <NavbarBrand >HFH</NavbarBrand>
+
+                <NavbarBrand className="mr-auto" expand="md" dark >
+                    <Media object src={logo} style={{ height: "40px" }} />&nbsp;
+                    <Media object src={logo1} style={{ height: "30px" }} />
+                </NavbarBrand>
+
 
                 <NavbarToggler onClick={toggle} />
+
+
                 <Collapse isOpen={isOpen} navbar>
+
                     <Nav className="mr-auto" navbar>
-
                         <NavItem>
-                            <NavLink href="#werteProJahr">Werte Pro Jahr</NavLink>
+                            <NavLink onClick={toggle} href="https://vue-js-three.vercel.app/">Für Kunden</NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink href="#anzahlderKommentare">Anzahl der Kommentare pro Klinik</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#bewertungen">Bewertungen</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#fachbereichen">Fachbereichen</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#kommentare">Kommentare</NavLink>
-                        </NavItem>
-
                     </Nav>
+
                 </Collapse>
+
+
             </Navbar>
         </Container>
     );
