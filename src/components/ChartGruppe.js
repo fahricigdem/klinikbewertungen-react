@@ -32,16 +32,28 @@ export default class ChartGruppe extends PureComponent {
 
                 return (
                     <div className="custom-tooltip flex-row" >
-                        <p className="label" style={{ backgroundColor: "white", color: "black", padding: "10px 10px" }}>
-
-
-
+                        <p className="label" style={{ backgroundColor: "#ffffff", color: "black", padding: "4px 6px" }}>
                             {`${getIntroOfPage(payload[0].name)} : ${payload[0].value}`}
-
-
                         </p>
+                        <span style={{ backgroundColor: "rgba(255, 255, 255, 0.5) ", color: "black" }}>
+                            {
+
+                                getIntroOfPage(payload[0].name) === "Gr-1" ?
+
+                                    "Eilenriede, St.Martini, Zuckerberg, Sophienklinik, Winsen"
+
+                                    : getIntroOfPage(payload[0].name) === "Gr-2" ?
+
+                                        "Wahrendorff, AMEOS Seepark, KRH Agness, AMEOS Hildesheim, Bucholz, Herzogin, HELIOS Cuxhafen, Peine, Helios Mittelwesser"
+
+                                        : getIntroOfPage(payload[0].name) === "Gr-3" ?
+                                            "DIAKOVERE Henr., Wolfsburg"
+                                            :
+                                            "Lüneburg (Psych)"
+                            } </span>
+
                     </div>
-                );
+                )
             }
             return null;
         };
