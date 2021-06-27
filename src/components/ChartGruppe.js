@@ -35,22 +35,23 @@ export default class ChartGruppe extends PureComponent {
                         <p className="label" style={{ backgroundColor: "#ffffff", color: "black", padding: "4px 6px" }}>
                             {`${getIntroOfPage(payload[0].name)} : ${payload[0].value}`}
                         </p>
-                        <span style={{ backgroundColor: "rgba(255, 255, 255, 0.5) ", color: "black" }}>
-                            {
+                        {this.props.klinik === "Alle" &&
+                            <span style={{ backgroundColor: "rgba(255, 255, 255, 0.5) ", color: "black" }}>
+                                {
 
-                                getIntroOfPage(payload[0].name) === "Gr-1" ?
+                                    getIntroOfPage(payload[0].name) === "Gr-1" ?
 
-                                    "Eilenriede, St.Martini, Zuckerberg, Sophienklinik, Winsen"
+                                        "Eilenriede, St.Martini, Zuckerberg, Sophienklinik, Winsen"
 
-                                    : getIntroOfPage(payload[0].name) === "Gr-2" ?
+                                        : getIntroOfPage(payload[0].name) === "Gr-2" ?
 
-                                        "Wahrendorff, AMEOS Seepark, KRH Agness, AMEOS Hildesheim, Bucholz, Herzogin, HELIOS Cuxhafen, Peine, Helios Mittelwesser"
+                                            "Wahrendorff, AMEOS Seepark, KRH Agness, AMEOS Hildesheim, Bucholz, Herzogin, HELIOS Cuxhafen, Peine, Helios Mittelwesser"
 
-                                        : getIntroOfPage(payload[0].name) === "Gr-3" ?
-                                            "DIAKOVERE Henr., Wolfsburg"
-                                            :
-                                            "Lüneburg (Psych)"
-                            } </span>
+                                            : getIntroOfPage(payload[0].name) === "Gr-3" ?
+                                                "DIAKOVERE Henr., Wolfsburg"
+                                                :
+                                                "Lüneburg (Psych)"
+                                } </span>}
 
                     </div>
                 )

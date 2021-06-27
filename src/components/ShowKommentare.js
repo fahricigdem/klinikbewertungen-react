@@ -216,7 +216,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                                 <CardSubtitle tag="h6" className="mb-2 text-muted text-center">Total: {rezensionen.length}</CardSubtitle>
                             </CardBody>
                             <center>
-                                <ChartGruppe data={data02} dark={dark} />
+                                <ChartGruppe data={data02} dark={dark} klinik={klinik} />
                             </center>
                         </Card>
                     </Col>}
