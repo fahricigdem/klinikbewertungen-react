@@ -240,7 +240,7 @@ const Kommentare = () => {
                         <Button
                             style={window.screen.width > 900 ? { width: "8vw" } : {}}
                             color={source === 'Alle' ?
-                                "secondary" : source === 'klinikDe' ? "darger" : "info"}
+                                "secondary" : source === 'klinikDe' ? "danger" : "info"}
 
                             onClick={handleQuelle} >
                             {source === 'Alle' ?
