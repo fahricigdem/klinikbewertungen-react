@@ -124,14 +124,55 @@ const Kommentare = () => {
         setFachbereich("Alle")
         setYear("Alle")
         setCurrentPage(1)
-        //
+
     }
+
+    function handleQuelle() {
+        if (source === "Alle") {
+            setSource("klinikDe")
+        } else if (source === "klinikDe") {
+            setSource("googleMaps")
+        } else {
+            setSource("Alle")
+        }
+
+
+        setSterne("Alle")
+        setGesamt("Alle")
+        setFachbereich("Alle")
+        setYear("Alle")
+        setCurrentPage(1)
+
+    }
+
+
 
     function handleResult(result) {
         setResult(result)
         setCurrentPage(1)
 
     }
+
+
+    function handlePolarity() {
+
+
+
+        if (result === "Alle") {
+            setResult(1)
+        } else if (result === 1) {
+            setResult(0)
+        } else {
+            setResult("Alle")
+        }
+
+
+        setCurrentPage(1)
+
+    }
+
+
+
 
     function handleFachbereich(fachbereich) {
         setFachbereich(fachbereich)
@@ -193,6 +234,24 @@ const Kommentare = () => {
             <Row className={`mt-1 pb-2 pt-1 ${window.screen.width > 900 ? "sticky-top" : ""} ${dark ? "bg-dark text-light" : "bg-light text-dark"} justify-content-between `} >
 
                 <Col xs="6" lg="auto">
+                    <center >
+                        <Label>{english ? "Data Source" : "Daten Quelle"}</Label><br />
+
+                        <Button
+                            style={window.screen.width > 900 ? { width: "8vw" } : {}}
+                            color={source === 'Alle' ?
+                                "secondary" : source === 'klinikDe' ? "info" : "danger"}
+
+                            onClick={handleQuelle} >
+                            {source === 'Alle' ?
+                                "Alle" : source === 'klinikDe' ? "klinikDe" : "Google Maps"}
+                        </Button>
+
+                    </center>
+                </Col>
+
+
+                {/* <Col xs="6" lg="auto">
                     <FormGroup >
                         <Label className="" for="exampleSelect"> {english ? "Data Source" : "Daten Quelle"}  </Label>
                         <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
@@ -201,7 +260,9 @@ const Kommentare = () => {
                             <option value='googleMaps'>Google Maps</option>
                         </Input>
                     </FormGroup>
-                </Col>
+                </Col> */}
+
+
                 <Col xs="6" lg={(source === 'Alle' || source === 'googleMaps') ? 2 : 1}>
                     <FormGroup >
                         <Label for="exampleSelect"> {english ? "Clinic" : "Klinik"}  </Label>
@@ -249,16 +310,12 @@ const Kommentare = () => {
 
                                             let i = uniqueFachbereichen_eng.indexOf(k)
 
-
                                             return (<option value={uniqueFachbereichen[i]} key={index}>{k}</option>)
                                         }
-
-
 
                                         )
 
                                         :
-
 
                                         uniqueFachbereichen.map((k, index) =>
                                             <option key={index}>{k}</option>
@@ -266,7 +323,6 @@ const Kommentare = () => {
 
 
                                     }
-
 
 
                                 </Input>
@@ -277,8 +333,6 @@ const Kommentare = () => {
                             }
                         </FormGroup>
                     </Col>}
-
-
 
 
                 <Col xs="6" lg="auto">
@@ -299,7 +353,26 @@ const Kommentare = () => {
                             </Input>}
                     </FormGroup>
                 </Col>
-                <Col xs="6" lg="1">
+
+
+                <Col xs="6" lg="auto">
+                    <center >
+                        <Label>{english ? "Polarity" : "Polarität"}</Label><br />
+
+                        <Button
+                            style={window.screen.width > 900 ? { width: "8vw" } : {}}
+                            color={result === 'Alle' ?
+                                "secondary" : result === 1 ? "success" : "danger"}
+
+                            onClick={handlePolarity} >
+                            {result === 'Alle' ?
+                                "+ & -" : result === 1 ? "+" : "-"}
+                        </Button>
+
+                    </center>
+                </Col>
+
+                {/* <Col xs="6" lg="1">
                     <FormGroup>
                         <Label className="" for="exampleSelect"> {english ? "Polarity" : "Polarität"} </Label>
                         <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
@@ -308,7 +381,11 @@ const Kommentare = () => {
                             <option value='0'> {english ? "Negative" : "Negativ"}  </option>
                         </Input>
                     </FormGroup>
-                </Col>
+                </Col> */}
+
+
+
+
                 {source === 'klinikDe' &&
                     <Col xs="6" lg="1">
                         <FormGroup>
@@ -378,6 +455,7 @@ const Kommentare = () => {
 
                         <Button
                             color="white"
+                            style={{ paddingTop: "0px", paddingBottom: "0px", fontSize: "1.5rem" }}
 
                             onClick={handleEnglish} >
                             {english ? "🇺🇸" : "🇩🇪"}
@@ -385,6 +463,8 @@ const Kommentare = () => {
 
                     </center>
                 </Col>
+
+
 
             </Row>
 
