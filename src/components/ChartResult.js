@@ -68,7 +68,7 @@ export default class ChartResult extends PureComponent {
             );
         };
 
-        let weit = window.screen.width - 200;
+        let weit = window.screen.width * 0.8;
         if (window.screen.width > 900) {
             weit = 300;
         }

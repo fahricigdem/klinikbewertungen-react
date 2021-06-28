@@ -28,7 +28,7 @@ export default class ChartResult extends PureComponent {
 
         return (
 
-            <PieChart width={350} height={200}>
+            <PieChart width={window.screen.width * 0.8} height={200}>
                 <Pie
                     dataKey="value"
                     isAnimationActive={true}

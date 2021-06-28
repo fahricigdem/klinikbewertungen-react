@@ -73,7 +73,7 @@ export default class ChartGruppe extends PureComponent {
 
         return (
 
-            <PieChart width={370} height={300}>
+            <PieChart width={window.screen.width * 0.8} height={300}>
                 <Pie
                     activeIndex={this.state.activeIndex}
                     activeShape={renderActiveShape}

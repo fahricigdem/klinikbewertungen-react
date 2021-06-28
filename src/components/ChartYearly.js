@@ -65,9 +65,11 @@ export default class ChartYearly extends PureComponent {
             datafordiagram.push(year)
         }
 
-        let weit = window.screen.width - 50;
+        console.log(window.innerWidth)
+
+        let weit = window.innerWidth * 0.85;
         let hoch = 350
-        if (window.screen.width > 900) {
+        if (window.innerWidth > 900) {
             hoch = 600;
             weit = (weit - 30) / 2
         }

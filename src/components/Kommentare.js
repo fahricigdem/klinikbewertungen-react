@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 import ShowKommentare from './ShowKommentare'
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, UncontrolledTooltip } from 'reactstrap';
 import Dataset from '../Data/Dataset'
 import { KlinikNames, FachbereichNames, FachbereichNamesKurz, FachbereichNamesKurz_eng_uniq, KlinikDeYears, GoogleMapsYears } from '../Data/Lists'
+import FlagUS from '../images/FlagUS.png'
+import FlagDE from '../images/FlagDE.png'
+
 
 const Kommentare = () => {
 
@@ -232,13 +235,14 @@ const Kommentare = () => {
         <Container fluid className={dark && "bg-dark text-light"}>
 
             <Row className={`mt-1 pb-2 pt-1 ${window.screen.width > 900 ? "sticky-top" : ""} ${dark ? "bg-dark text-light" : "bg-light text-dark"} justify-content-between `} >
-
+                {/*
                 <Col xs="6" lg="auto">
                     <center >
                         <Label>{english ? "Data Source" : "Daten Quelle"}</Label><br />
 
+
                         <Button
-                            style={window.screen.width > 900 ? { width: "8vw" } : {}}
+
                             color={source === 'Alle' ?
                                 "secondary" : source === 'klinikDe' ? "danger" : "info"}
 
@@ -250,50 +254,66 @@ const Kommentare = () => {
                     </center>
                 </Col>
 
-
-                {/* <Col xs="6" lg="auto">
+            */}
+                <Col xs="6" lg="auto">
                     <FormGroup >
                         <Label className="" for="exampleSelect"> {english ? "Data Source" : "Daten Quelle"}  </Label>
-                        <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                        <Input type="select" name="source" id="source" value={source} onChange={(e) => handleSource(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} id="Tooltip_Source">
                             <option value="Alle"> {english ? "All" : "Alle"}  </option>
                             <option value='klinikDe'>klinikDe</option>
                             <option value='googleMaps'>Google Maps</option>
                         </Input>
                     </FormGroup>
-                </Col> */}
+                </Col>
+
+
+                <UncontrolledTooltip placement="right" target="Tooltip_Source">
+                    {english ? "klinikDe Data has Fachbereich Data but Google Maps not" : "klinikDe Daten hat Fachbereichsdaten, aber Google Maps nicht"}
+                </UncontrolledTooltip>
 
 
                 <Col xs="6" lg={(source === 'Alle' || source === 'googleMaps') ? 2 : 1}>
                     <FormGroup >
                         <Label for="exampleSelect"> {english ? "Clinic" : "Klinik"}  </Label>
                         {gruppe === 'Alle' ?
-                            <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            <><Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} id="Tooltip_Klinik">
                                 <option value="Alle">{english ? "All" : "Alle"}</option>
                                 {KlinikNames.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
-                            </Input> :
+                            </Input>
+                                <UncontrolledTooltip placement="right" target="Tooltip_Klinik">
+                                    {english ? "Attention, if you choose clinic, you cannot select group due to information consistency." :
+                                        "Achtung, wenn Sie Klinik wählen, können Sie aufgrund der Informationskonsistenz keine Gruppe wählen."}
+                                </UncontrolledTooltip></>
+                            :
                             <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <option>{english ? "All" : "Alle"}</option>
                             </Input>}
                     </FormGroup>
+
                 </Col>
                 <Col xs="6" lg="auto">
                     <FormGroup>
                         <Label for="exampleSelect">{english ? "Group" : "Gruppe"} </Label>
                         {klinik === 'Alle' ?
-                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} id="Tooltip_Gruppe">
                                 <option value="Alle">{english ? "All" : "Alle"}</option>
                                 <option value="0"> 1</option>
                                 <option value='1'> 2 </option>
                                 <option value="2"> 3 </option>
                                 <option value='3'> 4 </option>
                             </Input> :
-                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            <Input type="select" name="gruppe" id="gruppe" value={gruppe} onChange={(e) => handleGruppe(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} disabled>
                                 <option value="Alle">{english ? "All" : "Alle"}</option>
                             </Input>}
                     </FormGroup>
                 </Col>
+
+                <UncontrolledTooltip placement="right" target="Tooltip_Gruppe">
+                    {english ? "Each Clinic belongs to a group determined by Machine Learning algorithm " :
+                        "Jede Klinik gehört zu einer durch Maschine Lernen Algorithmus bestimmten Gruppe"}
+                </UncontrolledTooltip>
 
 
                 {source === 'klinikDe' &&
@@ -303,28 +323,17 @@ const Kommentare = () => {
                             {source === 'klinikDe' ?
                                 <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                     <option value="Alle">{english ? "All" : "Alle"}</option>
-
                                     {english ?
-
                                         uniqueFachbereichen_eng.map((k, index) => {
-
                                             let i = uniqueFachbereichen_eng.indexOf(k)
-
                                             return (<option value={uniqueFachbereichen[i]} key={index}>{k}</option>)
                                         }
-
                                         )
-
                                         :
-
                                         uniqueFachbereichen.map((k, index) =>
                                             <option key={index}>{k}</option>
                                         )
-
-
                                     }
-
-
                                 </Input>
 
                                 : <Input type="select" name="fachbereich" id="fachbereich" value={fachbereich} onChange={(e) => handleFachbereich(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
@@ -339,51 +348,30 @@ const Kommentare = () => {
                     <FormGroup>
                         <Label for="exampleSelect">{english ? "Year" : "Jahr"} </Label>
                         {((source === 'klinikDe' || source === 'Alle')) ?
-                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            <>  <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} id="Tooltip_Year_klinikDe">
                                 <option value="Alle">{english ? "All" : "Alle"}</option>
                                 {KlinikDeYears.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
-                            </Input> :
-                            <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            </Input>
+                                <UncontrolledTooltip placement="right" target="Tooltip_Year_klinikDe">
+                                    {english ? "Clinic data goes back to 2006 and Google Maps data goes back to 2013." : "Klinikdaten reichen bis 2006 zurück und Google Maps-Daten reichen bis 2013 zurück."}
+                                </UncontrolledTooltip></>
+                            :
+                            <> <Input type="select" name="year" id="year" value={year} onChange={(e) => handleYear(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"} id="Tooltip_Year_Google">
                                 <option value="Alle">{english ? "All" : "Alle"}</option>
                                 {GoogleMapsYears.map((k, index) =>
                                     <option key={index}>{k}</option>
                                 )}
-                            </Input>}
+                            </Input>
+                                <UncontrolledTooltip placement="right" target="Tooltip_Year_Google">
+                                    {english ? "Clinic data goes back to 2006 and Google Maps data goes back to 2013." : "Klinikdaten reichen bis 2006 zurück und Google Maps-Daten reichen bis 2013 zurück."}
+                                </UncontrolledTooltip>
+                            </>}
                     </FormGroup>
+
+
                 </Col>
-
-
-                <Col xs="6" lg="auto">
-                    <center >
-                        <Label>{english ? "Polarity" : "Polarität"}</Label><br />
-
-                        <Button
-                            style={window.screen.width > 900 ? { width: "8vw" } : {}}
-                            color={result === 'Alle' ?
-                                "secondary" : result === 1 ? "success" : "danger"}
-
-                            onClick={handlePolarity} >
-                            {result === 'Alle' ?
-                                "+ & -" : result === 1 ? "+" : "-"}
-                        </Button>
-
-                    </center>
-                </Col>
-
-                {/* <Col xs="6" lg="1">
-                    <FormGroup>
-                        <Label className="" for="exampleSelect"> {english ? "Polarity" : "Polarität"} </Label>
-                        <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
-                            <option value="Alle">{english ? "All" : "Alle"}</option>
-                            <option value="1" > {english ? "Positive" : "Positiv"}  </option>
-                            <option value='0'> {english ? "Negative" : "Negativ"}  </option>
-                        </Input>
-                    </FormGroup>
-                </Col> */}
-
-
 
 
                 {source === 'klinikDe' &&
@@ -415,20 +403,85 @@ const Kommentare = () => {
                             </Input>
                         </FormGroup>
                     </Col>}
-                <Col xs={source === 'Alle' ? 6 : 3} lg="auto">
-                    <center >
-                        <Label>{english ? "Reset" : " Zurücksetzen"} </Label><br />
 
-                        <Button color={
-                            (source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle')
-                                ? 'success' : 'secondary'}
-                            onClick={resetFilter} >
-                            {english ? "All" : "Alle"}
+
+                <Col xs="3" lg="auto">
+                    <center >
+                        <Label>{english ? "Polarity" : "Polarität"}</Label><br />
+
+                        <Button
+                            id="Tooltip_Polarity"
+                            color={result === 'Alle' ?
+                                "secondary" : result === 1 ? "success" : "danger"}
+
+                            onClick={handlePolarity} >
+                            {
+                                english ? (result === 'Alle' ? "All" : result === 1 ? "Positive" : "Negative") :
+                                    (result === 'Alle' ? "Alle" : result === 1 ? "Positiv" : "Negativ")
+                            }
                         </Button>
+
                     </center>
                 </Col>
 
-                <Col xs={source === 'Alle' ? 6 : 3} lg="auto">
+
+                <UncontrolledTooltip placement="right" target="Tooltip_Polarity">
+                    {english ? "This information is determined by Text Blob and varies between -1 and +1." : "Diese Informationen werden von Text Blob bestimmt und variieren zwischen -1 und +1."}
+                </UncontrolledTooltip>
+
+                {/* <Col xs="6" lg="1">
+                    <FormGroup>
+                        <Label className="" for="exampleSelect"> {english ? "Polarity" : "Polarität"} </Label>
+                        <Input type="select" name="result" id="result" value={result} onChange={(e) => handleResult(e.target.value)} className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
+                            <option value="Alle">{english ? "All" : "Alle"}</option>
+                            <option value="1" > {english ? "Positive" : "Positiv"}  </option>
+                            <option value='0'> {english ? "Negative" : "Negativ"}  </option>
+                        </Input>
+                    </FormGroup>
+                </Col> */}
+
+
+
+
+
+
+
+
+                {
+                    (source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle')
+                    &&
+                    <Col xs="3" lg="auto">
+                        <center >
+                            <Label>Filter </Label><br />
+
+                            <Button color="success"
+                                id="Tooltip_Filter"
+                                onClick={resetFilter} >
+                                {english ? "On" : "Auf"}
+
+
+
+                            </Button>
+                        </center>
+                        <UncontrolledTooltip placement="right" target="Tooltip_Filter">
+                            {english ? "If you click it, the filters will be reset" : "Wenn Sie darauf klicken, werden die Filter zurückgesetzt"}
+                        </UncontrolledTooltip>
+                    </Col>
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+                <Col xs="3" lg="auto">
                     <center >
                         <Label>{english ? "Theme" : "Thema"} </Label><br />
 
@@ -439,7 +492,7 @@ const Kommentare = () => {
                             {
                                 dark ?
                                     english ?
-                                        "Light" : "Hellen"
+                                        "Light" : "Hell"
                                     :
                                     english ?
                                         "Dark" : "Dunkel"}
@@ -449,17 +502,19 @@ const Kommentare = () => {
                     </center>
                 </Col>
 
-                <Col xs={source === 'Alle' ? 6 : 3} lg="auto">
+
+
+
+
+                <Col xs="3" lg="auto">
                     <center >
-                        <Label>{english ? "Language" : "Sprache"}</Label><br />
+                        <Label> </Label><br />
 
-                        <Button
-                            color="white"
-                            style={{ paddingTop: "0px", paddingBottom: "0px", fontSize: "1.5rem" }}
-
-                            onClick={handleEnglish} >
-                            {english ? "🇺🇸" : "🇩🇪"}
-                        </Button>
+                        {english ?
+                            <img src={FlagUS} width="40" onClick={handleEnglish} />
+                            :
+                            <img src={FlagDE} width="40" onClick={handleEnglish} />
+                        }
 
                     </center>
                 </Col>

@@ -110,7 +110,7 @@ export default class ChartGruppe extends PureComponent {
             );
         };
 
-        let weit = window.screen.width - 155;
+        let weit = window.screen.width * 0.8;
         if (window.screen.width > 900) {
             weit = 300;
         }

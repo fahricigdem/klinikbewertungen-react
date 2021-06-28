@@ -10,7 +10,7 @@ import PaginationComponent from './PaginationComponent'
 import { Row, Col } from 'reactstrap';
 import { GoogleMapsYearlyPosNeg } from '../Data/Lists'
 import { KlinikDeYearlyPosNeg } from '../Data/Lists'
-import { Container, Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert } from 'reactstrap';
+import { Container, Card, CardText, CardBody, CardTitle, CardSubtitle, Progress, Alert, UncontrolledTooltip } from 'reactstrap';
 import ChartYearly_Google from './ChartYearly_Google'
 import ChartYearly_KlinikDe from './ChartYearly_KlinikDe'
 import ChartKlinikenDePolarity from './ChartKlinikenDePolarity'
@@ -172,11 +172,14 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
     source === "klinikDe" && (AlertColor = "danger")
     source === "googleMaps" && (AlertColor = "info")
 
+
+
+
     return (
         <Container fluid className=""> {/* Diagräme und Kommentare */}
             <Row > {/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
-                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
+                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" id="Tooltip_Alert">
                         <center>
                             <h4>
                                 {english ? "Number of Reviews: " : "Anzahl der Rezensionen: "} {rezensionen.length}
@@ -184,6 +187,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </center>
                     </Alert>
                 </Col>
+                <UncontrolledTooltip placement="right" target="Tooltip_Alert">
+                    {english ? "It shows the number of comments obtained as a result of filtering and the information below is displayed." :
+                        "Es zeigt die Anzahl der Kommentare an, die als Ergebnis der Filterung erhalten wurden, und die folgenden Informationen werden unten angezeigt."}
+                </UncontrolledTooltip>
             </Row>
             <Row > {/* Progressbar für  source */}
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
