@@ -21,11 +21,11 @@ const HeaderComponent = (props) => {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <Container fluid id="header">
-            <Navbar color="light" light >
 
+        <Navbar color="light" light >
+            <Container fluid id="header" id="Oben" >
 
-                <NavbarBrand className="mr-auto" expand="md" dark >
+                <NavbarBrand>
                     <Media object src={logo} style={{ height: "40px" }} />&nbsp;
                     <Media object src={logo1} style={{ height: "30px" }} />
                 </NavbarBrand>
@@ -34,19 +34,19 @@ const HeaderComponent = (props) => {
                 <NavbarToggler onClick={toggle} />
 
 
-                <Collapse isOpen={isOpen} navbar>
+                <Collapse isOpen={isOpen} navbar style={{ flexGrow: "0" }}>
 
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink onClick={toggle} href="https://vue-js-three.vercel.app/">Für Kunden</NavLink>
+                    <Nav navbar >
+                        <NavItem >
+                            <NavLink onClick={toggle} href="https://vue-js-three.vercel.app/" >Für Kunden</NavLink>
                         </NavItem>
                     </Nav>
 
                 </Collapse>
 
+            </Container>
+        </Navbar >
 
-            </Navbar>
-        </Container>
     );
 }
 

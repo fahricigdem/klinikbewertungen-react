@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'reactstrap';
+import up from '../images/up.png'
 
 const FooterComponent = () => {
     return (
@@ -10,7 +11,9 @@ const FooterComponent = () => {
                 <p className="text-white">H F H</p>
             </Col>
             <Col className="mt-3">
-                <Button size="md" style={{ backgroundColor: "#262020", borderRadius: "50%" }} onClick={() => window.scrollTo(0, 0)} >^</Button>
+
+                <a href="#Oben" style={{ textDecoration: "none" }}><img src={up} /></a>
+
             </Col>
             <Col className="mt-3">
                 <br />

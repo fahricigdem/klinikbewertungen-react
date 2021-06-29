@@ -12,7 +12,7 @@ const Kommentare = () => {
 
     var Data = [...Dataset]
 
-    const pageSize = 2  // Für Pagination hat jede seite wie pageSize hoch Kommantare
+    const pageSize = 1  // Für Pagination hat jede seite wie pageSize hoch Kommantare
 
     /////////// fachbereichNames Vorbereitungen : das ändert sich nach der Klinik
     let uniqueFachbereichen = []
@@ -81,7 +81,7 @@ const Kommentare = () => {
     //// In der Mitte von Pagination für Wahl der Seite von Kommentare
     const handlePageSelect = (pageInput) => {
         setCurrentPage(parseInt(pageInput))
-        window.location = String(window.location).replace(/\#.*$/, "") + "#AnfangderKommentare";
+        //window.location = String(window.location).replace(/\#.*$/, "") + "#AnfangderKommentare";
     }
 
 
@@ -508,7 +508,7 @@ const Kommentare = () => {
 
                 <Col xs="3" lg="auto">
                     <center >
-                        <Label> </Label><br />
+                        <Label> {english ? 'Language' : 'Sprache'}</Label><br />
 
                         {english ?
                             <img src={FlagUS} width="40" onClick={handleEnglish} />

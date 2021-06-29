@@ -8,7 +8,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
     return (
         <>
             <Row style={{ textAlign: "center", marginTop: "10px" }}>
-                <p>{(currentPage - 1) * pageSize + 1} {(rezensionenZahl >= (currentPage * pageSize)) && ("- " + (currentPage * pageSize))}  {english ? "of" : "von"} {rezensionenZahl}</p>
+                {/* <p>{(currentPage - 1) * pageSize + 1} {(rezensionenZahl >= (currentPage * pageSize)) && ("- " + (currentPage * pageSize))}  {english ? "of" : "von"} {rezensionenZahl}</p> */}
+                <p>{(currentPage - 1) * pageSize + 1}   {english ? "of" : "von"} {rezensionenZahl}</p>
             </Row>
 
             <Row>
@@ -20,7 +21,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
 
 
                             onClick={e => handleClick(e, 1)}
-                            href="#AnfangderKommentare"
+                            href=""
                         >
 
                             <span>«</span>
@@ -37,7 +38,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                         <PaginationLink
 
                             onClick={e => handleClick(e, currentPage - 1)}
-                            href="#AnfangderKommentare"
+                            href=""
                         >
 
 
@@ -65,7 +66,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                         <PaginationLink
 
                             onClick={e => handleClick(e, currentPage + 1)}
-                            href="#AnfangderKommentare"
+                            href=""
                         >
                             <span> › </span>
                         </PaginationLink>
@@ -77,7 +78,7 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                         <PaginationLink
 
                             onClick={e => handleClick(e, pagesCount)}
-                            href="#AnfangderKommentare"
+                            href=""
                         >
                             <span>»</span>
 

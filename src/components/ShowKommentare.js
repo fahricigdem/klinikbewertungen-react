@@ -21,6 +21,11 @@ import ChartFachbereichenPolarity from './ChartFachbereichenPolarity'
 import ChartFachbereichenGesamt from './ChartFachbereichenGesamt'
 import ChartKlinikenZahlen from './ChartKlinikenZahlen'
 import ChartFachbereichenZahlen from './ChartFachbereichenZahlen'
+import SentimentAnalysisDE from './SentimentAnalysisDE'
+import SentimentAnalysisEN from './SentimentAnalysisEN'
+
+
+
 
 
 
@@ -179,18 +184,21 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         <Container fluid className=""> {/* Diagräme und Kommentare */}
             <Row > {/* Zahl der rezension */}
                 <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
-                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" id="Tooltip_Alert">
-                        <center>
-                            <h4>
-                                {english ? "Number of Reviews: " : "Anzahl der Rezensionen: "} {rezensionen.length}
-                            </h4>
-                        </center>
-                    </Alert>
+                    <a href="#AnfangderKommentare" style={{ textDecoration: "none" }}>
+                        <Alert color={AlertColor} className="pt-1 pb-0 m-1" id="Tooltip_Alert">
+                            <center>
+                                <h4>
+                                    {english ? "Number of Reviews: " : "Anzahl der Rezensionen: "} {rezensionen.length}
+                                </h4>
+                            </center>
+                        </Alert>
+                        <UncontrolledTooltip placement="right" target="Tooltip_Alert">
+                            {english ? "the number of comments obtained by filtering" :
+                                "die Anzahl der Kommentare durch Filterung"}
+                        </UncontrolledTooltip>
+                    </a>
                 </Col>
-                <UncontrolledTooltip placement="right" target="Tooltip_Alert">
-                    {english ? "It shows the number of comments obtained as a result of filtering and the information below is displayed." :
-                        "Es zeigt die Anzahl der Kommentare an, die als Ergebnis der Filterung erhalten wurden, und die folgenden Informationen werden unten angezeigt."}
-                </UncontrolledTooltip>
+
             </Row>
             <Row > {/* Progressbar für  source */}
                 <Col sm="12" md={{ size: 10, offset: 1 }}>
@@ -432,24 +440,11 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>
                 </Row>}
             <br />
-            <h1 >{english ? "Reviews" : "Rezensionen"} </h1>
+            <h1 id="AnfangderKommentare">{english ? "Reviews and Sentiment Analysis" : "Rezensionen und Stimmungsanalyse"} </h1>
 
-            <Row >{/* Zahl der rezension */}
-                <Col xs="12" sm={{ size: 8, offset: 2 }} md={{ size: 6, offset: 3 }}>
-                    <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
-                        <center><h4>
-                            {english ? "Number of Reviews: " : "Anzahl der Rezensionen: "} {rezensionen.length}
 
-                        </h4></center>
-                    </Alert>
-                    <Progress multi >
-                        <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} </Progress>
-                        <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} </Progress>
-                    </Progress>
-                </Col>
-            </Row>
+            <Row className="mb-3"> {/* Kommentare */}
 
-            <Row> {/* Kommentare */}
                 {
                     rezensionen
                         .slice(
@@ -458,14 +453,33 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         )
                         .map((data) =>
                             <Col xs="12" lg="6" key={data.index}>
+                                <Alert color={AlertColor} className="pt-1 pb-0 m-1" >
+                                    <center><h4>
+                                        {english ? "Number of Reviews: " : "Anzahl der Rezensionen: "} {rezensionen.length}
+
+                                    </h4></center>
+                                </Alert>
+                                <Progress multi >
+                                    <Progress bar animated={((source === "googleMaps")) && true} color="info" max={Dataset.length} value={Dataset.filter(e => e.source === "googleMaps").length}>GoogleMaps - {Dataset.filter(e => e.source === "googleMaps").length} </Progress>
+                                    <Progress bar animated={((source === "klinikDe")) && true} color="danger" max={Dataset.length} value={Dataset.filter(e => e.source === "klinikDe").length}>KlinikDe - {Dataset.filter(e => e.source === "klinikDe").length} </Progress>
+                                </Progress>
                                 {data}
+                                <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} dark={dark} english={english} />
                             </Col>
                         )
                 }
+
+                <Col>
+
+                    {english ?
+                        <SentimentAnalysisEN dark={dark} />
+                        :
+                        <SentimentAnalysisDE dark={dark} />
+                    }
+
+                </Col>
             </Row>
-            <Row > {/* Pagination */}
-                <PaginationComponent handleClick={handlePageBottom} handlePageSelect={handlePageSelect} currentPage={currentPage} pagesCount={pagesCount} pageSize={pageSize} rezensionenZahl={rezensionen.length} dark={dark} english={english} />
-            </Row>
+
 
 
         </Container>
