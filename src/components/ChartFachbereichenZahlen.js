@@ -41,15 +41,15 @@ export default class Example extends PureComponent {
             let einKlinik
             {
                 this.props.english ?
-                einKlinik = {
-                    name: FachbereichNamesKurz_eng[i],
-                    zahl: 0,
-                }
-                :
-                einKlinik = {
-                    name: FachbereichNamesKurz[i],
-                    zahl: 0,
-                }
+                    einKlinik = {
+                        name: FachbereichNamesKurz_eng[i],
+                        zahl: 0,
+                    }
+                    :
+                    einKlinik = {
+                        name: FachbereichNamesKurz[i],
+                        zahl: 0,
+                    }
             }
 
 
@@ -63,7 +63,8 @@ export default class Example extends PureComponent {
             })
 
             einKlinik.zahl = j
-            datafordiagram.push(einKlinik)
+            { einKlinik.zahl && datafordiagram.push(einKlinik) }
+
         }
 
 
@@ -71,9 +72,9 @@ export default class Example extends PureComponent {
 
 
         let weit = window.screen.width - 50;
-        let hoch = 550
+        let hoch = 30 + (20 * datafordiagram.length)
         if (window.screen.width > 900) {
-            hoch = 600;
+            hoch = 30 + (20 * datafordiagram.length);
             weit = (weit - 30)
         }
         return (

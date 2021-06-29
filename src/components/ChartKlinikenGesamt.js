@@ -56,7 +56,9 @@ export default class Example extends PureComponent {
             })
 
             einKlinik.GesamtMean = einKlinik.GesamtMean / j
-            datafordiagram.push(einKlinik)
+
+            einKlinik.GesamtMean && datafordiagram.push(einKlinik)
+
         }
 
 
@@ -64,9 +66,9 @@ export default class Example extends PureComponent {
 
 
         let weit = window.screen.width - 50;
-        let hoch = 550
+        let hoch = 30 + (30 * datafordiagram.length)
         if (window.screen.width > 900) {
-            hoch = 600;
+            hoch = 30 + (30 * datafordiagram.length)
             weit = (weit - 30) / 2
         }
         return (

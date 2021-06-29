@@ -107,7 +107,7 @@ const Kommentare = () => {
 
         return <ShowKommentare Dataset={Data} pageSize={pageSize} pagesCount={pagesCount} currentPage={currentPage}
             handlePageBottom={handlePageBottom} handlePageSelect={handlePageSelect}
-            klinik={klinik} source={source} result={result} gruppe={gruppe} dark={dark} english={english} />
+            klinik={klinik} source={source} result={result} gruppe={gruppe} dark={dark} english={english} year={year} fachbereich={fachbereich} />
     }
 
 

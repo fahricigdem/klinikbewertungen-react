@@ -65,7 +65,9 @@ export default class Example extends PureComponent {
             })
 
             einKlinik.PolarityMean = (einKlinik.PolarityMean / j).toFixed(3)
-            datafordiagram.push(einKlinik)
+
+            einKlinik.PolarityMean !== "NaN" && datafordiagram.push(einKlinik)
+
         }
 
 
@@ -73,9 +75,9 @@ export default class Example extends PureComponent {
 
 
         let weit = window.screen.width - 50;
-        let hoch = 550
+        let hoch = 30 + (19 * datafordiagram.length)
         if (window.screen.width > 900) {
-            hoch = 600;
+            hoch = 30 + (19 * datafordiagram.length);
             weit = (weit - 44) / 2
         }
         return (
