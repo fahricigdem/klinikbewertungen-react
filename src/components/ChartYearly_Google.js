@@ -60,27 +60,29 @@ export default class Example extends PureComponent {
         }
 
         return (
+            <div style={{ width: '90%', height: hoch }}>
+                <ResponsiveContainer >
+                    <AreaChart
+                        width={weit}
+                        height={hoch}
+                        data={datafordiagram}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
+                        <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Area type="monotone" dataKey="GooglePositive" stackId="a" stroke="#8884d8" fill="#0C8FA7" />
+                        <Area type="monotone" dataKey="GoogleNegative" stackId="a" stroke="#8884d8" fill="#0DCAF0" />
 
-            <AreaChart
-                width={weit}
-                height={hoch}
-                data={datafordiagram}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
-                <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="GooglePositive" stackId="a" stroke="#8884d8" fill="#0C8FA7" />
-                <Area type="monotone" dataKey="GoogleNegative" stackId="a" stroke="#8884d8" fill="#0DCAF0" />
-
-            </AreaChart>
-
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         );
     }
 }

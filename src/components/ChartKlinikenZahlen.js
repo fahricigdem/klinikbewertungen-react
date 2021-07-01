@@ -82,30 +82,33 @@ export default class Example extends PureComponent {
 
         }
         return (
+            <div style={{ width: '100%', height: hoch * 2 }}>
+                <ResponsiveContainer >
+                    <BarChart
+                        layout="vertical"
+                        width={weit}
+                        height={hoch * 2}
+                        data={datafordiagram}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                        }}
 
-            <BarChart
-                layout="vertical"
-                width={weit}
-                height={hoch * 2}
-                data={datafordiagram}
-                margin={{
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                }}
+                    >
+                        <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                        <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-            >
-                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
-                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} dataKey="name" type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
-
-                <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<CustomTooltip />} />
 
 
-                <Bar dataKey="Zahl" fill={barColor} />
+                        <Bar dataKey="Zahl" fill={barColor} />
 
-            </BarChart>
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
 
         );
     }

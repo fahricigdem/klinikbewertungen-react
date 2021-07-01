@@ -76,29 +76,32 @@ export default class ChartYearly extends PureComponent {
 
 
         return (
+            <div style={{ width: '90%', height: hoch }}>
+                <ResponsiveContainer >
+                    <BarChart
+                        width={weit}
+                        height={hoch}
+                        data={datafordiagram}
+                        margin={{
+                            top: 10,
+                            right: 10,
+                            left: 1,
+                            bottom: 10,
+                        }}
 
-            <BarChart
-                width={weit}
-                height={hoch}
-                data={datafordiagram}
-                margin={{
-                    top: 10,
-                    right: 10,
-                    left: 1,
-                    bottom: 10,
-                }}
-
-            >
-                <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
-                <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
-                <Bar dataKey="GooglePositive" stackId="a" fill="#0C8FA7" />
-                <Bar dataKey="GoogleNegative" stackId="a" fill="#0DCAF0" />
-                <Bar dataKey="KlinikDePositive" stackId="b" fill="#9E2631" />
-                <Bar dataKey="KlinikDeNegative" stackId="b" fill="#DC3545" />
-            </BarChart>
+                    >
+                        <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
+                        <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Legend />
+                        <Bar dataKey="GooglePositive" stackId="a" fill="#0C8FA7" />
+                        <Bar dataKey="GoogleNegative" stackId="a" fill="#0DCAF0" />
+                        <Bar dataKey="KlinikDePositive" stackId="b" fill="#9E2631" />
+                        <Bar dataKey="KlinikDeNegative" stackId="b" fill="#DC3545" />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
 
         );
     }

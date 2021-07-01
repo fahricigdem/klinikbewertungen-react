@@ -78,30 +78,32 @@ export default class Example extends PureComponent {
             weit = (weit - 30)
         }
         return (
+            <div style={{ width: '98%', height: hoch * 2 }}>
+                <ResponsiveContainer >
+                    <BarChart
+                        layout="vertical"
+                        width={weit}
+                        height={hoch * 2}
+                        data={datafordiagram}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                        }}
+                    >
+                        <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                        <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-            <BarChart
-                layout="vertical"
-                width={weit}
-                height={hoch * 2}
-                data={datafordiagram}
-                margin={{
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                }}
-            >
-                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
-                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
-
-                <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<CustomTooltip />} />
 
 
-                <Bar dataKey="zahl" fill="#DC3545" />
+                        <Bar dataKey="zahl" fill="#DC3545" />
 
-            </BarChart>
-
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
         );
     }
 }

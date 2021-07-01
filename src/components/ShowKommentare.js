@@ -219,7 +219,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             <br />
             <Row >  {/* Piecharts */}
                 {((result === "Alle") && rezensionen.length !== 0) &&
-                    <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
+                    <Col xs="12" md="12" lg={source === "Alle" ? "6" : "4"}>
                         <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
                                 <CardTitle tag="h5" className="text-center">  {english ? "Positive Polarity" : "Positiv Polarität"}   </CardTitle>
@@ -231,7 +231,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                         </Card>
                     </Col>}
                 {(gruppe === "Alle" && rezensionen.length !== 0) &&
-                    <Col xs="12" sm="6" lg={source === "Alle" ? "6" : "4"}>
+                    <Col xs="12" md="12" lg={source === "Alle" ? "6" : "4"}>
                         <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}  >
                             <CardBody>
                                 <CardTitle tag="h5" className="text-red text-center"> {english ? "Clinic Group" : "Klinik Gruppe"}    </CardTitle>
@@ -244,7 +244,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>}
 
                 {source === "googleMaps" &&
-                    <Col xs="12" sm="6" lg="4">
+                    <Col xs="12" md="12" lg="4">
                         <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
                                 <CardTitle tag="h5" className="text-center">  {english ? "User Star Ratings" : "Nutzer Sterne Bewertungen"}   </CardTitle>
@@ -258,7 +258,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
 
 
                 {(source === "klinikDe" && rezensionen.length !== 0) &&
-                    <Col xs="12" sm="6" lg="4">
+                    <Col xs="12" md="12" lg="4">
                         <Card className={dark ? "bg-dark text-light" : "text-dark border-light"}>
                             <CardBody>
                                 <CardTitle tag="h5" className="text-center">{english ? "User Star Ratings" : "Nutzer Sterne Bewertungen"} </CardTitle>
@@ -277,7 +277,7 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             {year === "Alle" &&
                 <Row > {/* Yearly - commentareZahl und polarity */}
                     {(source === "Alle") ?
-                        <Col xs="12" sm="12" md="12" lg="6">
+                        <Col xs="12" sm="12" md="12" lg="6" >
                             <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"}>
                                 <CardBody>
                                     <CardTitle tag="h5" className="">

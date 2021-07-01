@@ -72,30 +72,32 @@ export default class Example extends PureComponent {
             weit = (weit - 30) / 2
         }
         return (
+            <div style={{ width: '98%', height: hoch * 1.2 }}>
+                <ResponsiveContainer >
+                    <BarChart
+                        layout="vertical"
+                        width={weit}
+                        height={hoch * 1.2}
+                        data={datafordiagram}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                        }}
+                    >
+                        <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
+                        <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} domain={[0, 100]} />
+                        <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
 
-            <BarChart
-                layout="vertical"
-                width={weit}
-                height={hoch * 1.2}
-                data={datafordiagram}
-                margin={{
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                }}
-            >
-                <CartesianGrid stroke={this.props.dark ? '#333333' : '#dddddd'} />
-                <XAxis type="number" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} domain={[0, 100]} />
-                <YAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} type="category" scale="band" width={150} style={{ fontSize: "0.9rem", whiteSpace: "nowrap", paddingLeft: "0px" }} />
-
-                <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<CustomTooltip />} />
 
 
-                <Bar dataKey="GesamtMean" fill="#9E2631" />
+                        <Bar dataKey="GesamtMean" fill="#9E2631" />
 
-            </BarChart>
-
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
         );
     }
 }

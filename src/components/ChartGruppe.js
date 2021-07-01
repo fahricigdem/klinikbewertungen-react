@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell, ResponsiveContainer } from 'recharts';
 
 
 
@@ -116,26 +116,29 @@ export default class ChartGruppe extends PureComponent {
         }
 
         return (
-
-            <PieChart width={weit + 40} height={weit}>
-                <Pie
-                    dataKey="value"
-                    isAnimationActive={true}
-                    data={this.props.data}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={weit / 3}
-                    fill="#8884d8"
-                >
-                    {this.props.data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Legend content={renderLegend} />
-                <Tooltip content={<CustomTooltip />} />
-            </PieChart>
+            <div style={{ width: '90%', height: weit }}>
+                <ResponsiveContainer >
+                    <PieChart width={weit} height={weit}>
+                        <Pie
+                            dataKey="value"
+                            isAnimationActive={true}
+                            data={this.props.data}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={weit / 3}
+                            fill="#8884d8"
+                        >
+                            {this.props.data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                        <Legend content={renderLegend} />
+                        <Tooltip content={<CustomTooltip />} />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
 
         );
     }

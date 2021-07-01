@@ -73,26 +73,29 @@ export default class Example extends PureComponent {
         }
 
         return (
-
-            <BarChart
-                width={weit}
-                height={hoch}
-                data={datafordiagram}
-                margin={{
-                    top: 10,
-                    right: 10,
-                    left: 1,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
-                <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
-                <Bar dataKey="KlinikDe" fill="#9E2631" />
-                <Bar dataKey="GoogleMaps" fill="#0C8FA7" />
-            </BarChart>
+            <div style={{ width: '90%', height: hoch }}>
+                <ResponsiveContainer >
+                    <BarChart
+                        width={weit}
+                        height={hoch}
+                        data={datafordiagram}
+                        margin={{
+                            top: 10,
+                            right: 10,
+                            left: 1,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" stroke={this.props.dark ? '#555555' : '#dddddd'} />
+                        <XAxis dataKey="name" tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <YAxis tick={{ fill: this.props.dark ? '#dddddd' : 'aaaaaa' }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Legend />
+                        <Bar dataKey="KlinikDe" fill="#9E2631" />
+                        <Bar dataKey="GoogleMaps" fill="#0C8FA7" />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
 
         );
     }
