@@ -267,7 +267,7 @@ const Kommentare = () => {
                 </Col>
 
 
-                <UncontrolledTooltip placement="right" target="Tooltip_Source">
+                <UncontrolledTooltip placement="right" target="Tooltip_Source" placement='bottom'>
                     {english ? "klinikDe Data has Fachbereich Data but Google Maps not" : "klinikDe Daten hat Fachbereichsdaten, aber Google Maps nicht"}
                 </UncontrolledTooltip>
 
@@ -282,7 +282,7 @@ const Kommentare = () => {
                                     <option key={index}>{k}</option>
                                 )}
                             </Input>
-                                <UncontrolledTooltip placement="right" target="Tooltip_Klinik">
+                                <UncontrolledTooltip placement="right" target="Tooltip_Klinik" placement='bottom'>
                                     {english ? "Attention, if you choose clinic, you cannot select group due to information consistency." :
                                         "Achtung, wenn Sie ein Klinik wählen, können Sie aufgrund der Informationskonsistenz nicht mehr eine Gruppe wählen."}
                                 </UncontrolledTooltip></>
@@ -310,7 +310,7 @@ const Kommentare = () => {
                     </FormGroup>
                 </Col>
 
-                <UncontrolledTooltip placement="right" target="Tooltip_Gruppe">
+                <UncontrolledTooltip placement="right" target="Tooltip_Gruppe" placement='bottom'>
                     {english ? "Each Clinic belongs to a group determined by Machine Learning algorithm " :
                         "Jede Klinik gehört zu einer durch Maschine Lernen Algorithmus bestimmten Gruppe"}
                 </UncontrolledTooltip>
@@ -354,7 +354,7 @@ const Kommentare = () => {
                                     <option key={index}>{k}</option>
                                 )}
                             </Input>
-                                <UncontrolledTooltip placement="right" target="Tooltip_Year_klinikDe">
+                                <UncontrolledTooltip placement="right" target="Tooltip_Year_klinikDe" placement='bottom'>
                                     {english ? "Clinic data goes back to 2006 and Google Maps data goes back to 2013." : "Klinikdaten reichen bis 2006 zurück und Google Maps-Daten reichen bis 2013 zurück."}
                                 </UncontrolledTooltip></>
                             :
@@ -364,7 +364,7 @@ const Kommentare = () => {
                                     <option key={index}>{k}</option>
                                 )}
                             </Input>
-                                <UncontrolledTooltip placement="right" target="Tooltip_Year_Google">
+                                <UncontrolledTooltip placement="right" target="Tooltip_Year_Google" placement='bottom'>
                                     {english ? "Clinic data goes back to 2006 and Google Maps data goes back to 2013." : "Klinikdaten reichen bis 2006 zurück und Google Maps-Daten reichen bis 2013 zurück."}
                                 </UncontrolledTooltip>
                             </>}
@@ -425,7 +425,7 @@ const Kommentare = () => {
                 </Col>
 
 
-                <UncontrolledTooltip placement="right" target="Tooltip_Polarity">
+                <UncontrolledTooltip placement="right" target="Tooltip_Polarity" placement='bottom'>
                     {english ? "This information is determined by Text Blob and varies between -1 and +1." : "Diese Informationen werden von Text Blob bestimmt und variieren zwischen -1 und +1."}
                 </UncontrolledTooltip>
 
@@ -441,44 +441,21 @@ const Kommentare = () => {
                 </Col> */}
 
 
+                <Col xs="3" lg="auto">
+                    <center >
+                        <Label>Filter </Label><br />
 
+                        <Button color={(source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle') ? "success" : "secondary"}
+                            id="Tooltip_Filter"
+                            onClick={resetFilter} >
+                            {(source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle') ? (english ? "On" : "Auf") : (english ? "Off" : "Aus")}
 
-
-
-
-
-                {
-                    (source !== 'Alle' || klinik !== 'Alle' || gruppe !== 'Alle' || year !== 'Alle' || result !== 'Alle' || fachbereich !== 'Alle')
-                    &&
-                    <Col xs="3" lg="auto">
-                        <center >
-                            <Label>Filter </Label><br />
-
-                            <Button color="success"
-                                id="Tooltip_Filter"
-                                onClick={resetFilter} >
-                                {english ? "On" : "Auf"}
-
-
-
-                            </Button>
-                        </center>
-                        <UncontrolledTooltip placement="right" target="Tooltip_Filter">
-                            {english ? "If you click it, the filters will be reset" : "Wenn Sie darauf klicken, werden die Filter zurückgesetzt"}
-                        </UncontrolledTooltip>
-                    </Col>
-
-
-
-                }
-
-
-
-
-
-
-
-
+                        </Button>
+                    </center>
+                    <UncontrolledTooltip placement="right" target="Tooltip_Filter" placement='bottom'>
+                        {english ? "If you click it, the filters will be reset" : "Wenn Sie darauf klicken, werden die Filter zurückgesetzt"}
+                    </UncontrolledTooltip>
+                </Col>
 
 
                 <Col xs="3" lg="auto">

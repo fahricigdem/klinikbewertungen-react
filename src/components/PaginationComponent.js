@@ -18,7 +18,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem >
 
                         <PaginationLink
-
+                            className={dark ? "text-white" : ""}
+                            style={dark ? { backgroundColor: "black" } : { backgroundColor: "white" }}
 
                             onClick={e => handleClick(e, 1)}
                             href=""
@@ -36,7 +37,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem disabled={currentPage <= 1}>
 
                         <PaginationLink
-
+                            className={dark ? "text-white" : ""}
+                            style={dark ? { backgroundColor: "black" } : { backgroundColor: "white" }}
                             onClick={e => handleClick(e, currentPage - 1)}
                             href=""
                         >
@@ -51,8 +53,10 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem >
 
 
-                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)} >
-
+                        <Input type="select" name="seite" id="seite" value={currentPage} onChange={(e) => handlePageSelect(e.target.value)}
+                            className={dark ? "text-white" : ""}
+                            style={dark ? { backgroundColor: "black" } : { backgroundColor: "white" }}
+                        >
                             {pages.map((p, index) =>
                                 <option key={index}>{p}</option>
                             )}
@@ -64,6 +68,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem disabled={currentPage >= pagesCount}>
 
                         <PaginationLink
+                            className={dark ? "text-white" : ""}
+                            style={dark ? { backgroundColor: "black" } : { backgroundColor: "white" }}
 
                             onClick={e => handleClick(e, currentPage + 1)}
                             href=""
@@ -76,6 +82,8 @@ const PaginationComponent = ({ handlePageSelect, handleClick, currentPage, pages
                     <PaginationItem >
 
                         <PaginationLink
+                            className={dark ? "text-white" : ""}
+                            style={dark ? { backgroundColor: "black" } : { backgroundColor: "white" }}
 
                             onClick={e => handleClick(e, pagesCount)}
                             href=""
