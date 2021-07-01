@@ -149,23 +149,30 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
         <Col xs="12" key={komment.index} >
             <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"} >
                 <CardBody>
-                    <CardTitle tag="h5"> {english ? "Review Nr.:" : "Rezension Nr.:"}   {komment.index + 1} {komment.positive ? " ✅  " : " ❌  "} </CardTitle>
+                    <CardTitle tag="h5">
+                        {english ? "Review Nr.:" : "Rezension Nr.:"}   {komment.index + 1}
+                    </CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{komment.name},  {komment.datum ? komment.datum : komment.year}, {komment.fachbereich && english ? komment.fachbereich_eng : komment.fachbereich}</CardSubtitle>
                 </CardBody>
                 <CardBody>
-                    <CardText style={{ height: "180px", overflowY: "scroll" }}> {komment.titel && <p>{english ? komment.titel_eng : komment.titel}</p>}{english ? komment.komment_eng : komment.komment}</CardText>
-                    <p >TextBlob: {komment.polarity.toFixed(2)}</p>
+                    <CardText id="commentText" style={{ height: "180px", overflowY: "scroll" }}> {komment.titel && <p>{english ? komment.titel_eng : komment.titel}</p>}{english ? komment.komment_eng : komment.komment}</CardText>
+
+
+                    {english ? " TextBlob Result:" : " TextBlob Bewertung:"}  {komment.positive ? " 👍  " : " 👎  "}
+
                     {komment.source === "googleMaps" &&
                         <>
-                            <p> {english ? " User Rating:" : " Nutzer Bewertung:"}   {komment.sterne == 1 ? " ⭐ " : komment.sterne == 2 ? "⭐⭐" : komment.sterne == 3 ? "⭐⭐⭐" : komment.sterne == 4 ? "⭐⭐⭐⭐" : "⭐⭐⭐⭐⭐"} </p>
-                            <p>Likes : {" ", komment.likes}</p>
+                            <p> {english ? " User Rating:" : " Nutzer Bewertung:"}   {komment.sterne == 1 ? " ⭐ " : komment.sterne == 2 ? "⭐ ⭐" : komment.sterne == 3 ? "⭐ ⭐ ⭐" : komment.sterne == 4 ? "⭐ ⭐ ⭐ ⭐" : "⭐ ⭐ ⭐ ⭐ ⭐"} </p>
+                            <p>  ❤️  &nbsp; {" ", komment.likes}</p>
                         </>
                     }
                     {komment.source === "klinikDe" &&
                         <>
-                            <p>{english ? " User" : " Nutzer"}   : {komment.gesamt === 100 ? "😃 " : komment.gesamt === 67 ? " 🙂" : komment.gesamt === 33 ? " 😏" : " 😡"}</p>
+                            <p>{english ? " User Rating" : " Nutzer Bewertung"}   : {komment.gesamt === 100 ? "😃 " : komment.gesamt === 67 ? " 🙂" : komment.gesamt === 33 ? " 😏" : " 😡"}</p>
                         </>
                     }
+
+                    <p >TextBlob: {komment.polarity.toFixed(2)}</p>
                     <p> {english ? "  Data Source" : "  Daten Quelle"} : {komment.source}</p>
                 </CardBody>
             </Card>
@@ -265,7 +272,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
             </Row>
 
             <br />
-            <h1 >{english ? "Values per year" : "Werte pro Jahr "}  </h1>
+            {year === "Alle" &&
+                <h1 >{english ? "Values per year" : "Werte pro Jahr "}  </h1>}
             {year === "Alle" &&
                 <Row > {/* Yearly - commentareZahl und polarity */}
                     {(source === "Alle") ?
@@ -323,7 +331,8 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                 </Row>
             }
             <br />
-            <h1>{english ? "Number of reviews per clinic" : "Anzahl der Rezensionen pro Klinik"}    </h1>
+
+            {klinik === "Alle" && <h1>{english ? "Number of reviews per clinic" : "Anzahl der Rezensionen pro Klinik"}    </h1>}
 
             {klinik === "Alle" &&
 
@@ -440,10 +449,10 @@ const ShowKommentare = ({ Dataset, pagesCount, pageSize, currentPage, handlePage
                     </Col>
                 </Row>}
             <br />
-            <h1 id="AnfangderKommentare">{english ? "Reviews and Sentiment Analysis" : "Rezensionen und Stimmungsanalyse"} </h1>
+            <h1 id="AnfangderKommentare">{english ? "Reviews / Sentiment Analysis" : "Rezensionen / Stimmungsanalyse"} </h1>
 
 
-            <Row className="mb-3"> {/* Kommentare */}
+            <Row className="pb-3"> {/* Kommentare */}
 
                 {
                     rezensionen

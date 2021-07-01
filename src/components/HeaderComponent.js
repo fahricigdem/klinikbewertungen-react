@@ -12,7 +12,7 @@ import {
     Media
 } from 'reactstrap';
 
-import logo1 from '../images/logo1.jpeg'
+import logo1 from '../images/logo1.png'
 import logo from '../images/logo.png'
 
 const HeaderComponent = (props) => {
@@ -45,7 +45,7 @@ const HeaderComponent = (props) => {
                 </Collapse>
 
             </Container>
-        </Navbar >
+        </Navbar>
 
     );
 }

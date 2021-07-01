@@ -234,7 +234,7 @@ const Kommentare = () => {
     return (
         <Container fluid className={dark && "bg-dark text-light"}>
 
-            <Row className={`mt-1 pb-2 pt-1 ${window.screen.width > 900 ? "sticky-top" : ""} ${dark ? "bg-dark text-light" : "bg-light text-dark"} justify-content-between `} >
+            <Row className={`pt-1 pb-2 pt-1 ${window.screen.width > 900 ? "sticky-top" : ""} ${dark ? "bg-dark text-light" : "bg-light text-dark"} justify-content-between `} >
                 {/*
                 <Col xs="6" lg="auto">
                     <center >
@@ -284,7 +284,7 @@ const Kommentare = () => {
                             </Input>
                                 <UncontrolledTooltip placement="right" target="Tooltip_Klinik">
                                     {english ? "Attention, if you choose clinic, you cannot select group due to information consistency." :
-                                        "Achtung, wenn Sie Klinik wählen, können Sie aufgrund der Informationskonsistenz keine Gruppe wählen."}
+                                        "Achtung, wenn Sie ein Klinik wählen, können Sie aufgrund der Informationskonsistenz nicht mehr eine Gruppe wählen."}
                                 </UncontrolledTooltip></>
                             :
                             <Input type="select" name="klinik" id="klinik" value={klinik} onChange={(e) => handleKlinik(e.target.value)} disabled className={dark ? "bg-dark text-light" : "bg-light text-dark"}>

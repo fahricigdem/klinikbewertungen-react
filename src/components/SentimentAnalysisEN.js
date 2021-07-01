@@ -30,10 +30,10 @@ const SentimentAnalysisDE = ({ dark }) => {
     return (
         <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"} >
             <CardBody className={generalSentiment === "Positive" ? "bg-success text-light" : generalSentiment === "Negative" ? "bg-danger text-light" : ""}>
-                <CardTitle tag="h5">Sentiment Analysis</CardTitle>
+                <CardTitle tag="h5">Sentiment Analysis (English)</CardTitle>
                 <CardSubtitle tag="h6" > </CardSubtitle>
-                <Label for="exampleText" className="mb-1 mt-2" >Type the text here to analyze it</Label>
-                <Input type="textarea" rows="12" name="text" id="exampleText" onChange={findSentiment} />
+                <Label for="exampleText_eng" className="mb-1 mt-2" >Type the text here to analyze it</Label>
+                <Input type="textarea" rows="13" name="text" id="exampleText_eng" onChange={findSentiment} className={dark ? "bg-dark text-light" : "bg-light text-dark"} placeholder="Your Text..." />
 
 
 

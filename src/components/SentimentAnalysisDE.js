@@ -6785,6 +6785,7 @@ const SentimentAnalysisDE = ({ dark }) => {
                     var prevtoken = tokens[cursor - 1];
                     if ((prevtoken === 'nicht') ||
                         (prevtoken === 'kein') ||
+                        (prevtoken === 'niemals') ||
                         (prevtoken === 'kaum')) {
                         tokenScore = -tokenScore;
                     }
@@ -6814,11 +6815,11 @@ const SentimentAnalysisDE = ({ dark }) => {
     return (
         <Card className={dark ? "bg-dark text-light" : "bg-light text-dark"} >
             <CardBody className={generalSentiment === "Positive" ? "bg-success text-light" : generalSentiment === "Negative" ? "bg-danger text-light" : ""}>
-                <CardTitle tag="h5">Stimmungsanalyse</CardTitle>
+                <CardTitle tag="h5">Stimmungsanalyse (Deutsch)</CardTitle>
                 <CardSubtitle tag="h6" className="mb-2 text-muted"> </CardSubtitle>
 
                 <Label for="exampleText" className="mb-1 mt-2" >Zum analysieren typen Sie hier den Text </Label>
-                <Input type="textarea" rows="12" name="text" id="exampleText" onChange={findSentiment} />
+                <Input type="textarea" rows="13" name="text" id="exampleText" onChange={findSentiment} className={dark ? "bg-dark text-light" : "bg-light text-dark"} placeholder="Ihre Text..." />
 
                 <p className="mt-4" >Ergebnis: {generalSentiment}</p>
                 <p>Quantität:  {(sentimentScore / 7).toPrecision(4)}</p>
