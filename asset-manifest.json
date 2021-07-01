@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/klinikbewertungen-react/static/css/main.bab0b925.chunk.css",
-    "main.js": "/klinikbewertungen-react/static/js/main.102b29a1.chunk.js",
-    "main.js.map": "/klinikbewertungen-react/static/js/main.102b29a1.chunk.js.map",
+    "main.js": "/klinikbewertungen-react/static/js/main.1f2b2da7.chunk.js",
+    "main.js.map": "/klinikbewertungen-react/static/js/main.1f2b2da7.chunk.js.map",
     "runtime-main.js": "/klinikbewertungen-react/static/js/runtime-main.6710ad03.js",
     "runtime-main.js.map": "/klinikbewertungen-react/static/js/runtime-main.6710ad03.js.map",
     "static/css/2.61b4cb56.chunk.css": "/klinikbewertungen-react/static/css/2.61b4cb56.chunk.css",
@@ -17,8 +17,8 @@
     "static/media/FlagDE.ce059c19.png": "/klinikbewertungen-react/static/media/FlagDE.ce059c19.png",
     "static/media/FlagUS.ce08b738.png": "/klinikbewertungen-react/static/media/FlagUS.ce08b738.png",
     "static/media/jumbotron_image.070a9d1b.jpeg": "/klinikbewertungen-react/static/media/jumbotron_image.070a9d1b.jpeg",
-    "static/media/jumbotron_imageBig.5146d15d.png": "/klinikbewertungen-react/static/media/jumbotron_imageBig.5146d15d.png",
-    "static/media/logo1.c1f3934e.jpeg": "/klinikbewertungen-react/static/media/logo1.c1f3934e.jpeg",
+    "static/media/jumbotron_imageBig.4b27bec7.png": "/klinikbewertungen-react/static/media/jumbotron_imageBig.4b27bec7.png",
+    "static/media/logo1.4abddb45.png": "/klinikbewertungen-react/static/media/logo1.4abddb45.png",
     "static/media/refugeeks.116ea051.png": "/klinikbewertungen-react/static/media/refugeeks.116ea051.png"
   },
   "entrypoints": [
@@ -26,6 +26,6 @@
     "static/css/2.61b4cb56.chunk.css",
     "static/js/2.0e159503.chunk.js",
     "static/css/main.bab0b925.chunk.css",
-    "static/js/main.102b29a1.chunk.js"
+    "static/js/main.1f2b2da7.chunk.js"
   ]
 }
