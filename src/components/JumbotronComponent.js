@@ -17,8 +17,8 @@ const JumbotronComponent = () => {
     return (
         <div>
 
-            <Jumbotron fluid style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}>
-                <Container fluid style={{ height: window.screen.height / 4, width: window.screen.width }}>
+            <Jumbotron fluid style={{ backgroundImage: `url(${image}) no-repeat center center fixed`, backgroundPosition: "center center", webkitBackgroundSize: "cover", mozBackgroundSize: "cover", oBackgroundSize: "cover", backgroundSize: "cover" }}>
+                <Container fluid style={{ height: window.innerWidth / 6 }}>
 
                 </Container>
             </Jumbotron>
