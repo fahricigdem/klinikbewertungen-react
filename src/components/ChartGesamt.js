@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Legend, Tooltip, Cell, Sector } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell, Sector, ResponsiveContainer } from 'recharts';
 
 
 
@@ -72,28 +72,30 @@ export default class ChartGruppe extends PureComponent {
 
 
         return (
+            <div style={{ width: '98%', height: 300 }}>
+                <ResponsiveContainer >
+                    <PieChart width={window.screen.width > 900 ? 370 : (window.screen.width * 0.8)} height={300}>
+                        <Pie
+                            activeIndex={this.state.activeIndex}
+                            activeShape={renderActiveShape}
+                            data={this.props.data}
+                            dataKey="value"
+                            isAnimationActive={true}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={60}
+                            fill="#8884d8"
+                            outerRadius={80}
+                            onMouseEnter={this.onPieEnter}
+                        >
+                            {this.props.data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
 
-            <PieChart width={window.screen.width > 900 ? 370 : (window.screen.width * 0.8)} height={300}>
-                <Pie
-                    activeIndex={this.state.activeIndex}
-                    activeShape={renderActiveShape}
-                    data={this.props.data}
-                    dataKey="value"
-                    isAnimationActive={true}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    fill="#8884d8"
-                    outerRadius={80}
-                    onMouseEnter={this.onPieEnter}
-                >
-                    {this.props.data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-
-            </PieChart>
-
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
         );
     }
 }

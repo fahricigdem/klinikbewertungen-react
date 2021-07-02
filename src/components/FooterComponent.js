@@ -17,7 +17,7 @@ const FooterComponent = () => {
                 </Col>
                 <Col className="mt-3">
                     <br />
-                    <p className="text-white">R e f u g e e k s</p>
+                    <p className="text-white" style={{ fontSize: ".8rem" }} >R e f u g e e k s</p>
                 </Col>
             </Row>
         </Container>
