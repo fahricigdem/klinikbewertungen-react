@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/klinikbewertungen-react/static/css/main.9ef1d638.chunk.css",
-    "main.js": "/klinikbewertungen-react/static/js/main.2979c2c0.chunk.js",
-    "main.js.map": "/klinikbewertungen-react/static/js/main.2979c2c0.chunk.js.map",
+    "main.js": "/klinikbewertungen-react/static/js/main.d8706cd6.chunk.js",
+    "main.js.map": "/klinikbewertungen-react/static/js/main.d8706cd6.chunk.js.map",
     "runtime-main.js": "/klinikbewertungen-react/static/js/runtime-main.590d88ed.js",
     "runtime-main.js.map": "/klinikbewertungen-react/static/js/runtime-main.590d88ed.js.map",
     "static/css/2.61b4cb56.chunk.css": "/klinikbewertungen-react/static/css/2.61b4cb56.chunk.css",
@@ -26,6 +26,6 @@
     "static/css/2.61b4cb56.chunk.css",
     "static/js/2.4cbcfaa8.chunk.js",
     "static/css/main.9ef1d638.chunk.css",
-    "static/js/main.2979c2c0.chunk.js"
+    "static/js/main.d8706cd6.chunk.js"
   ]
 }
