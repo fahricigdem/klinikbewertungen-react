@@ -551,7 +551,7 @@ const SentimentAnalysisDE = ({ dark }) => {
 
             "Rücken": 1,
 
-            "schlecht": -3,
+            "schlechte": -3,
 
             "Pech": -2,
 
@@ -1161,6 +1161,7 @@ const SentimentAnalysisDE = ({ dark }) => {
             "versöhnen": 2,
 
             "versöhnt": 2,
+            "top": 3,
 
             "versöhnt": 2,
 
@@ -1273,6 +1274,7 @@ const SentimentAnalysisDE = ({ dark }) => {
             "gesellig": 2,
 
             "cool": 1,
+            "super cool": 3,
 
             "cooles Zeug": 3,
 
@@ -1714,9 +1716,10 @@ const SentimentAnalysisDE = ({ dark }) => {
 
             "verschlechtert": -2,
 
-            "verschlechtert": -2,
+            "verschlimmert": -2,
 
-            "verschlechtern": -2,
+            "verschlimmern": -2,
+            "verhunzen": -2,
 
             "bestimmt": 2,
 
@@ -2783,6 +2786,8 @@ const SentimentAnalysisDE = ({ dark }) => {
             "verdammt": -4,
 
             "verdammt": -4,
+            "toll": 2,
+
 
             "verdammt toll": 4,
 
@@ -4746,13 +4751,13 @@ const SentimentAnalysisDE = ({ dark }) => {
 
             "Verschmutzung ": -2,
 
-            "schlecht": -2,
+            "schlecht": -3,
 
             "ärmer": -2,
 
             "am schlechtesten": -2,
 
-            "schlecht": -2,
+            "super schlecht": -4,
 
             "beliebt": 3,
 
@@ -6565,6 +6570,7 @@ const SentimentAnalysisDE = ({ dark }) => {
             "wollen": 1,
 
             "Krieg": -2,
+            "empfehlenswert": 2,
 
             "Kriegsführung": -2,
 
@@ -6775,6 +6781,8 @@ const SentimentAnalysisDE = ({ dark }) => {
             "eiferer": -2,
 
             "Eiferer": -2,
+            "geil": 2,
+            "geile": 2,
 
             "eifrig": 2
 
@@ -6789,6 +6797,14 @@ const SentimentAnalysisDE = ({ dark }) => {
                         (prevtoken === 'kaum')) {
                         tokenScore = -tokenScore;
                     }
+                    if ((prevtoken === 'super') ||
+                        (prevtoken === 'geil') ||
+                        (prevtoken === 'geile') ||
+                        (prevtoken === 'tolle') ||
+                        (prevtoken === 'toll')) {
+                        tokenScore = 2 * tokenScore;
+                    }
+
                 }
                 return tokenScore;
             }
